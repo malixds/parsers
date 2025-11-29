@@ -1,6 +1,7 @@
 import asyncio
 import json
 import logging
+import os
 import re
 import xml.etree.ElementTree as ET
 from typing import Any
@@ -33,6 +34,8 @@ class RwholmesParser:
         client: httpx.AsyncClient,
         source_name: str = "rwholmes",
         concurrency: int = 10,
+        save_html_every: int = 20,
+        html_save_dir: str = "htmls",
     ) -> None:
         self.client = client
         self.source_name = source_name
@@ -40,6 +43,16 @@ class RwholmesParser:
         
         self.sitemap_url = "https://rwholmes.com/estate_property-sitemap.xml"
         self.base_url = "https://rwholmes.com"
+        
+        # Настройки сохранения HTML
+        self.save_html_every = save_html_every
+        self.html_save_dir = html_save_dir
+        self.html_counter = 0
+        
+        # Создаем папку для сохранения HTML, если её нет
+        if not os.path.exists(self.html_save_dir):
+            os.makedirs(self.html_save_dir)
+            logger.info(f"Создана папка для сохранения HTML: {self.html_save_dir}")
 
     # ---------------------- NETWORK ----------------------
 
@@ -457,6 +470,25 @@ class RwholmesParser:
         
         return brochure_url
 
+    def _save_html_if_needed(self, html: str, listing_id: str, url: str) -> None:
+        """Сохраняет HTML в файл, если нужно (каждый N-й)"""
+        self.html_counter += 1
+        
+        if self.html_counter % self.save_html_every == 0:
+            # Создаем безопасное имя файла из listing_id
+            safe_filename = re.sub(r'[^\w\-_\.]', '_', listing_id)
+            if not safe_filename or safe_filename == '_':
+                safe_filename = f"listing_{self.html_counter}"
+            
+            filepath = os.path.join(self.html_save_dir, f"{safe_filename}.html")
+            
+            try:
+                with open(filepath, 'w', encoding='utf-8') as f:
+                    f.write(html)
+                logger.info(f"💾 Сохранен HTML [{self.html_counter}]: {filepath}")
+            except Exception as e:
+                logger.error(f"Ошибка при сохранении HTML {filepath}: {e}")
+
     async def parse_listing(self, url: str) -> DbDTO | None:
         """
         ЭТАП 3: Парсит HTML и извлекает обязательные поля
@@ -469,6 +501,9 @@ class RwholmesParser:
         
         soup = BeautifulSoup(html, 'lxml')
         listing_id = self.extract_listing_id_from_url(url) or url
+        
+        # Сохраняем каждый N-й HTML
+        self._save_html_if_needed(html, listing_id, url)
         
         # Извлекаем обязательные поля
         price, listing_type = self.extract_price(soup)
