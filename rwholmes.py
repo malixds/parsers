@@ -72,20 +72,49 @@ class RwholmesParser:
         }
 
     async def get_html(self, url: str) -> str | None:
-        """Получает HTML страницы"""
-        try:
-            async with self.semaphore:
-                resp = await self.client.get(
-                    url,
-                    headers=self.get_headers(),
-                    timeout=10.0,
-                    follow_redirects=True,  # Следовать редиректам
-                )
-                resp.raise_for_status()
-                return resp.text
-        except Exception as e:
-            logger.error(f"GET {url} failed: {e}")
-            return None
+        """
+        Получает HTML страницы с ретраями на сетевые/серверные ошибки.
+        Ретраим в том числе 403, как вы просили, но с ограничением по попыткам.
+        """
+        max_retries = 3
+        backoff = 1.5
+
+        for attempt in range(1, max_retries + 1):
+            try:
+                async with self.semaphore:
+                    resp = await self.client.get(
+                        url,
+                        headers=self.get_headers(),
+                        timeout=10.0,
+                        follow_redirects=True,
+                    )
+                    resp.raise_for_status()
+                    return resp.text
+
+            except httpx.HTTPStatusError as e:
+                status = e.response.status_code
+                logger.error(f"GET {url} failed with status {status} on attempt {attempt}/{max_retries}")
+
+                # Ретраим только ограниченное число раз
+                if attempt >= max_retries:
+                    return None
+
+                # Небольшая пауза перед следующей попыткой
+                await asyncio.sleep(backoff * attempt)
+
+            except httpx.RequestError as e:
+                # Сетевые ошибки (разрыв соединения и т.п.)
+                logger.error(f"GET {url} network error on attempt {attempt}/{max_retries}: {e}")
+                if attempt >= max_retries:
+                    return None
+                await asyncio.sleep(backoff * attempt)
+
+            except Exception as e:
+                # Любая другая ошибка — логируем и выходим без агрессивных ретраев
+                logger.error(f"GET {url} unexpected error: {e}")
+                return None
+
+        return None
 
     # ---------------------- ЭТАП 1: ИНДЕКСАЦИЯ ----------------------
 
@@ -276,6 +305,23 @@ class RwholmesParser:
             value = re.sub(r"\s+", " ", " ".join(parts)).strip()
             if value and key not in details:
                 details[key] = value
+
+        # 6. Фоллбек: пары "ключ: значение" в параграфах без <b>/<strong>,
+        # например: "Available: 800 – 1,850 SF"
+        paragraph_kv_pattern = re.compile(
+            r"\b(Available|Building Size|Zoning|Year Built|Stories|Parking)\s*:\s*([^\n]+)",
+            re.IGNORECASE,
+        )
+        for p in soup.find_all("p"):
+            text = p.get_text(" ", strip=True)
+            if ":" not in text:
+                continue
+            for match in paragraph_kv_pattern.finditer(text):
+                raw_key, raw_value = match.groups()
+                key = raw_key.strip().lower()
+                value = raw_value.strip()
+                if key and value and len(key) <= 60 and key not in details:
+                    details[key] = value
 
         return details
 

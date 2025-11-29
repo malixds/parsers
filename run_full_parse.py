@@ -8,7 +8,7 @@ import logging
 from datetime import datetime
 
 import httpx
-from members_moodys import RwholmesParser
+from rwholmes import RwholmesParser
 
 # Настройка логирования
 logging.basicConfig(

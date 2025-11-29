@@ -47,7 +47,7 @@
 
 ```
 parsers/
-├── members_moodys.py      # Основной парсер
+├── rwholmes.py      # Основной парсер
 ├── schema.py              # Pydantic DTO схемы
 ├── run_full_parse.py      # Скрипт для полного парсинга
 ├── requirements.txt       # Зависимости
@@ -132,7 +132,7 @@ python3 run_full_parse.py
 ### Прямой запуск парсера
 
 ```bash
-python3 members_moodys.py
+python3 rwholmes.py
 ```
 
 ### Использование как модуль
@@ -140,7 +140,7 @@ python3 members_moodys.py
 ```python
 import asyncio
 import httpx
-from members_moodys import RwholmesParser
+from rwholmes import RwholmesParser
 
 async def main():
     async with httpx.AsyncClient() as client:
@@ -282,7 +282,7 @@ coordinates: Optional[str]
 ```python
 import asyncio
 import httpx
-from members_moodys import RwholmesParser
+from rwholmes import RwholmesParser
 
 async def parse_one():
     async with httpx.AsyncClient() as client:
@@ -324,7 +324,7 @@ async def parse_limited():
 
 ```python
 import json
-from members_moodys import RwholmesParser
+from rwholmes import RwholmesParser
 
 async def save_results():
     async with httpx.AsyncClient() as client:
@@ -556,7 +556,7 @@ python3 run_full_parse.py
 
 - **Схема данных:** `schema.py` - полное описание DbDTO модели
 - **Статистика:** `STATISTICS_REPORT.md` - детальный анализ результатов
-- **Исходный код:** `members_moodys.py` - реализация парсера
+- **Исходный код:** `rwholmes.py` - реализация парсера
 
 ---
 
