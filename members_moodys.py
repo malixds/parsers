@@ -10,6 +10,8 @@ import httpx
 from bs4 import BeautifulSoup
 from fake_useragent import UserAgent
 
+from schema import DbDTO, AgentData
+
 # Настройка логирования
 logging.basicConfig(
     level=logging.INFO,
@@ -64,6 +66,7 @@ class RwholmesParser:
                     url,
                     headers=self.get_headers(),
                     timeout=10.0,
+                    follow_redirects=True,  # Следовать редиректам
                 )
                 resp.raise_for_status()
                 return resp.text
@@ -80,7 +83,11 @@ class RwholmesParser:
         logger.info(f"[1] Получаю sitemap: {self.sitemap_url}")
         
         try:
-            resp = await self.client.get(self.sitemap_url, headers=self.get_headers())
+            resp = await self.client.get(
+                self.sitemap_url, 
+                headers=self.get_headers(),
+                follow_redirects=True
+            )
             resp.raise_for_status()
             
             # Парсим XML
@@ -91,10 +98,16 @@ class RwholmesParser:
             for url_elem in root.findall('.//sitemap:url', namespace):
                 loc = url_elem.find('sitemap:loc', namespace)
                 if loc is not None:
+                    # Получаем текст, учитывая CDATA
                     url = loc.text
-                    # Фильтруем только URL вида /property/ или /properties/
-                    if '/property' in url.lower():
-                        urls.append(url)
+                    # Если текст None, пробуем получить через tostring
+                    if url is None:
+                        url_text = ET.tostring(loc, encoding='unicode', method='text')
+                        # Извлекаем текст между CDATA или просто текст
+                        url = url_text.strip() if url_text else None
+                    
+                    if url and '/propert' in url.lower():  # Ищем /property или /properties
+                        urls.append(url.strip())
             
             logger.info(f"[1] Найдено {len(urls)} ссылок на объявления")
             return urls
@@ -267,6 +280,63 @@ class RwholmesParser:
         return size
 
     @staticmethod
+    def extract_address(soup: BeautifulSoup) -> str:
+        """Извлекает адрес недвижимости (обязательное поле)"""
+        address = None
+        
+        # 1. H1 заголовок (часто содержит адрес)
+        h1 = soup.find('h1')
+        if h1:
+            h1_text = h1.get_text(strip=True)
+            # Проверяем, что это похоже на адрес (содержит цифры и улицу)
+            if re.search(r'\d+', h1_text) and len(h1_text) > 10:
+                address = h1_text
+        
+        # 2. Специальные классы для адреса
+        if not address:
+            address_selectors = [
+                soup.find(class_=re.compile(r'address|property-address|location|street', re.I)),
+                soup.find(id=re.compile(r'address|property-address|location', re.I)),
+                soup.find('div', {'itemprop': 'address'}),
+                soup.find('span', {'itemprop': 'address'}),
+            ]
+            
+            for selector in address_selectors:
+                if selector:
+                    addr_text = selector.get_text(strip=True)
+                    if len(addr_text) > 5 and re.search(r'\d+', addr_text):
+                        address = addr_text
+                        break
+        
+        # 3. Title тег (может содержать адрес)
+        if not address:
+            title_tag = soup.find('title')
+            if title_tag:
+                title_text = title_tag.get_text(strip=True)
+                # Ищем адрес в title (обычно в начале или конце)
+                if re.search(r'\d+.*(street|st|avenue|ave|road|rd|drive|dr|boulevard|blvd|way|ln)', title_text, re.I):
+                    address = title_text.split('|')[0].strip()
+        
+        # 4. Мета-теги
+        if not address:
+            meta_address = soup.find('meta', {'property': 'og:street-address'})
+            if meta_address and meta_address.get('content'):
+                address = meta_address['content']
+        
+        # 5. Если ничего не нашли, пытаемся извлечь из описания или первого параграфа
+        if not address:
+            desc = soup.find(class_=re.compile(r'description|summary|details', re.I))
+            if desc:
+                desc_text = desc.get_text()
+                # Ищем паттерн адреса в описании
+                addr_match = re.search(r'(\d+\s+[\w\s]+(?:street|st|avenue|ave|road|rd|drive|dr|boulevard|blvd|way|ln)[,\s]+[\w\s]+[,\s]+[A-Z]{2}\s+\d{5})', desc_text, re.I)
+                if addr_match:
+                    address = addr_match.group(1).strip()
+        
+        # Возвращаем адрес или fallback на URL если ничего не нашли
+        return address or "Address not found"
+
+    @staticmethod
     def extract_description(soup: BeautifulSoup) -> str | None:
         """Извлекает описание недвижимости"""
         description = None
@@ -387,9 +457,10 @@ class RwholmesParser:
         
         return brochure_url
 
-    async def parse_listing(self, url: str) -> dict[str, Any] | None:
+    async def parse_listing(self, url: str) -> DbDTO | None:
         """
         ЭТАП 3: Парсит HTML и извлекает обязательные поля
+        Возвращает DbDTO объект
         """
         # Получаем HTML
         html = await self.get_listing_html(url)
@@ -405,33 +476,57 @@ class RwholmesParser:
         description = self.extract_description(soup)
         listing_status = self.extract_listing_status(soup)
         listing_details = self.extract_details(soup)
-        photos = self.extract_photos(soup, url)
-        brochure_pdf = self.extract_brochure_pdf(soup, url)
+        photos = self.extract_photos(soup, self.base_url)
+        brochure_pdf = self.extract_brochure_pdf(soup, self.base_url)
         mls_number = self.extract_mls(soup)
+        address = self.extract_address(soup)
         
-        return {
-            'listing_id': listing_id,
-            'listing_link': url,
-            'source_name': self.source_name,
-            'price': price,
-            'size': size,
-            'listing_type': listing_type,  # 'sale' или 'lease'
-            'description': description,
-            'listing_status': listing_status,
-            'listing_details': listing_details,
-            'photos': photos,
-            'brochure_pdf': brochure_pdf,
-            'mls_number': mls_number,
-        }
+        # Разделяем цену на sale_price и lease_price в зависимости от типа
+        sale_price = None
+        lease_price = None
+        if price:
+            if listing_type == 'sale':
+                sale_price = price
+            elif listing_type == 'lease':
+                lease_price = price
+            else:
+                # Если тип не определен, пытаемся угадать по контексту
+                # Или записываем в оба поля
+                sale_price = price
+                lease_price = price
+        
+        # Создаем и возвращаем DbDTO объект
+        try:
+            dto = DbDTO(
+                source_name=self.source_name,
+                listing_id=listing_id,
+                listing_link=url,
+                listing_type=listing_type,
+                listing_status=listing_status,
+                address=address,  # Обязательное поле
+                sale_price=sale_price,
+                lease_price=lease_price,
+                size=size,
+                property_description=description,
+                listing_details=listing_details if listing_details else None,
+                photos=photos if photos else None,
+                brochure_pdf=brochure_pdf,
+                mls_number=mls_number,
+            )
+            return dto
+        except Exception as e:
+            logger.error(f"Ошибка при создании DbDTO для {url}: {e}")
+            return None
 
     # ---------------------- ОСНОВНОЙ ПРОЦЕСС ----------------------
 
-    async def run(self) -> list[dict[str, Any]]:
+    async def run(self) -> list[DbDTO]:
         """
         Основной процесс:
         1. Индексация - сбор всех URL
         2. Получение HTML для каждого листинга
         3. Парсинг обязательных полей
+        Возвращает список DbDTO объектов
         """
         # ЭТАП 1: Индексация
         listing_urls = await self.get_listing_urls()
@@ -441,7 +536,7 @@ class RwholmesParser:
             return []
         
         # ЭТАП 2 и 3: Обработка каждого листинга
-        results = []
+        results: list[DbDTO] = []
         tasks = [self.parse_listing(url) for url in listing_urls]
         
         logger.info(f"[2-3] Начинаю обработку {len(listing_urls)} объявлений...")
@@ -453,9 +548,9 @@ class RwholmesParser:
                 logger.error(f"Ошибка при обработке {listing_urls[i]}: {result}")
                 continue
             
-            if result:
+            if result and isinstance(result, DbDTO):
                 results.append(result)
-                logger.info(f"✓ [{len(results)}/{len(listing_urls)}] {result.get('listing_id', 'N/A')}")
+                logger.info(f"✓ [{len(results)}/{len(listing_urls)}] {result.listing_id}")
         
         logger.info(f"\nОбработано объявлений: {len(results)}/{len(listing_urls)}")
         return results
@@ -470,7 +565,9 @@ async def main():
         
         if results:
             print("\nПример данных первого объявления:")
-            print(json.dumps(results[0], indent=2, ensure_ascii=False))
+            # Преобразуем DbDTO в словарь для вывода
+            first_dto = results[0]
+            print(json.dumps(first_dto.model_dump(), indent=2, ensure_ascii=False))
         
         return results
 

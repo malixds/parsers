@@ -3,4 +3,5 @@ beautifulsoup4
 lxml
 httpx
 fake-useragent
+pydantic[email]
 
