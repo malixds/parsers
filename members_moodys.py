@@ -224,7 +224,59 @@ class RwholmesParser:
                 value = value.strip()
                 if key and value:
                     details[key] = value
-        
+
+        # 4. Фоллбек: парсим элементы <li> с шаблоном "ключ: значение"
+        # Это помогает, если детали заданы в списках, а не в таблице.
+        for li in soup.find_all("li"):
+            text = li.get_text(" ", strip=True)
+            if ":" not in text:
+                continue
+            key, value = text.split(":", 1)
+            key = key.strip().lower()
+            value = value.strip()
+            # Немного фильтруем шум: ключ не слишком длинный и есть значение
+            if key and value and len(key) <= 60:
+                # Не перезаписываем уже найденные ключи
+                if key not in details:
+                    details[key] = value
+
+        # 5. Фоллбек: парсим <b>/<strong> внутри абзацев, как в блоке описания:
+        # <p><b>Available: </b>2,200 – 4,752 SF<br><b>Building Size: </b>30,000 SF ...</p>
+        for bold in soup.find_all(["b", "strong"]):
+            parent = bold.parent
+            if not parent:
+                continue
+
+            raw_key = bold.get_text(" ", strip=True)
+            if not raw_key:
+                continue
+
+            key = raw_key.rstrip(":").strip().lower()
+            # Фильтруем слишком короткие/длинные ключи
+            if not key or len(key) < 3 or len(key) > 60:
+                continue
+
+            # Собираем значение из соседей до следующего <br> или следующего <b>/<strong>
+            parts: list[str] = []
+            for sib in bold.next_siblings:
+                # Останавливаемся на <br> или новом ключе
+                if hasattr(sib, "name") and sib.name is not None:
+                    if sib.name.lower() in ["br", "b", "strong"]:
+                        break
+                    # Теги с текстом (например, span)
+                    text = sib.get_text(" ", strip=True)
+                    if text:
+                        parts.append(text)
+                else:
+                    # Текстовый узел
+                    text = str(sib).strip()
+                    if text:
+                        parts.append(text)
+
+            value = re.sub(r"\s+", " ", " ".join(parts)).strip()
+            if value and key not in details:
+                details[key] = value
+
         return details
 
     @staticmethod
@@ -270,6 +322,36 @@ class RwholmesParser:
                     break
         
         return price_value, listing_type
+
+    @staticmethod
+    def extract_listing_type_from_page(soup: BeautifulSoup) -> str | None:
+        """
+        Дополнительный способ определить тип сделки (sale/lease),
+        даже если цену не нашли.
+        """
+        # Пробуем по спец. блокам
+        type_blocks = [
+            soup.find(class_=re.compile(r'property_categories_type1_wrapper', re.I)),
+            soup.find(class_=re.compile(r'action_tag_wrapper', re.I)),
+        ]
+        for block in type_blocks:
+            if not block:
+                continue
+            text = block.get_text(" ", strip=True).lower()
+            if 'for lease' in text or 'lease' in text or 'for rent' in text:
+                return 'lease'
+            if 'for sale' in text or 'sale' in text:
+                return 'sale'
+
+        # Фоллбек по всей странице
+        page_text = soup.get_text(" ", strip=True).lower()
+        # Сначала проверяем более специфичный lease, чтобы не путать с "for sale or lease"
+        if 'for lease' in page_text or 'for rent' in page_text:
+            return 'lease'
+        if 'for sale' in page_text:
+            return 'sale'
+
+        return None
 
     @staticmethod
     def extract_size(soup: BeautifulSoup) -> str | None:
@@ -470,6 +552,157 @@ class RwholmesParser:
         
         return brochure_url
 
+    @staticmethod
+    def extract_agents(soup: BeautifulSoup, base_url: str) -> list[AgentData]:
+        """
+        Извлекает агентов (основного и других) в список AgentData.
+        Ориентируемся на блоки sidebar + mobile agent area + секцию \"Other Agents\".
+        """
+        agents: dict[str, AgentData] = {}
+
+        def add_agent(
+            name: str | None,
+            title: str | None = None,
+            photo_url: str | None = None,
+            phone: str | None = None,
+            link: str | None = None,
+        ) -> None:
+            if not name:
+                return
+            key = name.strip().lower()
+            if key not in agents:
+                agents[key] = AgentData(
+                    name=name.strip(),
+                    title=title.strip() if title else None,
+                    phone_primary=phone.strip() if phone else None,
+                    photo_url=photo_url.strip() if photo_url else None,
+                    social_media=link.strip() if link else None,
+                )
+            else:
+                agent = agents[key]
+                if title and not agent.title:
+                    agent.title = title.strip()
+                if phone and not agent.phone_primary:
+                    agent.phone_primary = phone.strip()
+                if photo_url and not agent.photo_url:
+                    agent.photo_url = photo_url.strip()
+                if link and not agent.social_media:
+                    agent.social_media = link.strip()
+
+        # --------- 1. Sidebar агент ---------
+        sidebar_unit = soup.find("div", class_=re.compile(r"agent_unit_widget_sidebar_wrapper_unit"))
+        if sidebar_unit:
+            # имя + ссылка
+            name = None
+            link = None
+            h4 = sidebar_unit.find("h4")
+            if h4:
+                a = h4.find("a")
+                if a:
+                    name = a.get_text(strip=True)
+                    link = a.get("href")
+                else:
+                    name = h4.get_text(strip=True)
+
+            # должность
+            position_el = sidebar_unit.find(class_=re.compile(r"agent_position"))
+            title = position_el.get_text(strip=True) if position_el else None
+
+            # фото (background-image)
+            photo_url = None
+            photo_div = sidebar_unit.find(class_=re.compile(r"agent_unit_widget_sidebar"))
+            if photo_div:
+                style = photo_div.get("style", "")
+                # style="background-image: url(https://...jpg)"
+                match = re.search(r"url\(['\"]?([^'\")]+)", style)
+                if match:
+                    photo_url = match.group(1)
+                    if not photo_url.startswith("http"):
+                        photo_url = urljoin(base_url, photo_url)
+
+            # телефон из кнопки Call
+            phone = None
+            call_link = soup.find("a", class_=re.compile(r"realtor_call"))
+            if call_link:
+                # сначала пробуем текст внутри <span class="agent_call_no">
+                span_phone = call_link.find(class_=re.compile(r"agent_call_no"))
+                if span_phone:
+                    phone = span_phone.get_text(strip=True)
+                else:
+                    href = call_link.get("href", "")
+                    # href="tel:(508) 651-9017"
+                    tel_match = re.search(r"tel:(.+)$", href)
+                    if tel_match:
+                        phone = tel_match.group(1).strip()
+
+            add_agent(name=name, title=title, photo_url=photo_url, phone=phone, link=link)
+
+        # --------- 2. Мобильный блок агента ---------
+        mobile_blocks = soup.find_all("div", class_=re.compile(r"mobile_agent_area_wrapper"))
+        for block in mobile_blocks:
+            # имя + ссылка
+            name = None
+            link = None
+            name_link = block.find("a")
+            if name_link:
+                name = name_link.get_text(strip=True)
+                link = name_link.get("href")
+
+            # фото
+            photo_url = None
+            pict_div = block.find("div", class_=re.compile(r"agentpict"))
+            if pict_div:
+                style = pict_div.get("style", "")
+                match = re.search(r"url\(['\"]?([^'\")]+)", style)
+                if match:
+                    photo_url = match.group(1)
+                    if not photo_url.startswith("http"):
+                        photo_url = urljoin(base_url, photo_url)
+
+            # телефон – тот же, что и в sidebar (если есть)
+            phone = None
+            call_link = soup.find("a", class_=re.compile(r"realtor_call"))
+            if call_link:
+                span_phone = call_link.find(class_=re.compile(r"agent_call_no"))
+                if span_phone:
+                    phone = span_phone.get_text(strip=True)
+                else:
+                    href = call_link.get("href", "")
+                    tel_match = re.search(r"tel:(.+)$", href)
+                    if tel_match:
+                        phone = tel_match.group(1).strip()
+
+            add_agent(name=name, photo_url=photo_url, phone=phone, link=link)
+
+        # --------- 3. Секция \"Other Agents\" (property_other_agents) ---------
+        # Структура по примеру https://rwholmes.com/properties/11-huron-drive-natick/
+        other_section = soup.find(id=re.compile(r"property_other_agents", re.I))
+        if other_section:
+            # Ищем заголовки h3/h4 под этим блоком — там имена агентов
+            for heading in other_section.find_all(["h3", "h4"]):
+                name = heading.get_text(strip=True)
+                if not name:
+                    continue
+                lower = name.lower()
+                # Пропускаем сам заголовок \"Other Agents\" и похожее
+                if "other agents" in lower:
+                    continue
+
+                # Попробуем взять должность как ближайший непустой текст после заголовка
+                title = None
+                sib = heading.find_next_sibling()
+                while sib is not None and sib.name not in ["h3", "h4"]:
+                    text = sib.get_text(" ", strip=True) if hasattr(sib, "get_text") else str(sib).strip()
+                    if text:
+                        title = text
+                        break
+                    sib = sib.find_next_sibling()
+
+                add_agent(name=name, title=title, photo_url=None, phone=None, link=None)
+
+        # Возвращаем список AgentData
+        return list(agents.values())
+
     def _save_html_if_needed(self, html: str, listing_id: str, url: str) -> None:
         """Сохраняет HTML в файл, если нужно (каждый N-й)"""
         self.html_counter += 1
@@ -507,6 +740,9 @@ class RwholmesParser:
         
         # Извлекаем обязательные поля
         price, listing_type = self.extract_price(soup)
+        if not listing_type:
+            # Пытаемся определить тип по тексту страницы (For Lease / For Sale и т.п.)
+            listing_type = self.extract_listing_type_from_page(soup)
         size = self.extract_size(soup)
         description = self.extract_description(soup)
         listing_status = self.extract_listing_status(soup)
@@ -515,6 +751,7 @@ class RwholmesParser:
         brochure_pdf = self.extract_brochure_pdf(soup, self.base_url)
         mls_number = self.extract_mls(soup)
         address = self.extract_address(soup)
+        agents = self.extract_agents(soup, self.base_url)
         
         # Разделяем цену на sale_price и lease_price в зависимости от типа
         sale_price = None
@@ -547,6 +784,8 @@ class RwholmesParser:
                 photos=photos if photos else None,
                 brochure_pdf=brochure_pdf,
                 mls_number=mls_number,
+                agents=agents or None,
+                agency_phone=agents[0].phone_primary if agents and agents[0].phone_primary else None,
             )
             return dto
         except Exception as e:
