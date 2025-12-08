@@ -323,6 +323,11 @@ class RwholmesParser:
                 if key and value and len(key) <= 60 and key not in details:
                     details[key] = value
 
+        # Фильтруем нежелательные поля
+        unwanted_keys = ['search for', 'search']
+        for key in unwanted_keys:
+            details.pop(key, None)
+
         return details
 
     @staticmethod
@@ -795,7 +800,6 @@ class RwholmesParser:
         listing_details = self.extract_details(soup)
         photos = self.extract_photos(soup, self.base_url)
         brochure_pdf = self.extract_brochure_pdf(soup, self.base_url)
-        mls_number = self.extract_mls(soup)
         address = self.extract_address(soup)
         agents = self.extract_agents(soup, self.base_url)
         
@@ -829,7 +833,7 @@ class RwholmesParser:
                 listing_details=listing_details if listing_details else None,
                 photos=photos if photos else None,
                 brochure_pdf=brochure_pdf,
-                mls_number=mls_number,
+                mls_number=None,  # Не сохраняем MLS номер
                 agents=agents or None,
                 agency_phone=agents[0].phone_primary if agents and agents[0].phone_primary else None,
             )
