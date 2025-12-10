@@ -5,6 +5,7 @@
 import asyncio
 import json
 import logging
+import sys
 from datetime import datetime
 
 from compass import CompassParser
@@ -26,9 +27,22 @@ def run_full_parse(location: str = "new-york", max_results: int = 1000):
     start_time = datetime.now()
     output_file = f"parsed_results_{start_time.strftime('%Y%m%d_%H%M%S')}.json"
     
-    # Создаем парсер (headless=True для работы без UI)
+    # Создаем парсер
+    # По умолчанию используем API (быстрее и надежнее)
+    # Для отладки можно использовать Selenium (use_api=False)
+    use_api = True
+    headless_mode = True
+    
+    if len(sys.argv) > 3:
+        if sys.argv[3].lower() == 'debug':
+            headless_mode = False
+            print("🐛 Режим отладки: браузер будет виден")
+        elif sys.argv[3].lower() == 'selenium':
+            use_api = False
+            print("🌐 Используется Selenium вместо API")
+    
     parser = CompassParser(
-        headless=True,
+        headless=headless_mode,
         page_load_timeout=60
     )
     
@@ -38,8 +52,10 @@ def run_full_parse(location: str = "new-york", max_results: int = 1000):
     print(f"📁 Результаты будут сохранены в: {output_file}\n")
     
     try:
-        # Запускаем парсинг (синхронно, так как Selenium блокирующий)
-        results = parser.run(location=location, max_results=max_results)
+        # Запускаем парсинг
+        # Если use_api=True, используется API (быстро)
+        # Если use_api=False, используется Selenium (медленнее, но может обойти некоторые защиты)
+        results = parser.run(location=location, max_results=max_results, use_api=use_api)
         
         end_time = datetime.now()
         duration = (end_time - start_time).total_seconds()
