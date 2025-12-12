@@ -3,12 +3,11 @@ import json
 import logging
 import os
 import re
-import time
 import uuid
 from typing import Any
 from urllib.parse import urljoin, urlparse
 
-import requests
+import httpx
 from bs4 import BeautifulSoup
 from fake_useragent import UserAgent
 
@@ -24,9 +23,9 @@ logger = logging.getLogger(__name__)
 
 class CompassParser:
     """
-    Парсер для compass.com через API
+    Парсер для compass.com через API (асинхронный)
     1. Получение списка объявлений через API (POST запросы)
-    2. Получение HTML для каждого листинга через requests
+    2. Получение HTML для каждого листинга через httpx
     3. Парсинг данных из API и HTML для извлечения обязательных полей
     """
     
@@ -34,6 +33,7 @@ class CompassParser:
         self,
         save_html_every: int = 20,
         html_save_dir: str = "htmls",
+        concurrency: int = 10,
     ) -> None:
         self.source_name = "compass"
         self.base_url = "https://www.compass.com"
@@ -43,6 +43,10 @@ class CompassParser:
         self.html_save_dir = html_save_dir
         self.html_counter = 0
         
+        # Настройки concurrency
+        self.concurrency = concurrency
+        self.semaphore = asyncio.Semaphore(concurrency)
+        
         # Создаем папку для сохранения HTML, если её нет
         if not os.path.exists(self.html_save_dir):
             os.makedirs(self.html_save_dir)
@@ -50,9 +54,9 @@ class CompassParser:
 
     # ---------------------- ЭТАП 1: ИНДЕКСАЦИЯ ----------------------
 
-    def get_listings_from_api(self, location: str = "new-york", max_results: int = 1000) -> list[dict]:
+    async def get_listings_from_api(self, client: httpx.AsyncClient, location: str = "new-york", max_results: int = 1000) -> list[dict]:
         """
-        ЭТАП 1 (API): Получает данные объявлений через API compass.com
+        ЭТАП 1 (API): Получает данные объявлений через API compass.com (асинхронно)
         Возвращает список словарей с данными объявлений (включая listing объекты)
         """
         logger.info(f"[1-API] Получаю данные объявлений через API для локации: {location}")
@@ -67,9 +71,6 @@ class CompassParser:
         viewport_ne = {"lat": 45.2954092, "lng": -72.3285732}
         viewport_sw = {"lat": 39.839376, "lng": -79.2115078}
         
-        # Пробуем получить locationId из первой страницы (если нужно)
-        # Пока используем общие координаты
-        
         page = 0
         num_per_page = 50  # Максимум результатов за запрос
         
@@ -83,7 +84,6 @@ class CompassParser:
                     'Content-Type': 'application/json',
                     'Origin': 'https://www.compass.com',
                     'Sec-GPC': '1',
-                    'Connection': 'keep-alive',
                     'Sec-Fetch-Dest': 'empty',
                     'Sec-Fetch-Mode': 'cors',
                     'Sec-Fetch-Site': 'same-origin',
@@ -126,14 +126,15 @@ class CompassParser:
                 logger.info(f"[1-API] Запрос страницы {page + 1}, start={page * num_per_page}")
                 
                 try:
-                    response = requests.post(
-                        api_url,
-                        params=params,
-                        json=json_data,
-                        headers=headers,
-                        timeout=30
-                    )
-                    response.raise_for_status()
+                    async with self.semaphore:
+                        response = await client.post(
+                            api_url,
+                            params=params,
+                            json=json_data,
+                            headers=headers,
+                            timeout=30.0
+                        )
+                        response.raise_for_status()
                     
                     data = response.json()
                     
@@ -170,10 +171,13 @@ class CompassParser:
                     
                     page += 1
                     
-                    # Задержка между запросами
-                    time.sleep(1)
+                    # Небольшая задержка между запросами
+                    await asyncio.sleep(0.5)
                     
-                except requests.exceptions.RequestException as e:
+                except httpx.HTTPStatusError as e:
+                    logger.error(f"[1-API] HTTP ошибка при запросе к API: {e}")
+                    break
+                except httpx.RequestError as e:
                     logger.error(f"[1-API] Ошибка при запросе к API: {e}")
                     break
                 except json.JSONDecodeError as e:
@@ -192,26 +196,26 @@ class CompassParser:
 
     # ---------------------- ЭТАП 3: ПАРСИНГ ДАННЫХ ----------------------
 
-    def get_listing_html(self, url: str) -> str | None:
-        """Получает HTML страницы объявления через requests"""
+    async def get_listing_html(self, client: httpx.AsyncClient, url: str) -> str | None:
+        """Получает HTML страницы объявления через httpx (асинхронно)"""
         try:
             headers = {
                 'User-Agent': UserAgent().random,
                 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
                 'Accept-Language': 'en-US,en;q=0.5',
                 'Referer': 'https://www.compass.com/',
-                'Connection': 'keep-alive',
             }
-            response = requests.get(url, headers=headers, timeout=15)
-            response.raise_for_status()
-            return response.text
+            async with self.semaphore:
+                response = await client.get(url, headers=headers, timeout=15.0, follow_redirects=True)
+                response.raise_for_status()
+                return response.text
         except Exception as e:
             logger.warning(f"Не удалось загрузить HTML для {url}: {e}")
             return None
 
-    def parse_listing_from_api_data(self, listing_data: dict) -> DbDTO | None:
+    async def parse_listing_from_api_data(self, client: httpx.AsyncClient, listing_data: dict) -> DbDTO | None:
         """
-        ЭТАП 3 (API): Парсит данные объявления напрямую из API ответа
+        ЭТАП 3 (API): Парсит данные объявления напрямую из API ответа (асинхронно)
         Для недостающих полей (описание, MLS, brochure, агенты) загружает HTML страницы
         """
         try:
@@ -237,7 +241,7 @@ class CompassParser:
             dto = self._map_to_dto_from_api(listing_data, url, listing_id)
             
             # Затем загружаем HTML для недостающих полей
-            html = self.get_listing_html(url)
+            html = await self.get_listing_html(client, url)
             if html:
                 # Дополняем данными из HTML
                 self._enrich_from_html(dto, html, listing_id)
@@ -719,32 +723,49 @@ class CompassParser:
             except Exception as e:
                 logger.error(f"Ошибка при сохранении HTML: {e}")
 
-    def run(self, location: str = "new-york", max_results: int = 1000) -> list[DbDTO]:
-        """Основной процесс - использует только API"""
-        # Получаем данные объявлений через API
-        logger.info("[API MODE] Используется API для получения данных")
-        listings_data = self.get_listings_from_api(location, max_results)
-        
-        if not listings_data:
-            logger.warning("Не найдено данных объявлений через API")
-            return []
-        
-        # Парсим данные из API ответа
-        results = []
-        logger.info(f"[2-3] Начинаю обработку {len(listings_data)} объявлений из API...")
-        
-        for i, listing_data in enumerate(listings_data):
-            logger.info(f"Обработка [{i+1}/{len(listings_data)}]...")
-            dto = self.parse_listing_from_api_data(listing_data)
-            if dto:
-                results.append(dto)
-                logger.info(f"✓ Успешно: {dto.address}")
-            else:
-                logger.warning(f"⚠ Не удалось распарсить объявление {i+1}")
-        
-        logger.info(f"\nОбработано объявлений: {len(results)}/{len(listings_data)}")
-        return results
+    async def run(self, location: str = "new-york", max_results: int = 1000) -> list[DbDTO]:
+        """Основной процесс - использует только API (асинхронно)"""
+        async with httpx.AsyncClient() as client:
+            # Получаем данные объявлений через API
+            logger.info("[API MODE] Используется API для получения данных")
+            listings_data = await self.get_listings_from_api(client, location, max_results)
+            
+            if not listings_data:
+                logger.warning("Не найдено данных объявлений через API")
+                return []
+            
+            # Парсим данные из API ответа параллельно
+            logger.info(f"[2-3] Начинаю обработку {len(listings_data)} объявлений из API...")
+            
+            # Создаем задачи для параллельной обработки
+            tasks = [
+                self.parse_listing_from_api_data(client, listing_data)
+                for listing_data in listings_data
+            ]
+            
+            # Выполняем все задачи параллельно
+            results = []
+            completed = 0
+            for coro in asyncio.as_completed(tasks):
+                try:
+                    dto = await coro
+                    completed += 1
+                    if dto:
+                        results.append(dto)
+                        logger.info(f"✓ [{completed}/{len(listings_data)}] Успешно: {dto.address}")
+                    else:
+                        logger.warning(f"⚠ [{completed}/{len(listings_data)}] Не удалось распарсить объявление")
+                except Exception as e:
+                    completed += 1
+                    logger.error(f"❌ [{completed}/{len(listings_data)}] Ошибка при обработке: {e}")
+            
+            logger.info(f"\nОбработано объявлений: {len(results)}/{len(listings_data)}")
+            return results
 
 if __name__ == '__main__':
-    parser = CompassParser()
-    parser.run("new-york", 5)
+    async def main():
+        parser = CompassParser()
+        results = await parser.run("new-york", 5)
+        print(f"Получено {len(results)} объявлений")
+    
+    asyncio.run(main())

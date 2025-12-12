@@ -18,26 +18,27 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
-def run_full_parse(location: str = "new-york", max_results: int = 1000):
-    """Полный парсинг всех объявлений"""
+async def run_full_parse(location: str = "new-york", max_results: int = 1000):
+    """Полный парсинг всех объявлений (асинхронно)"""
     print("\n" + "=" * 70)
-    print("🚀 ПОЛНЫЙ ПАРСИНГ ВСЕХ ОБЪЯВЛЕНИЙ COMPASS.COM (API)")
+    print("🚀 ПОЛНЫЙ ПАРСИНГ ВСЕХ ОБЪЯВЛЕНИЙ COMPASS.COM (API - ASYNC)")
     print("=" * 70)
     
     start_time = datetime.now()
     output_file = f"parsed_results_{start_time.strftime('%Y%m%d_%H%M%S')}.json"
     
-    # Создаем парсер (использует только API через requests)
-    parser = CompassParser()
+    # Создаем парсер (использует только API через httpx)
+    parser = CompassParser(concurrency=10)
     
     print(f"\n⏱️  Начало: {start_time.strftime('%Y-%m-%d %H:%M:%S')}")
     print(f"📍 Локация: {location}")
     print(f"📊 Максимум результатов: {max_results}")
+    print(f"🚀 Concurrency: {parser.concurrency}")
     print(f"📁 Результаты будут сохранены в: {output_file}\n")
     
     try:
-        # Запускаем парсинг через API
-        results = parser.run(location=location, max_results=max_results)
+        # Запускаем парсинг через API (асинхронно)
+        results = await parser.run(location=location, max_results=max_results)
         
         end_time = datetime.now()
         duration = (end_time - start_time).total_seconds()
@@ -123,6 +124,6 @@ if __name__ == '__main__':
             print(f"⚠️  Неверное значение max_results: {sys.argv[2]}, использую 1000")
     
     try:
-        run_full_parse(location=location, max_results=max_results)
+        asyncio.run(run_full_parse(location=location, max_results=max_results))
     except KeyboardInterrupt:
         print("\n\n⚠️  Парсинг прерван пользователем")

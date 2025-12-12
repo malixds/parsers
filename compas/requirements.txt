@@ -3,5 +3,3 @@ beautifulsoup4
 lxml
 fake-useragent
 pydantic[email]
-selenium
-webdriver-manager
