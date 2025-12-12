@@ -21,30 +21,14 @@ logger = logging.getLogger(__name__)
 def run_full_parse(location: str = "new-york", max_results: int = 1000):
     """Полный парсинг всех объявлений"""
     print("\n" + "=" * 70)
-    print("🚀 ПОЛНЫЙ ПАРСИНГ ВСЕХ ОБЪЯВЛЕНИЙ COMPASS.COM (SELENIUM)")
+    print("🚀 ПОЛНЫЙ ПАРСИНГ ВСЕХ ОБЪЯВЛЕНИЙ COMPASS.COM (API)")
     print("=" * 70)
     
     start_time = datetime.now()
     output_file = f"parsed_results_{start_time.strftime('%Y%m%d_%H%M%S')}.json"
     
-    # Создаем парсер
-    # По умолчанию используем API (быстрее и надежнее)
-    # Для отладки можно использовать Selenium (use_api=False)
-    use_api = True
-    headless_mode = True
-    
-    if len(sys.argv) > 3:
-        if sys.argv[3].lower() == 'debug':
-            headless_mode = False
-            print("🐛 Режим отладки: браузер будет виден")
-        elif sys.argv[3].lower() == 'selenium':
-            use_api = False
-            print("🌐 Используется Selenium вместо API")
-    
-    parser = CompassParser(
-        headless=headless_mode,
-        page_load_timeout=60
-    )
+    # Создаем парсер (использует только API через requests)
+    parser = CompassParser()
     
     print(f"\n⏱️  Начало: {start_time.strftime('%Y-%m-%d %H:%M:%S')}")
     print(f"📍 Локация: {location}")
@@ -52,10 +36,8 @@ def run_full_parse(location: str = "new-york", max_results: int = 1000):
     print(f"📁 Результаты будут сохранены в: {output_file}\n")
     
     try:
-        # Запускаем парсинг
-        # Если use_api=True, используется API (быстро)
-        # Если use_api=False, используется Selenium (медленнее, но может обойти некоторые защиты)
-        results = parser.run(location=location, max_results=max_results, use_api=use_api)
+        # Запускаем парсинг через API
+        results = parser.run(location=location, max_results=max_results)
         
         end_time = datetime.now()
         duration = (end_time - start_time).total_seconds()
@@ -118,9 +100,6 @@ def run_full_parse(location: str = "new-york", max_results: int = 1000):
         print(f"\n\n❌ Ошибка: {e}")
         import traceback
         traceback.print_exc()
-        # В случае ошибки все равно пробуем сохранить драйвер, если он есть
-        if parser.driver:
-            parser.stop_driver()
     
     print("\n" + "=" * 70)
     print("✅ ПАРСИНГ ЗАВЕРШЕН!")
