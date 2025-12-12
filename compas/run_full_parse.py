@@ -18,21 +18,31 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
-async def run_full_parse(location: str = "new-york", max_results: int = 1000):
-    """Полный парсинг всех объявлений (асинхронно)"""
+async def run_full_parse(location: str = "new-york", max_results: int | None = None):
+    """
+    Полный парсинг всех объявлений (асинхронно)
+    
+    Args:
+        location: Локация для парсинга (например, "new-york", "los-angeles", "miami")
+        max_results: Максимальное количество результатов. Если None - без лимита (собирает все)
+    """
     print("\n" + "=" * 70)
     print("🚀 ПОЛНЫЙ ПАРСИНГ ВСЕХ ОБЪЯВЛЕНИЙ COMPASS.COM (API - ASYNC)")
     print("=" * 70)
     
     start_time = datetime.now()
-    output_file = f"parsed_results_{start_time.strftime('%Y%m%d_%H%M%S')}.json"
+    output_file = f"parsed_results_{location}_{start_time.strftime('%Y%m%d_%H%M%S')}.json"
     
     # Создаем парсер (использует только API через httpx)
     parser = CompassParser(concurrency=10)
     
     print(f"\n⏱️  Начало: {start_time.strftime('%Y-%m-%d %H:%M:%S')}")
     print(f"📍 Локация: {location}")
-    print(f"📊 Максимум результатов: {max_results}")
+    if max_results is None:
+        print(f"📊 Максимум результатов: БЕЗ ЛИМИТА (собираем все объявления)")
+        max_results = 999999999  # Очень большое число для "без лимита"
+    else:
+        print(f"📊 Максимум результатов: {max_results}")
     print(f"🚀 Concurrency: {parser.concurrency}")
     print(f"📁 Результаты будут сохранены в: {output_file}\n")
     
@@ -113,15 +123,20 @@ if __name__ == '__main__':
     import sys
     
     location = "new-york"
-    max_results = 1000
+    max_results = None  # По умолчанию без лимита
     
     if len(sys.argv) > 1:
         location = sys.argv[1]
     if len(sys.argv) > 2:
-        try:
-            max_results = int(sys.argv[2])
-        except ValueError:
-            print(f"⚠️  Неверное значение max_results: {sys.argv[2]}, использую 1000")
+        arg = sys.argv[2].lower()
+        if arg in ['none', 'all', 'unlimited', '-1']:
+            max_results = None  # Без лимита
+        else:
+            try:
+                max_results = int(sys.argv[2])
+            except ValueError:
+                print(f"⚠️  Неверное значение max_results: {sys.argv[2]}, использую без лимита")
+                max_results = None
     
     try:
         asyncio.run(run_full_parse(location=location, max_results=max_results))

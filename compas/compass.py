@@ -54,14 +54,43 @@ class CompassParser:
 
     # ---------------------- ЭТАП 1: ИНДЕКСАЦИЯ ----------------------
 
-    async def get_listings_from_api(self, client: httpx.AsyncClient, location: str = "new-york", max_results: int = 1000) -> list[dict]:
+    def _split_area_into_grid(self, ne_point: dict, sw_point: dict, grid_size: int = 3) -> list[tuple]:
+        """
+        Разбивает область на более мелкие части (grid) для получения всех объявлений
+        Возвращает список кортежей (ne_point, sw_point) для каждой ячейки grid
+        """
+        ne_lat, ne_lng = ne_point['latitude'], ne_point['longitude']
+        sw_lat, sw_lng = sw_point['latitude'], sw_point['longitude']
+        
+        lat_step = (ne_lat - sw_lat) / grid_size
+        lng_step = (ne_lng - sw_lng) / grid_size
+        
+        grid_cells = []
+        for i in range(grid_size):
+            for j in range(grid_size):
+                cell_ne_lat = ne_lat - (i * lat_step)
+                cell_ne_lng = ne_lng - (j * lng_step)
+                cell_sw_lat = ne_lat - ((i + 1) * lat_step)
+                cell_sw_lng = ne_lng - ((j + 1) * lng_step)
+                
+                cell_ne = {"latitude": cell_ne_lat, "longitude": cell_ne_lng}
+                cell_sw = {"latitude": cell_sw_lat, "longitude": cell_sw_lng}
+                
+                grid_cells.append((cell_ne, cell_sw))
+        
+        return grid_cells
+
+    async def get_listings_from_api(self, client: httpx.AsyncClient, location: str = "new-york", max_results: int = 1000, use_grid: bool = True) -> list[dict]:
         """
         ЭТАП 1 (API): Получает данные объявлений через API compass.com (асинхронно)
         Возвращает список словарей с данными объявлений (включая listing объекты)
+        
+        Args:
+            use_grid: Если True, разбивает область на части для получения всех объявлений
         """
         logger.info(f"[1-API] Получаю данные объявлений через API для локации: {location}")
         
-        listings_data = []
+        all_listings_data = []
         search_result_id = str(uuid.uuid4())
         
         # Базовые координаты для New York (можно расширить для других локаций)
@@ -71,8 +100,71 @@ class CompassParser:
         viewport_ne = {"lat": 45.2954092, "lng": -72.3285732}
         viewport_sw = {"lat": 39.839376, "lng": -79.2115078}
         
+        if use_grid:
+            # Разбиваем область на части для получения всех объявлений
+            logger.info(f"[1-API] Используется grid-подход: разбиваем область на части")
+            # Увеличиваем grid_size для получения большего количества объявлений
+            grid_size = 6  # 6x6 = 36 частей (больше покрытие)
+            grid_cells = self._split_area_into_grid(ne_point, sw_point, grid_size=grid_size)
+            logger.info(f"[1-API] Область разбита на {len(grid_cells)} частей ({grid_size}x{grid_size})")
+            
+            # Обрабатываем каждую часть параллельно
+            tasks = []
+            for idx, (cell_ne, cell_sw) in enumerate(grid_cells):
+                cell_viewport_ne = {"lat": cell_ne["latitude"], "lng": cell_ne["longitude"]}
+                cell_viewport_sw = {"lat": cell_sw["latitude"], "lng": cell_sw["longitude"]}
+                task = self._get_listings_for_area(
+                    client, location, str(uuid.uuid4()),  # Уникальный search_result_id для каждой части
+                    cell_ne, cell_sw, cell_viewport_ne, cell_viewport_sw,
+                    max_results // len(grid_cells) + 50  # Немного больше на часть
+                )
+                tasks.append(task)
+            
+            # Выполняем все задачи параллельно
+            results = await asyncio.gather(*tasks, return_exceptions=True)
+            
+            for idx, result in enumerate(results):
+                if isinstance(result, Exception):
+                    logger.error(f"[1-API] Ошибка при обработке части {idx + 1}: {result}")
+                else:
+                    all_listings_data.extend(result)
+                    logger.info(f"[1-API] Часть {idx + 1}/{len(grid_cells)}: получено {len(result)} объявлений")
+            
+            # Удаляем дубликаты по listingIdSHA
+            seen_ids = set()
+            unique_listings = []
+            for listing in all_listings_data:
+                listing_id = listing.get('listingIdSHA')
+                if listing_id and listing_id not in seen_ids:
+                    seen_ids.add(listing_id)
+                    unique_listings.append(listing)
+            
+            logger.info(f"[1-API] После удаления дубликатов: {len(unique_listings)} уникальных объявлений из {len(all_listings_data)}")
+            return unique_listings[:max_results]
+        else:
+            # Старый подход - одна область
+            return await self._get_listings_for_area(
+                client, location, search_result_id,
+                ne_point, sw_point, viewport_ne, viewport_sw,
+                max_results
+            )
+
+    async def _get_listings_for_area(
+        self, 
+        client: httpx.AsyncClient,
+        location: str,
+        search_result_id: str,
+        ne_point: dict,
+        sw_point: dict,
+        viewport_ne: dict,
+        viewport_sw: dict,
+        max_results: int
+    ) -> list[dict]:
+        """Получает объявления для конкретной области"""
+        listings_data = []
+        location_ids = None
         page = 0
-        num_per_page = 50  # Максимум результатов за запрос
+        num_per_page = 50
         
         try:
             while len(listings_data) < max_results:
@@ -90,26 +182,40 @@ class CompassParser:
                     'Priority': 'u=6',
                 }
                 
-                params = {
-                    'searchQuery': '{"sort":{"column":"dom","direction":"asc"}}',
+                # Пагинация работает через параметр start в searchQuery URL!
+                search_query = {
+                    "sort": {"column": "dom", "direction": "asc"},
+                    "start": page * num_per_page  # Добавляем start для пагинации
                 }
+                params = {
+                    'searchQuery': json.dumps(search_query),
+                }
+                
+                # Формируем rawLolSearchQuery
+                raw_query = {
+                    'listingTypes': [2],  # 2 = For Sale
+                    'saleStatuses': [12, 9],  # Active listings
+                    'num': num_per_page,
+                    'start': page * num_per_page,
+                    'sortOrder': 46,  # DOM ascending
+                    'facetFieldNames': [
+                        'contributingDatasetList',
+                        'compassListingTypes',
+                        'comingSoon',
+                    ],
+                }
+                
+                # Добавляем locationIds если есть (из первого ответа)
+                if location_ids:
+                    raw_query['locationIds'] = location_ids
+                else:
+                    # Используем координаты для первого запроса
+                    raw_query['nePoint'] = ne_point
+                    raw_query['swPoint'] = sw_point
                 
                 json_data = {
                     'searchResultId': search_result_id,
-                    'rawLolSearchQuery': {
-                        'listingTypes': [2],  # 2 = For Sale
-                        'nePoint': ne_point,
-                        'swPoint': sw_point,
-                        'saleStatuses': [12, 9],  # Active listings
-                        'num': num_per_page,
-                        'start': page * num_per_page,
-                        'sortOrder': 46,  # DOM ascending
-                        'facetFieldNames': [
-                            'contributingDatasetList',
-                            'compassListingTypes',
-                            'comingSoon',
-                        ],
-                    },
+                    'rawLolSearchQuery': raw_query,
                     'viewport': {
                         'northeast': viewport_ne,
                         'southwest': viewport_sw,
@@ -145,6 +251,13 @@ class CompassParser:
                     listings = data['lolResults']['data']
                     total_items = data['lolResults'].get('totalItems', 0)
                     
+                    # Извлекаем locationIds из ответа для последующих запросов
+                    if not location_ids and 'rawLolSearchQuery' in data:
+                        response_query = data.get('rawLolSearchQuery', {})
+                        if 'locationIds' in response_query:
+                            location_ids = response_query['locationIds']
+                            logger.info(f"[1-API] Найдены locationIds: {location_ids}, используем для последующих запросов")
+                    
                     logger.info(f"[1-API] Получено {len(listings)} объявлений (всего доступно: {total_items})")
                     
                     if not listings:
@@ -159,14 +272,32 @@ class CompassParser:
                     
                     logger.info(f"[1-API] На странице {page + 1} добавлено {len(listings)} объявлений. Всего: {len(listings_data)}")
                     
-                    # Если получили меньше, чем запрашивали, или достигли лимита, завершаем
-                    if len(listings) < num_per_page or len(listings_data) >= max_results:
-                        logger.info(f"[1-API] Получено меньше результатов или достигнут лимит. Завершаем.")
+                    # Проверяем, достигли ли мы лимита
+                    if len(listings_data) >= max_results:
+                        logger.info(f"[1-API] Достигнут лимит max_results ({max_results}). Завершаем.")
                         break
                     
-                    # Если total_items меньше или равно текущему количеству, завершаем
+                    # Проверяем, получили ли мы все доступные объявления
                     if total_items > 0 and len(listings_data) >= total_items:
                         logger.info(f"[1-API] Получены все доступные объявления ({total_items}). Завершаем.")
+                        break
+                    
+                    # Пагинация теперь работает правильно через start в searchQuery URL!
+                    # Не нужно проверять дубликаты между страницами, так как результаты разные
+                    
+                    # Если получили меньше, чем запрашивали, проверяем есть ли еще данные
+                    if len(listings) < num_per_page:
+                        # Если получили меньше результатов и еще есть объявления - продолжаем
+                        if total_items > 0 and len(listings_data) < total_items:
+                            remaining = total_items - len(listings_data)
+                            logger.info(f"[1-API] Получено меньше результатов ({len(listings)}), но еще есть {remaining} объявлений. Продолжаем.")
+                        else:
+                            # Если total_items неизвестен или мы получили все - завершаем
+                            logger.info(f"[1-API] Получено меньше результатов и больше нет объявлений. Завершаем.")
+                            break
+                    # Если получили пустой список - завершаем
+                    elif len(listings) == 0:
+                        logger.info(f"[1-API] Получен пустой список объявлений. Завершаем.")
                         break
                     
                     page += 1
