@@ -718,63 +718,145 @@ class CompassParser:
         for selector in agent_selectors:
             elements = soup.select(selector)
             for elem in elements:
-                # Ищем имя
-                name_elem = elem.find(['h3', 'h4', 'h5', 'div'], class_=re.compile(r'name|agent', re.I))
+                # Получаем весь текст блока для парсинга
+                full_text = elem.get_text(separator=' ', strip=True)
+                
+                # Ищем имя - сначала пытаемся найти отдельный элемент
+                name = None
+                name_elem = elem.find(['h3', 'h4', 'h5', 'div', 'span'], class_=re.compile(r'name|agent', re.I))
                 if not name_elem:
                     name_elem = elem.find('a', href=re.compile(r'/agent/|/team/'))
                 
                 if name_elem:
                     name = name_elem.get_text(strip=True)
-                    if name and len(name) > 2:
-                        # Ищем ссылку
-                        link = None
-                        a_tag = name_elem.find('a') if name_elem.name != 'a' else name_elem
-                        if a_tag:
-                            link = a_tag.get('href', '')
-                            if link and not link.startswith('http'):
-                                link = urljoin(base_url, link)
-                        
-                        # Ищем телефон
-                        phone = None
-                        phone_elem = elem.find('a', href=re.compile(r'tel:'))
-                        if phone_elem:
-                            phone_match = re.search(r'tel:([\d\s\-\(\)]+)', phone_elem.get('href', ''))
-                            if phone_match:
-                                phone = phone_match.group(1).strip()
-                        
-                        # Ищем email
-                        email = None
-                        email_elem = elem.find('a', href=re.compile(r'mailto:'))
-                        if email_elem:
-                            email_match = re.search(r'mailto:([^\s]+)', email_elem.get('href', ''))
-                            if email_match:
-                                email = email_match.group(1).strip()
-                        
-                        # Ищем фото
-                        photo_url = None
-                        img = elem.find('img')
-                        if img:
-                            photo_url = img.get('src') or img.get('data-src')
-                            if photo_url and not photo_url.startswith('http'):
-                                photo_url = urljoin(base_url, photo_url)
-                        
-                        # Ищем должность
-                        title = None
-                        title_elem = elem.find(['div', 'span'], class_=re.compile(r'title|position|role', re.I))
-                        if title_elem:
-                            title = title_elem.get_text(strip=True)
-                        
-                        agent = AgentData(
-                            name=name,
-                            title=title,
-                            phone_primary=phone,
-                            email=email,
-                            photo_url=photo_url,
-                            social_media=link,
-                        )
-                        agents.append(agent)
+                else:
+                    # Если не нашли отдельный элемент, парсим из текста
+                    # Формат: "Listed byLynn Wadleigh • Coldwell Banker..."
+                    name_match = re.search(r'(?:Listed\s+by|Agent:?)\s*([A-Z][a-z]+(?:\s+[A-Z][a-z]+)*)', full_text)
+                    if name_match:
+                        name = name_match.group(1).strip()
+                
+                # Если имя не найдено, пропускаем
+                if not name or len(name) < 2:
+                    continue
+                
+                # Ищем ссылку на профиль агента
+                link = None
+                a_tag = elem.find('a', href=re.compile(r'/agent/|/team/'))
+                if a_tag:
+                    link = a_tag.get('href', '')
+                    if link and not link.startswith('http'):
+                        link = urljoin(base_url, link)
+                
+                # Парсим телефон из текста
+                # Форматы: P:(518)-260-2222, C:(518)-260-2222, Phone: (518) 260-2222
+                phone_primary = None
+                phone_alt = None
+                
+                # Ищем через tel: ссылки
+                phone_elems = elem.find_all('a', href=re.compile(r'tel:'))
+                for phone_elem in phone_elems:
+                    phone_match = re.search(r'tel:([\d\s\-\(\)]+)', phone_elem.get('href', ''))
+                    if phone_match:
+                        if not phone_primary:
+                            phone_primary = phone_match.group(1).strip()
+                        else:
+                            phone_alt = phone_match.group(1).strip()
+                
+                # Парсим из текста: P:(518)-260-2222 или C:(518)-260-2222
+                if not phone_primary:
+                    phone_patterns = [
+                        r'P:\s*\(?(\d{3})\)?\s*-?\s*(\d{3})\s*-?\s*(\d{4})',  # P:(518)-260-2222
+                        r'Phone:\s*\(?(\d{3})\)?\s*-?\s*(\d{3})\s*-?\s*(\d{4})',  # Phone: (518) 260-2222
+                        r'\((\d{3})\)\s*(\d{3})\s*-?\s*(\d{4})',  # (518) 260-2222
+                    ]
+                    for pattern in phone_patterns:
+                        match = re.search(pattern, full_text)
+                        if match:
+                            phone_primary = f"({match.group(1)}) {match.group(2)}-{match.group(3)}"
+                            break
+                
+                # Ищем альтернативный телефон (C:)
+                if not phone_alt:
+                    cell_match = re.search(r'C:\s*\(?(\d{3})\)?\s*-?\s*(\d{3})\s*-?\s*(\d{4})', full_text)
+                    if cell_match:
+                        phone_alt = f"({cell_match.group(1)}) {cell_match.group(2)}-{cell_match.group(3)}"
+                
+                # Парсим email
+                email = None
+                email_elem = elem.find('a', href=re.compile(r'mailto:'))
+                if email_elem:
+                    email_match = re.search(r'mailto:([^\s"\'<>]+)', email_elem.get('href', ''))
+                    if email_match:
+                        email = email_match.group(1).strip()
+                else:
+                    # Парсим email из текста
+                    email_match = re.search(r'([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})', full_text)
+                    if email_match:
+                        email = email_match.group(1).strip()
+                
+                # Парсим название офиса
+                # Формат: "• Coldwell Banker Prime Properties"
+                office_name = None
+                office_match = re.search(r'•\s*([A-Z][^•P:C:@]+?)(?:\s+P:|C:|@|$)', full_text)
+                if office_match:
+                    office_name = office_match.group(1).strip()
+                else:
+                    # Ищем в отдельном элементе
+                    office_elem = elem.find(['div', 'span'], class_=re.compile(r'office|brokerage|company', re.I))
+                    if office_elem:
+                        office_name = office_elem.get_text(strip=True)
+                
+                # Ищем телефон офиса
+                office_phone = None
+                office_phone_elem = elem.find(['div', 'span'], class_=re.compile(r'office.*phone|brokerage.*phone', re.I))
+                if office_phone_elem:
+                    office_phone_match = re.search(r'\(?(\d{3})\)?\s*-?\s*(\d{3})\s*-?\s*(\d{4})', office_phone_elem.get_text())
+                    if office_phone_match:
+                        office_phone = f"({office_phone_match.group(1)}) {office_phone_match.group(2)}-{office_phone_match.group(3)}"
+                
+                # Ищем фото
+                photo_url = None
+                img = elem.find('img')
+                if img:
+                    photo_url = img.get('src') or img.get('data-src') or img.get('data-lazy-src')
+                    if photo_url and not photo_url.startswith('http'):
+                        photo_url = urljoin(base_url, photo_url)
+                
+                # Ищем должность
+                title = None
+                title_elem = elem.find(['div', 'span'], class_=re.compile(r'title|position|role', re.I))
+                if title_elem:
+                    title = title_elem.get_text(strip=True)
+                
+                # Очищаем имя от лишних префиксов
+                if name:
+                    name = re.sub(r'^Listed\s+by\s*', '', name, flags=re.I).strip()
+                    name = re.sub(r'\s*•.*$', '', name).strip()  # Убираем все после •
+                
+                agent = AgentData(
+                    name=name,
+                    title=title,
+                    phone_primary=phone_primary,
+                    phone_alt=phone_alt,
+                    email=email,
+                    photo_url=photo_url,
+                    social_media=link,
+                    office_name=office_name,
+                    office_phone=office_phone,
+                )
+                agents.append(agent)
         
-        return agents
+        # Удаляем дубликаты по имени и email
+        seen = set()
+        unique_agents = []
+        for agent in agents:
+            key = (agent.name, agent.email)
+            if key not in seen and agent.name:
+                seen.add(key)
+                unique_agents.append(agent)
+        
+        return unique_agents
 
     @staticmethod
     def extract_details(soup: BeautifulSoup) -> dict[str, Any]:
