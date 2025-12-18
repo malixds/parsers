@@ -18,26 +18,26 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
-async def run_full_parse(location: str = "new-york", max_results: int | None = None):
+async def run_full_parse(max_results: int | None = None, mode: str = "sitemap"):
     """
     Полный парсинг всех объявлений (асинхронно)
     
     Args:
-        location: Локация для парсинга (например, "new-york", "los-angeles", "miami")
         max_results: Максимальное количество результатов. Если None - без лимита (собирает все)
+        mode: Режим работы - "sitemap" (через robots.txt) или "api" (через API, требует location)
     """
     print("\n" + "=" * 70)
-    print("🚀 ПОЛНЫЙ ПАРСИНГ ВСЕХ ОБЪЯВЛЕНИЙ COMPASS.COM (API - ASYNC)")
+    print(f"🚀 ПОЛНЫЙ ПАРСИНГ ВСЕХ ОБЪЯВЛЕНИЙ COMPASS.COM (MODE: {mode.upper()})")
     print("=" * 70)
     
     start_time = datetime.now()
-    output_file = f"parsed_results_{location}_{start_time.strftime('%Y%m%d_%H%M%S')}.json"
+    output_file = f"parsed_results_sitemap_{start_time.strftime('%Y%m%d_%H%M%S')}.json"
     
-    # Создаем парсер (использует только API через httpx)
+    # Создаем парсер
     parser = CompassParser(concurrency=10)
     
     print(f"\n⏱️  Начало: {start_time.strftime('%Y-%m-%d %H:%M:%S')}")
-    print(f"📍 Локация: {location}")
+    print(f"🗺️  Режим: {mode}")
     if max_results is None:
         print(f"📊 Максимум результатов: БЕЗ ЛИМИТА (собираем все объявления)")
         max_results = 999999999  # Очень большое число для "без лимита"
@@ -47,8 +47,8 @@ async def run_full_parse(location: str = "new-york", max_results: int | None = N
     print(f"📁 Результаты будут сохранены в: {output_file}\n")
     
     try:
-        # Запускаем парсинг через API (асинхронно)
-        results = await parser.run(location=location, max_results=max_results)
+        # Запускаем парсинг (асинхронно)
+        results = await parser.run(max_results=max_results, mode=mode)
         
         end_time = datetime.now()
         duration = (end_time - start_time).total_seconds()
@@ -122,23 +122,27 @@ async def run_full_parse(location: str = "new-york", max_results: int | None = N
 if __name__ == '__main__':
     import sys
     
-    location = "new-york"
     max_results = None  # По умолчанию без лимита
+    mode = "sitemap"  # По умолчанию режим sitemap
     
     if len(sys.argv) > 1:
-        location = sys.argv[1]
-    if len(sys.argv) > 2:
-        arg = sys.argv[2].lower()
+        arg = sys.argv[1].lower()
         if arg in ['none', 'all', 'unlimited', '-1']:
             max_results = None  # Без лимита
         else:
             try:
-                max_results = int(sys.argv[2])
+                max_results = int(sys.argv[1])
             except ValueError:
-                print(f"⚠️  Неверное значение max_results: {sys.argv[2]}, использую без лимита")
+                print(f"⚠️  Неверное значение max_results: {sys.argv[1]}, использую без лимита")
                 max_results = None
     
+    if len(sys.argv) > 2:
+        mode = sys.argv[2].lower()
+        if mode not in ['sitemap', 'api']:
+            print(f"⚠️  Неверный режим: {mode}, использую 'sitemap'")
+            mode = "sitemap"
+    
     try:
-        asyncio.run(run_full_parse(location=location, max_results=max_results))
+        asyncio.run(run_full_parse(max_results=max_results, mode=mode))
     except KeyboardInterrupt:
         print("\n\n⚠️  Парсинг прерван пользователем")

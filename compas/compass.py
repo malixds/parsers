@@ -6,6 +6,9 @@ import re
 import uuid
 from typing import Any
 from urllib.parse import urljoin, urlparse
+import xml.etree.ElementTree as ET
+import gzip
+from io import BytesIO
 
 import httpx
 from bs4 import BeautifulSoup
@@ -52,7 +55,142 @@ class CompassParser:
             os.makedirs(self.html_save_dir)
             logger.info(f"Создана папка для сохранения HTML: {self.html_save_dir}")
 
-    # ---------------------- ЭТАП 1: ИНДЕКСАЦИЯ ----------------------
+    # ---------------------- ЭТАП 1: ИНДЕКСАЦИЯ (ЧЕРЕЗ САЙТМАПЫ) ----------------------
+
+    async def get_sitemap_urls(self, client: httpx.AsyncClient) -> list[str]:
+        """
+        Получает все URL сайтмапов из robots.txt
+        """
+        robots_url = f"{self.base_url}/robots.txt"
+        logger.info(f"[1-SITEMAP] Получаю robots.txt: {robots_url}")
+        
+        try:
+            headers = {'User-Agent': UserAgent().random}
+            response = await client.get(robots_url, headers=headers, timeout=30.0)
+            response.raise_for_status()
+            
+            robots_content = response.text
+            sitemap_urls = []
+            
+            # Парсим robots.txt и ищем все строки с Sitemap:
+            for line in robots_content.split('\n'):
+                line = line.strip()
+                if line.lower().startswith('sitemap:'):
+                    sitemap_url = line.split(':', 1)[1].strip()
+                    sitemap_urls.append(sitemap_url)
+            
+            logger.info(f"[1-SITEMAP] Найдено {len(sitemap_urls)} сайтмапов в robots.txt")
+            return sitemap_urls
+            
+        except Exception as e:
+            logger.error(f"[1-SITEMAP] Ошибка при получении robots.txt: {e}")
+            return []
+
+    async def parse_sitemap(self, client: httpx.AsyncClient, sitemap_url: str) -> list[str]:
+        """
+        Парсит один sitemap и возвращает список URL с /homedetails
+        Поддерживает как обычные XML сайтмапы, так и gzip сайтмапы
+        """
+        logger.info(f"[1-SITEMAP] Обрабатываю sitemap: {sitemap_url}")
+        
+        try:
+            headers = {'User-Agent': UserAgent().random}
+            async with self.semaphore:
+                response = await client.get(sitemap_url, headers=headers, timeout=60.0)
+                response.raise_for_status()
+            
+            content = response.content
+            
+            # Проверяем, gzip ли это
+            if sitemap_url.endswith('.gz'):
+                try:
+                    content = gzip.decompress(content)
+                except Exception as e:
+                    logger.warning(f"[1-SITEMAP] Не удалось разархивировать gzip: {e}")
+                    return []
+            
+            # Парсим XML
+            try:
+                root = ET.fromstring(content)
+            except ET.ParseError as e:
+                logger.error(f"[1-SITEMAP] Ошибка парсинга XML: {e}")
+                return []
+            
+            # Извлекаем URL
+            # Namespace для sitemap
+            ns = {'sm': 'http://www.sitemaps.org/schemas/sitemap/0.9'}
+            
+            urls = []
+            
+            # Проверяем, это sitemap index или обычный sitemap
+            sitemap_elements = root.findall('.//sm:sitemap', ns)
+            if sitemap_elements:
+                # Это sitemap index - рекурсивно обрабатываем вложенные сайтмапы
+                logger.info(f"[1-SITEMAP] Найден sitemap index с {len(sitemap_elements)} вложенными сайтмапами")
+                for sitemap_elem in sitemap_elements:
+                    loc = sitemap_elem.find('sm:loc', ns)
+                    if loc is not None and loc.text:
+                        nested_urls = await self.parse_sitemap(client, loc.text)
+                        urls.extend(nested_urls)
+            else:
+                # Это обычный sitemap с URL
+                url_elements = root.findall('.//sm:url', ns)
+                
+                for url_elem in url_elements:
+                    loc = url_elem.find('sm:loc', ns)
+                    if loc is not None and loc.text:
+                        url = loc.text
+                        # Фильтруем только URL с /homedetails
+                        if '/homedetails' in url:
+                            urls.append(url)
+                
+                logger.info(f"[1-SITEMAP] Найдено {len(urls)} URL с /homedetails в sitemap")
+            
+            return urls
+            
+        except Exception as e:
+            logger.error(f"[1-SITEMAP] Ошибка при обработке sitemap {sitemap_url}: {e}")
+            return []
+
+    async def get_all_listing_urls_from_sitemaps(self, client: httpx.AsyncClient, max_urls: int = None) -> list[str]:
+        """
+        Получает все URL листингов (/homedetails) из всех сайтмапов
+        """
+        logger.info("[1-SITEMAP] Начинаю сбор URL из сайтмапов...")
+        
+        # Получаем список сайтмапов
+        sitemap_urls = await self.get_sitemap_urls(client)
+        
+        if not sitemap_urls:
+            logger.error("[1-SITEMAP] Не найдено сайтмапов в robots.txt")
+            return []
+        
+        # Обрабатываем каждый sitemap параллельно
+        logger.info(f"[1-SITEMAP] Обрабатываю {len(sitemap_urls)} сайтмапов...")
+        
+        tasks = [self.parse_sitemap(client, sitemap_url) for sitemap_url in sitemap_urls]
+        results = await asyncio.gather(*tasks, return_exceptions=True)
+        
+        all_urls = []
+        for idx, result in enumerate(results):
+            if isinstance(result, Exception):
+                logger.error(f"[1-SITEMAP] Ошибка при обработке sitemap {idx + 1}: {result}")
+            else:
+                all_urls.extend(result)
+                logger.info(f"[1-SITEMAP] Sitemap {idx + 1}/{len(sitemap_urls)}: получено {len(result)} URL")
+        
+        # Удаляем дубликаты
+        unique_urls = list(set(all_urls))
+        logger.info(f"[1-SITEMAP] Всего найдено {len(unique_urls)} уникальных URL с /homedetails")
+        
+        # Ограничиваем количество, если задано
+        if max_urls and len(unique_urls) > max_urls:
+            logger.info(f"[1-SITEMAP] Ограничиваю до {max_urls} URL")
+            unique_urls = unique_urls[:max_urls]
+        
+        return unique_urls
+
+    # ---------------------- ЭТАП 1: ИНДЕКСАЦИЯ (СТАРЫЙ МЕТОД ЧЕРЕЗ API) ----------------------
 
     def _split_area_into_grid(self, ne_point: dict, sw_point: dict, grid_size: int = 3) -> list[tuple]:
         """
@@ -936,49 +1074,209 @@ class CompassParser:
             except Exception as e:
                 logger.error(f"Ошибка при сохранении HTML: {e}")
 
-    async def run(self, location: str = "new-york", max_results: int = 1000) -> list[DbDTO]:
-        """Основной процесс - использует только API (асинхронно)"""
-        async with httpx.AsyncClient() as client:
-            # Получаем данные объявлений через API
-            logger.info("[API MODE] Используется API для получения данных")
-            listings_data = await self.get_listings_from_api(client, location, max_results)
+    async def parse_listing_from_html_only(self, client: httpx.AsyncClient, url: str) -> DbDTO | None:
+        """
+        Парсит данные объявления напрямую из HTML страницы (для режима sitemap)
+        """
+        try:
+            # Извлекаем ID из URL
+            listing_id = "unknown"
+            parsed = urlparse(url)
+            path_parts = [p for p in parsed.path.split('/') if p]
+            if path_parts:
+                listing_id = path_parts[-1]
             
-            if not listings_data:
-                logger.warning("Не найдено данных объявлений через API")
-                return []
+            # Загружаем HTML
+            html = await self.get_listing_html(client, url)
+            if not html:
+                logger.warning(f"Не удалось загрузить HTML для {url}")
+                return None
             
-            # Парсим данные из API ответа параллельно
-            logger.info(f"[2-3] Начинаю обработку {len(listings_data)} объявлений из API...")
+            soup = BeautifulSoup(html, 'lxml')
             
-            # Создаем задачи для параллельной обработки
-            tasks = [
-                self.parse_listing_from_api_data(client, listing_data)
-                for listing_data in listings_data
-            ]
+            # Создаем базовый DTO
+            dto = DbDTO(
+                source_name=self.source_name,
+                listing_id=listing_id,
+                listing_link=url,
+                listing_type='sale',
+                listing_status="Available",
+                address="Address not found",
+                sale_price=None,
+                lease_price=None,
+                size=None,
+                property_description=None,
+                listing_details={},
+                photos=[],
+                brochure_pdf=None,
+                mls_number=None,
+                agents=[],
+                agency_phone=None,
+            )
             
-            # Выполняем все задачи параллельно
-            results = []
-            completed = 0
-            for coro in asyncio.as_completed(tasks):
+            # Извлекаем данные из JSON-LD структурированных данных
+            scripts = soup.find_all('script', type='application/ld+json')
+            for script in scripts:
                 try:
-                    dto = await coro
-                    completed += 1
-                    if dto:
-                        results.append(dto)
-                        logger.info(f"✓ [{completed}/{len(listings_data)}] Успешно: {dto.address}")
-                    else:
-                        logger.warning(f"⚠ [{completed}/{len(listings_data)}] Не удалось распарсить объявление")
-                except Exception as e:
-                    completed += 1
-                    logger.error(f"❌ [{completed}/{len(listings_data)}] Ошибка при обработке: {e}")
+                    if not script.string:
+                        continue
+                    data = json.loads(script.string)
+                    
+                    # Может быть SingleFamilyResidence, Product, или другой тип
+                    if isinstance(data, dict):
+                        # Address
+                        if 'address' in data:
+                            addr = data['address']
+                            if isinstance(addr, dict):
+                                street = addr.get('streetAddress', '')
+                                city = addr.get('addressLocality', '')
+                                state = addr.get('addressRegion', '')
+                                zip_code = addr.get('postalCode', '')
+                                parts = [p for p in [street, city, state, zip_code] if p]
+                                if parts:
+                                    dto.address = ', '.join(parts)
+                        
+                        # Description
+                        if 'description' in data and not dto.property_description:
+                            desc = data['description']
+                            if isinstance(desc, str) and len(desc) > 50:
+                                dto.property_description = desc
+                        
+                        # Price
+                        if 'offers' in data:
+                            offers = data['offers']
+                            if isinstance(offers, dict):
+                                price = offers.get('price')
+                                if price:
+                                    dto.sale_price = f"${price:,.0f}" if isinstance(price, (int, float)) else str(price)
+                        
+                        # Photos
+                        if 'image' in data:
+                            images = data['image']
+                            if isinstance(images, list):
+                                dto.photos = images
+                            elif isinstance(images, str):
+                                dto.photos = [images]
+                        
+                        # Additional properties
+                        if 'numberOfRooms' in data:
+                            dto.listing_details['rooms'] = data['numberOfRooms']
+                        if 'numberOfBedrooms' in data:
+                            dto.listing_details['bedrooms'] = data['numberOfBedrooms']
+                        if 'numberOfBathroomsTotal' in data:
+                            dto.listing_details['bathrooms'] = data['numberOfBathroomsTotal']
+                        if 'floorSize' in data:
+                            floor_size = data['floorSize']
+                            if isinstance(floor_size, dict) and 'value' in floor_size:
+                                dto.size = f"{floor_size['value']:,} SF"
+                            elif isinstance(floor_size, str):
+                                dto.size = floor_size
+                
+                except (json.JSONDecodeError, KeyError, AttributeError) as e:
+                    logger.debug(f"Ошибка при парсинге JSON-LD: {e}")
+                    continue
             
-            logger.info(f"\nОбработано объявлений: {len(results)}/{len(listings_data)}")
-            return results
+            # Дополняем данными из HTML парсинга
+            self._enrich_from_html(dto, html, listing_id)
+            
+            return dto
+            
+        except Exception as e:
+            logger.error(f"Ошибка при парсинге {url}: {e}")
+            import traceback
+            traceback.print_exc()
+            return None
+
+    async def run(self, location: str = "new-york", max_results: int = 1000, mode: str = "sitemap") -> list[DbDTO]:
+        """
+        Основной процесс парсинга (асинхронно)
+        
+        Args:
+            location: Локация для поиска (используется только в режиме api)
+            max_results: Максимальное количество результатов
+            mode: Режим работы - "sitemap" (через robots.txt) или "api" (через API)
+        """
+        async with httpx.AsyncClient() as client:
+            if mode == "sitemap":
+                # Новый режим: через сайтмапы из robots.txt
+                logger.info("[SITEMAP MODE] Используются сайтмапы из robots.txt")
+                
+                # Получаем все URL с /homedetails из сайтмапов
+                listing_urls = await self.get_all_listing_urls_from_sitemaps(client, max_urls=max_results)
+                
+                if not listing_urls:
+                    logger.warning("Не найдено URL в сайтмапах")
+                    return []
+                
+                # Парсим каждый URL параллельно
+                logger.info(f"[2-3] Начинаю обработку {len(listing_urls)} листингов из сайтмапов...")
+                
+                tasks = [
+                    self.parse_listing_from_html_only(client, url)
+                    for url in listing_urls
+                ]
+                
+                # Выполняем все задачи параллельно
+                results = []
+                completed = 0
+                for coro in asyncio.as_completed(tasks):
+                    try:
+                        dto = await coro
+                        completed += 1
+                        if dto:
+                            results.append(dto)
+                            logger.info(f"✓ [{completed}/{len(listing_urls)}] Успешно: {dto.address}")
+                        else:
+                            logger.warning(f"⚠ [{completed}/{len(listing_urls)}] Не удалось распарсить объявление")
+                    except Exception as e:
+                        completed += 1
+                        logger.error(f"❌ [{completed}/{len(listing_urls)}] Ошибка при обработке: {e}")
+                
+                logger.info(f"\nОбработано объявлений: {len(results)}/{len(listing_urls)}")
+                return results
+                
+            else:
+                # Старый режим: через API
+                logger.info("[API MODE] Используется API для получения данных")
+                listings_data = await self.get_listings_from_api(client, location, max_results)
+                
+                if not listings_data:
+                    logger.warning("Не найдено данных объявлений через API")
+                    return []
+                
+                # Парсим данные из API ответа параллельно
+                logger.info(f"[2-3] Начинаю обработку {len(listings_data)} объявлений из API...")
+                
+                # Создаем задачи для параллельной обработки
+                tasks = [
+                    self.parse_listing_from_api_data(client, listing_data)
+                    for listing_data in listings_data
+                ]
+                
+                # Выполняем все задачи параллельно
+                results = []
+                completed = 0
+                for coro in asyncio.as_completed(tasks):
+                    try:
+                        dto = await coro
+                        completed += 1
+                        if dto:
+                            results.append(dto)
+                            logger.info(f"✓ [{completed}/{len(listings_data)}] Успешно: {dto.address}")
+                        else:
+                            logger.warning(f"⚠ [{completed}/{len(listings_data)}] Не удалось распарсить объявление")
+                    except Exception as e:
+                        completed += 1
+                        logger.error(f"❌ [{completed}/{len(listings_data)}] Ошибка при обработке: {e}")
+                
+                logger.info(f"\nОбработано объявлений: {len(results)}/{len(listings_data)}")
+                return results
 
 if __name__ == '__main__':
     async def main():
         parser = CompassParser()
-        results = await parser.run("new-york", 5)
+        # Используем режим sitemap для получения данных через сайтмапы
+        results = await parser.run(max_results=10, mode="sitemap")
         print(f"Получено {len(results)} объявлений")
     
     asyncio.run(main())

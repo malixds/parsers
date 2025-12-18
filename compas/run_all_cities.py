@@ -145,11 +145,11 @@ POPULAR_COUNTIES = [
 ]
 
 
-async def parse_city(parser: CompassParser, location: str, max_results: int | None = None) -> list:
-    """Парсит один город"""
+async def parse_city(parser: CompassParser, location: str, max_results: int | None = None, mode: str = "api") -> list:
+    """Парсит один город (только для режима api)"""
     try:
         logger.info(f"📍 Начинаю парсинг: {location}")
-        results = await parser.run(location=location, max_results=max_results or 999999999)
+        results = await parser.run(location=location, max_results=max_results or 999999999, mode=mode)
         logger.info(f"✅ {location}: получено {len(results)} объявлений")
         return results
     except Exception as e:
@@ -163,22 +163,29 @@ async def run_all_cities(
     cities: list[str] | None = None,
     max_results_per_city: int | None = None,
     output_dir: str = "results_all_cities",
-    concurrency: int = 3  # Одновременно обрабатываем несколько городов
+    concurrency: int = 3,  # Одновременно обрабатываем несколько городов
+    mode: str = "api"  # Режим работы (только api поддерживает локации)
 ):
     """
-    Парсит все города из списка
+    Парсит все города из списка (только для режима api)
     
     Args:
         cities: Список городов для парсинга. Если None - использует POPULAR_CITIES
         max_results_per_city: Максимум результатов на город. Если None - без лимита
         output_dir: Директория для сохранения результатов
         concurrency: Количество одновременных запросов к разным городам
+        mode: Режим работы ("api" - по городам, "sitemap" - все через сайтмапы)
     """
+    if mode == "sitemap":
+        print("\n⚠️  Режим 'sitemap' не поддерживает парсинг по городам.")
+        print("Используйте run_full_parse.py для режима sitemap.\n")
+        return []
+    
     if cities is None:
         cities = POPULAR_CITIES
     
     print("\n" + "=" * 70)
-    print("🌍 ПАРСИНГ ВСЕХ ГОРОДОВ COMPASS.COM")
+    print(f"🌍 ПАРСИНГ ВСЕХ ГОРОДОВ COMPASS.COM (MODE: {mode.upper()})")
     print("=" * 70)
     print(f"📍 Всего городов: {len(cities)}")
     if max_results_per_city is None:
@@ -204,7 +211,7 @@ async def run_all_cities(
     
     async def parse_with_semaphore(location: str):
         async with city_semaphore:
-            results = await parse_city(parser, location, max_results_per_city)
+            results = await parse_city(parser, location, max_results_per_city, mode)
             city_stats[location] = len(results)
             return results
     
@@ -275,11 +282,12 @@ async def run_all_cities(
 if __name__ == '__main__':
     import argparse
     
-    parser = argparse.ArgumentParser(description='Парсинг всех городов compass.com')
+    parser = argparse.ArgumentParser(description='Парсинг всех городов compass.com (только режим api)')
     parser.add_argument('--cities', nargs='+', help='Список городов для парсинга (по умолчанию: все популярные)')
     parser.add_argument('--max-results', type=int, default=None, help='Максимум результатов на город (по умолчанию: без лимита)')
     parser.add_argument('--output-dir', type=str, default='results_all_cities', help='Директория для сохранения результатов')
     parser.add_argument('--concurrency', type=int, default=3, help='Количество одновременных запросов к разным городам')
+    parser.add_argument('--mode', type=str, default='api', choices=['api', 'sitemap'], help='Режим работы (по умолчанию: api)')
     
     args = parser.parse_args()
     
@@ -288,7 +296,8 @@ if __name__ == '__main__':
             cities=args.cities,
             max_results_per_city=args.max_results,
             output_dir=args.output_dir,
-            concurrency=args.concurrency
+            concurrency=args.concurrency,
+            mode=args.mode
         ))
     except KeyboardInterrupt:
         print("\n\n⚠️  Парсинг прерван пользователем")
