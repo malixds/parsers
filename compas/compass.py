@@ -154,7 +154,8 @@ class CompassParser:
 
     async def get_all_listing_urls_from_sitemaps(self, client: httpx.AsyncClient, max_urls: int = None) -> list[str]:
         """
-        Получает все URL листингов (/homedetails) из всех сайтмапов
+        Получает URL листингов (/homedetails) из сайтмапов
+        Останавливается, как только набрано нужное количество
         """
         logger.info("[1-SITEMAP] Начинаю сбор URL из сайтмапов...")
         
@@ -165,30 +166,49 @@ class CompassParser:
             logger.error("[1-SITEMAP] Не найдено сайтмапов в robots.txt")
             return []
         
-        # Обрабатываем каждый sitemap параллельно
-        logger.info(f"[1-SITEMAP] Обрабатываю {len(sitemap_urls)} сайтмапов...")
+        logger.info(f"[1-SITEMAP] Найдено {len(sitemap_urls)} сайтмапов в robots.txt")
         
-        tasks = [self.parse_sitemap(client, sitemap_url) for sitemap_url in sitemap_urls]
-        results = await asyncio.gather(*tasks, return_exceptions=True)
+        if max_urls:
+            logger.info(f"[1-SITEMAP] Собираю первые {max_urls} URL...")
         
         all_urls = []
-        for idx, result in enumerate(results):
-            if isinstance(result, Exception):
-                logger.error(f"[1-SITEMAP] Ошибка при обработке sitemap {idx + 1}: {result}")
-            else:
-                all_urls.extend(result)
-                logger.info(f"[1-SITEMAP] Sitemap {idx + 1}/{len(sitemap_urls)}: получено {len(result)} URL")
+        seen_urls = set()
         
-        # Удаляем дубликаты
-        unique_urls = list(set(all_urls))
-        logger.info(f"[1-SITEMAP] Всего найдено {len(unique_urls)} уникальных URL с /homedetails")
+        # Обрабатываем сайтмапы последовательно, останавливаемся при достижении лимита
+        for idx, sitemap_url in enumerate(sitemap_urls):
+            if max_urls and len(all_urls) >= max_urls:
+                logger.info(f"[1-SITEMAP] Достигнут лимит {max_urls} URL, останавливаю сбор")
+                break
+            
+            try:
+                urls = await self.parse_sitemap(client, sitemap_url)
+                
+                # Добавляем только уникальные URL
+                new_urls = []
+                for url in urls:
+                    if url not in seen_urls:
+                        seen_urls.add(url)
+                        new_urls.append(url)
+                        all_urls.append(url)
+                        
+                        # Останавливаемся, если достигли лимита
+                        if max_urls and len(all_urls) >= max_urls:
+                            break
+                
+                if new_urls:
+                    logger.info(f"[1-SITEMAP] Sitemap {idx + 1}/{len(sitemap_urls)}: добавлено {len(new_urls)} новых URL (всего: {len(all_urls)})")
+                    
+            except Exception as e:
+                logger.error(f"[1-SITEMAP] Ошибка при обработке sitemap {idx + 1}: {e}")
         
-        # Ограничиваем количество, если задано
-        if max_urls and len(unique_urls) > max_urls:
-            logger.info(f"[1-SITEMAP] Ограничиваю до {max_urls} URL")
-            unique_urls = unique_urls[:max_urls]
+        logger.info(f"[1-SITEMAP] Всего собрано {len(all_urls)} уникальных URL с /homedetails")
         
-        return unique_urls
+        # Ограничиваем количество, если нужно
+        if max_urls and len(all_urls) > max_urls:
+            all_urls = all_urls[:max_urls]
+            logger.info(f"[1-SITEMAP] Ограничено до {max_urls} URL")
+        
+        return all_urls
 
     # ---------------------- ЭТАП 1: ИНДЕКСАЦИЯ (СТАРЫЙ МЕТОД ЧЕРЕЗ API) ----------------------
 
