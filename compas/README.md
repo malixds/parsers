@@ -1,6 +1,6 @@
 # Compass.com Parser
 
-Парсер для сбора объявлений с сайта compass.com
+Парсер для сбора объявлений с сайта compass.com. Собирает ссылки на объявления через API и извлекает данные из `window.__INITIAL_DATA__` на страницах объявлений.
 
 ## Установка
 
@@ -8,156 +8,207 @@
 pip install -r requirements.txt
 ```
 
+## Зависимости
+
+- `httpx` - для асинхронных HTTP запросов
+- `fake-useragent` - для генерации User-Agent заголовков
+- `requests` - для синхронных запросов (опционально)
+
 ## Использование
 
-### 1. Парсинг одного города
+### Базовое использование
 
-#### С лимитом результатов:
+Запустите `test.py` для парсинга объявлений:
+
 ```bash
-python run_full_parse.py new-york 1000
+python test.py
 ```
 
-#### Без лимита (собирает все объявления):
-```bash
-python run_full_parse.py new-york all
-# или
-python run_full_parse.py new-york none
-# или
-python run_full_parse.py new-york
+По умолчанию скрипт:
+1. Собирает ссылки на объявления из региона Hawaii
+2. Парсит первые 10 объявлений (для теста)
+3. Сохраняет результаты в `listings_data.json`
+
+### Настройка параметров
+
+Откройте `test.py` и измените параметры в блоке `if __name__ == "__main__"`:
+
+```python
+# Измените URL региона
+location_url = 'https://www.compass.com/homes-for-sale/hawaii/'
+
+# Измените количество одновременных запросов
+links = get_all_listing_links(location_url, concurrency=10)
+
+# Измените лимит объявлений для парсинга (или уберите limit для всех)
+TEST_LIMIT = 10
+listings_data = parse_listings(links, concurrency=10, limit=TEST_LIMIT)
 ```
 
-#### Примеры других городов:
-```bash
-python run_full_parse.py los-angeles all
-python run_full_parse.py miami all
-python run_full_parse.py san-francisco all
-python run_full_parse.py chicago all
+### Примеры регионов
+
+Скрипт работает с любым регионом Compass:
+
+```python
+# Штаты
+location_url = 'https://www.compass.com/homes-for-sale/arizona/'
+location_url = 'https://www.compass.com/homes-for-sale/california/'
+location_url = 'https://www.compass.com/homes-for-sale/new-york/'
+location_url = 'https://www.compass.com/homes-for-sale/hawaii/'
+
+# Города
+location_url = 'https://www.compass.com/homes-for-sale/honolulu-hi/'
+location_url = 'https://www.compass.com/homes-for-sale/phoenix-az/'
+
+# С координатами mapview
+location_url = 'https://www.compass.com/homes-for-sale/arizona/mapview=37.0,-109.0,31.0,-114.0/'
 ```
 
-### 2. Парсинг всех городов
+## Функциональность
 
-#### Парсинг всех популярных городов (без лимита):
-```bash
-python run_all_cities.py
-```
+### 1. Сбор ссылок на объявления
 
-#### С лимитом на город:
-```bash
-python run_all_cities.py --max-results 5000
-```
+Функция `get_all_listing_links()`:
+- Делает POST запросы к API Compass
+- Обрабатывает пагинацию автоматически
+- Собирает все ссылки на объявления из указанного региона
+- Работает асинхронно для высокой скорости
+- Поддерживает настройку уровня параллелизма
 
-#### Парсинг конкретных городов:
-```bash
-python run_all_cities.py --cities new-york los-angeles miami
-```
+### 2. Парсинг объявлений
 
-#### Настройка параллелизма:
-```bash
-python run_all_cities.py --concurrency 5
-```
+Функция `parse_listings()`:
+- Загружает HTML страницы объявлений
+- Извлекает данные из `window.__INITIAL_DATA__` используя алгоритм подсчета скобок
+- Парсит нужные поля из JSON структуры
+- Работает асинхронно с настраиваемым параллелизмом
 
-#### Изменение директории для результатов:
-```bash
-python run_all_cities.py --output-dir my_results
-```
+## Извлекаемые данные
 
-### 3. Полный синтаксис
+Каждое объявление содержит следующие поля:
 
-#### run_full_parse.py:
-```bash
-python run_full_parse.py <город> [лимит]
-```
+- **url** - полная ссылка на объявление
+- **price** - информация о цене:
+  - `formatted` - отформатированная цена (например, "$680,000")
+  - `value` - числовое значение цены
+  - `per_square_foot` - цена за квадратный фут (вычисляется автоматически, если не указана)
+- **square_feet** - площадь в квадратных футах
+- **listing_type** - тип объявления: `"sale"` (продажа) или `"rent"` (аренда)
+- **description** - описание недвижимости
+- **listing_status** - статус объявления (например, "Coming Soon", "Active", "Sold")
+- **listing_details** - детальная информация в виде структурированных таблиц
+- **photos** - массив ссылок на фотографии:
+  - `url` - полная ссылка на оригинальное изображение
+  - `thumbnail` - ссылка на миниатюру
+  - `width`, `height` - размеры изображения
+- **brochure_pdf** - ссылка на PDF брошюру (если доступна)
+- **mls** - информация о MLS:
+  - `source_name` - название источника
+  - `source_display_name` - отображаемое название
+  - `contributing_datasets` - список источников данных
+  - `status` - статус MLS
+  - `is_off_mls` - флаг, находится ли объявление вне MLS
+  - `mls_id` - ID в MLS (если доступен)
+- **agents** - массив агентов:
+  - `name` - имя агента
+  - `email` - email
+  - `phone` - телефон
+  - `contact_type` - тип контакта (например, "Listing Agent")
+  - `license` - номер лицензии
+  - `profile_url` - ссылка на профиль
+  - `company` - компания
 
-Где:
-- `<город>` - название города (например, "new-york", "los-angeles")
-- `[лимит]` - опционально, максимальное количество результатов. Если не указано или указано "all"/"none" - без лимита
+## Технические особенности
 
-#### run_all_cities.py:
-```bash
-python run_all_cities.py [--cities ГОРОД1 ГОРОД2 ...] [--max-results ЧИСЛО] [--output-dir ДИРЕКТОРИЯ] [--concurrency ЧИСЛО]
-```
+### Извлечение window.__INITIAL_DATA__
 
-Параметры:
-- `--cities` - список городов для парсинга (по умолчанию: все популярные)
-- `--max-results` - максимум результатов на город (по умолчанию: без лимита)
-- `--output-dir` - директория для сохранения результатов (по умолчанию: "results_all_cities")
-- `--concurrency` - количество одновременных запросов к разным городам (по умолчанию: 3)
+Парсер использует алгоритм подсчета скобок для правильного извлечения больших JSON объектов из HTML:
+- Находит маркер `__INITIAL_DATA__` в HTML
+- Определяет начало JSON объекта (первая `{`)
+- Подсчитывает вложенные скобки, учитывая строки и экранированные символы
+- Извлекает полный JSON объект до соответствующей закрывающей скобки
 
-## Примеры городов
+### Обработка данных
 
-Популярные города:
-- `new-york`
-- `los-angeles`
-- `chicago`
-- `miami`
-- `san-francisco`
-- `boston`
-- `seattle`
-- `denver`
-- `atlanta`
-- `houston`
+- Автоматическое исправление URL (убирает двойные слэши)
+- Фильтрация шаблонных сообщений из описаний
+- Проверка расширения файлов для brochure PDF
+- Автоматический расчет цены за квадратный фут
+- Поиск площади в разных местах структуры данных
 
-Штаты (для более широкого покрытия):
-- `california`
-- `texas`
-- `florida`
-- `new-york`
-- `illinois`
+### Асинхронная обработка
 
-Округа:
-- `new-york-county-ny`
-- `los-angeles-county-ca`
-- `miami-dade-county-fl`
+- Параллельные запросы для сбора ссылок
+- Параллельные запросы для парсинга объявлений
+- Настраиваемый уровень параллелизма (по умолчанию 10)
+- Использование семафоров для контроля нагрузки
 
 ## Результаты
 
-### run_full_parse.py
-Результаты сохраняются в файл:
+Результаты сохраняются в файл `listings_data.json` в формате JSON с отступами для удобного чтения.
+
+## Пример структуры данных
+
+```json
+[
+  {
+    "url": "https://www.compass.com/homedetails/583-Kamoku-St-Unit-1907-Honolulu-HI-96826/LYKEY_pid/",
+    "price": {
+      "formatted": "$680,000",
+      "value": 680000,
+      "per_square_foot": 481.25
+    },
+    "square_feet": 1413,
+    "listing_type": "sale",
+    "description": "Описание недвижимости...",
+    "listing_status": "Coming Soon",
+    "listing_details": [...],
+    "photos": [
+      {
+        "url": "https://www.compass.com/m/0/.../origin.jpg",
+        "thumbnail": "https://www.compass.com/m/0/.../1500x1000.jpg",
+        "width": 2394,
+        "height": 1544
+      }
+    ],
+    "brochure_pdf": null,
+    "mls": {
+      "source_name": "listing_editor_manual",
+      "source_display_name": "Manual",
+      "status": "Coming Soon",
+      "is_off_mls": true
+    },
+    "agents": [
+      {
+        "name": "Ben Fieman",
+        "email": "ben.fieman@compass.com",
+        "phone": "8084007007",
+        "contact_type": "Listing Agent",
+        "license": "RB-23470",
+        "profile_url": "https://www.compass.com/agents/ben-fieman/",
+        "company": "Compass"
+      }
+    ]
+  }
+]
 ```
-parsed_results_<город>_<дата>_<время>.json
-```
-
-### run_all_cities.py
-Результаты сохраняются в директорию:
-- По каждому городу отдельно: `<город>_<дата>_<время>.json`
-- Общий файл со всеми результатами: `all_cities_<дата>_<время>.json`
-
-## Особенности
-
-- ✅ Асинхронная обработка для высокой скорости
-- ✅ Правильная пагинация через параметр `start` в URL
-- ✅ Grid-подход для параллельной обработки разных областей
-- ✅ Автоматическое удаление дубликатов
-- ✅ Сохранение HTML для отладки (каждые 20 объявлений)
-- ✅ Детальная статистика по результатам
 
 ## Производительность
 
-- Скорость: ~2-5 объявлений/сек (зависит от сети и сервера)
-- Параллелизм: до 10 одновременных запросов внутри одного города
-- Параллелизм городов: до 3 одновременных городов (настраивается)
+- Скорость сбора ссылок: зависит от количества страниц и параллелизма
+- Скорость парсинга: ~10-20 объявлений/сек (при concurrency=10)
+- Параллелизм: настраивается через параметр `concurrency`
 
-## Структура данных
+## Ограничения
 
-Каждое объявление содержит:
-- `source_name` - источник ("compass")
-- `listing_id` - ID объявления
-- `listing_link` - ссылка на объявление
-- `listing_type` - тип ("sale" или "lease")
-- `listing_status` - статус ("Active", "Coming Soon", etc.)
-- `address` - адрес
-- `sale_price` / `lease_price` - цена
-- `size` - площадь
-- `property_description` - описание
-- `listing_details` - детали (словарь)
-- `photos` - список ссылок на фото
-- `brochure_pdf` - ссылка на PDF брошюру
-- `mls_number` - MLS номер
-- `agents` - список агентов
+- Для тестирования по умолчанию установлен лимит в 10 объявлений
+- Уберите параметр `limit` в функции `parse_listings()` для обработки всех объявлений
+- Рекомендуется использовать разумные значения `concurrency` (10-20) чтобы не перегружать сервер
 
 ## Примечания
 
-- Парсер использует только API compass.com (без Selenium)
-- Все запросы асинхронные для максимальной скорости
-- HTML сохраняется периодически для отладки парсинга
-- При ошибках парсер продолжает работу и логирует проблемы
+- Все URL автоматически преобразуются в полный формат
+- Относительные ссылки на фото и профили агентов преобразуются в абсолютные
+- Если описание содержит только шаблонное сообщение, оно не сохраняется
+- Brochure PDF проверяется по расширению файла (.pdf)
+- Цена за квадратный фут вычисляется автоматически, если не указана в данных
