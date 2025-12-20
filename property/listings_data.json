@@ -1,0 +1,1990 @@
+[
+  {
+    "source_name": "jll",
+    "listing_id": "725720",
+    "listing_link": "https://property.jll.com/listings/8360-w-sahara-ave-las-vegas",
+    "listing_type": "For Lease",
+    "listing_status": "Lease",
+    "address": "8360 W Sahara Ave, Las Vegas, NV, 89117",
+    "coordinates": "36.145564,-115.274142",
+    "street_name": "8360 W Sahara Ave",
+    "city": "Las Vegas",
+    "state": "NV",
+    "zipcode": "89117",
+    "property_type": "office",
+    "building_class": "Unclassified",
+    "listing_details": {
+      "aerialViewID": null,
+      "address": "8360 W Sahara Ave",
+      "approxLocation": false,
+      "amenities": [],
+      "buildingClass": "Unclassified",
+      "city": "Las Vegas",
+      "commissionDisclaimer": null,
+      "customRefId": null,
+      "department": null,
+      "district": null,
+      "energyRating": null,
+      "energyRatingUrl": null,
+      "availabilityLabel": null,
+      "floorPlans": {
+        "images": [],
+        "files": []
+      },
+      "hideAvailabilitiesPrice": true,
+      "hidePrice": false,
+      "id": "725720",
+      "labels": [
+        "Lease"
+      ],
+      "latitude": 36.145564,
+      "locationDescription": null,
+      "longitude": -115.274142,
+      "pageUrl": "/listings/8360-w-sahara-ave-las-vegas",
+      "postcode": "89117",
+      "propertyType": "office",
+      "propertyTypes": [
+        "office"
+      ],
+      "refId": "725720",
+      "region": "Nevada",
+      "rentPrice": null,
+      "salePrice": null,
+      "serviceCharge": null,
+      "state": "NV",
+      "submarket": "West Las Vegas",
+      "surfaceArea": null,
+      "surfaceAreas": [],
+      "tenureTypes": [
+        "rent"
+      ],
+      "translations": [],
+      "title": null,
+      "videos": [],
+      "view360URLs": [],
+      "virtualTours": [],
+      "websiteUrl": null,
+      "wls": null,
+      "availabilitiesCount": 0,
+      "energyRatingDescription": null
+    },
+    "brochure_pdf": "https://property.jll.com/listings/8360-w-sahara-ave-las-vegas/brochure",
+    "agents": [
+      {
+        "name": "Nick Barber",
+        "title": "Managing Director, Brokerage",
+        "license": "S.0058027",
+        "phone_primary": "+1 702 360 4927",
+        "email": "nick.barber@jll.com",
+        "social_media": "https://www.linkedin.com/in/nicholas-barber-a78119108/",
+        "photo_url": "https://res.cloudinary.com/jll-global-broker-profile/image/upload/v1745363834/broker_profile_management_PROD/lkjp2kk8kwwxzhim3hwt.jpg",
+        "office_name": "Jones Lang LaSalle Brokerage, Inc. a licensed real estate broker",
+        "office_phone": "+1702-360-4907"
+      }
+    ]
+  },
+  {
+    "source_name": "jll",
+    "listing_id": "115084",
+    "listing_link": "https://property.jll.com/listings/bldg-4-800-township-line-rd-lower-bucks-county",
+    "listing_type": "For Lease",
+    "listing_status": "Sublease, Lease",
+    "address": "800 Township Line Rd, Yardley, PA, 19067",
+    "coordinates": "40.2244,-74.883804",
+    "street_name": "800 Township Line Rd",
+    "city": "Yardley",
+    "state": "PA",
+    "zipcode": "19067",
+    "property_name": "Bldg 4",
+    "property_type": "office",
+    "building_class": "A",
+    "location_highlights": [
+      "Cafe with outdoor seating",
+      "Fitness Center with showers and locker rooms",
+      "Conference Center",
+      "Waterfront Plaza",
+      "Collaborative outdoor spaces",
+      "Renovated interior common areas",
+      "food trucks",
+      "Updated interior amenities"
+    ],
+    "size": "5,596-17,517 feet",
+    "property_highlights": "Cafe with outdoor seating; Fitness Center with showers and locker rooms; Conference Center; Waterfront Plaza; Collaborative outdoor spaces; Renovated interior common areas; food trucks; Updated interior amenities",
+    "property_description": "Makefield Crossing’s combination of unparalled design, finishes, amenities and convenient location will enable corporations to attract and retain the region’s top talent in a one-of-a-kind bucolic corporate setting. The three Class A office buildings that comprise the South campus are outfitted with modern finishes and updated amenities to optimize productivity of employees in the 21st century and beyond.",
+    "listing_details": {
+      "aerialViewID": "OM8Q5lh-12h4yr1U2Xh5eP",
+      "address": "800 Township Line Rd",
+      "approxLocation": false,
+      "amenities": [],
+      "buildingClass": "A",
+      "city": "Yardley",
+      "commissionDisclaimer": null,
+      "customRefId": null,
+      "department": null,
+      "district": null,
+      "energyRating": null,
+      "energyRatingUrl": null,
+      "availabilityLabel": null,
+      "floorPlans": {
+        "images": [],
+        "files": [
+          {
+            "url": "https://res.cloudinary.com/marketsphere/image/upload/j6ypfhufqcdjiydd76ty.pdf",
+            "image": "https://res.cloudinary.com/marketsphere/image/upload/c_scale,h_234,w_181/j6ypfhufqcdjiydd76ty.png",
+            "type": "floorplan"
+          },
+          {
+            "url": "https://res.cloudinary.com/marketsphere/image/upload/wk9haaxsn0l7bhwwpncg.pdf",
+            "image": "https://res.cloudinary.com/marketsphere/image/upload/c_scale,h_234,w_181/wk9haaxsn0l7bhwwpncg.png",
+            "type": "floorplan"
+          }
+        ]
+      },
+      "hideAvailabilitiesPrice": true,
+      "hidePrice": false,
+      "id": "115084",
+      "labels": [
+        "Sublease",
+        "Lease"
+      ],
+      "latitude": 40.2244,
+      "locationDescription": null,
+      "longitude": -74.883804,
+      "pageUrl": "/listings/bldg-4-800-township-line-rd-lower-bucks-county",
+      "postcode": "19067",
+      "propertyType": "office",
+      "propertyTypes": [
+        "office"
+      ],
+      "refId": "115084",
+      "region": "Pennsylvania",
+      "rentPrice": null,
+      "salePrice": null,
+      "serviceCharge": null,
+      "state": "PA",
+      "submarket": "Lower Bucks County",
+      "surfaceArea": {
+        "value": {
+          "min": 5596,
+          "max": 17517
+        },
+        "unit": "feet",
+        "metrics": [
+          {
+            "unit": "meters",
+            "value": {
+              "min": 520,
+              "max": 1627
+            }
+          },
+          {
+            "unit": "desks",
+            "value": {
+              "min": 51,
+              "max": 162
+            }
+          },
+          {
+            "unit": "acres",
+            "value": {
+              "min": 0.1284662528,
+              "max": 0.4021342656
+            }
+          },
+          {
+            "unit": "feet",
+            "value": {
+              "min": 5596,
+              "max": 17517
+            }
+          },
+          {
+            "unit": "hectares",
+            "value": {
+              "min": 0.0514832,
+              "max": 0.1611564
+            }
+          },
+          {
+            "unit": "tsubo",
+            "value": {
+              "min": 157.26533932,
+              "max": 492.28322889000003
+            }
+          },
+          {
+            "unit": "rack",
+            "value": {
+              "min": 51.98684,
+              "max": 162.73292999999998
+            }
+          },
+          {
+            "unit": "pyeong",
+            "value": {
+              "min": 157.26533932,
+              "max": 492.28322889000003
+            }
+          }
+        ],
+        "alternativeUnit": null,
+        "showEstimateDesks": false,
+        "label": "rent"
+      },
+      "surfaceAreas": [
+        {
+          "value": {
+            "min": 5596,
+            "max": 17517
+          },
+          "unit": "feet",
+          "metrics": [
+            {
+              "unit": "meters",
+              "value": {
+                "min": 520,
+                "max": 1627
+              }
+            },
+            {
+              "unit": "desks",
+              "value": {
+                "min": 51,
+                "max": 162
+              }
+            },
+            {
+              "unit": "acres",
+              "value": {
+                "min": 0.1284662528,
+                "max": 0.4021342656
+              }
+            },
+            {
+              "unit": "feet",
+              "value": {
+                "min": 5596,
+                "max": 17517
+              }
+            },
+            {
+              "unit": "hectares",
+              "value": {
+                "min": 0.0514832,
+                "max": 0.1611564
+              }
+            },
+            {
+              "unit": "tsubo",
+              "value": {
+                "min": 157.26533932,
+                "max": 492.28322889000003
+              }
+            },
+            {
+              "unit": "rack",
+              "value": {
+                "min": 51.98684,
+                "max": 162.73292999999998
+              }
+            },
+            {
+              "unit": "pyeong",
+              "value": {
+                "min": 157.26533932,
+                "max": 492.28322889000003
+              }
+            }
+          ],
+          "alternativeUnit": null,
+          "showEstimateDesks": false,
+          "label": "rent"
+        }
+      ],
+      "tenureTypes": [
+        "rent"
+      ],
+      "translations": [],
+      "title": "Bldg 4",
+      "videos": [],
+      "view360URLs": [],
+      "virtualTours": [],
+      "websiteUrl": null,
+      "wls": null,
+      "availabilitiesCount": 3,
+      "energyRatingDescription": null
+    },
+    "photos": [
+      "https://res.cloudinary.com/marketsphere/image/upload/tagcqqrmaeu6c93pchdu.jpg"
+    ],
+    "brochure_pdf": "https://res.cloudinary.com/marketsphere/image/upload/c9y2ifzeirtaykbyqlnu.pdf",
+    "agents": [
+      {
+        "name": "Mike MacCrory",
+        "title": "Executive Vice President",
+        "license": "RS270781",
+        "phone_primary": "+1 610 249 2270",
+        "email": "mike.maccrory@jll.com",
+        "social_media": "https://www.linkedin.com/in/michael-maccrory-607a528",
+        "photo_url": "https://res.cloudinary.com/jll-global-broker-profile/image/upload/v1730333662/broker_profile_management_PROD/r1udkdzvn2xne1w6k2oz.png",
+        "office_name": "Jones Lang LaSalle Brokerage, Inc. a licensed real estate broker",
+        "office_phone": "+1610-249-2255"
+      },
+      {
+        "name": "Chris Werner",
+        "title": "Managing Director",
+        "license": "RS295554",
+        "phone_primary": "+1 610 249 2265",
+        "email": "chris.werner@jll.com",
+        "social_media": "https://www.linkedin.com/in/chris-werner-234b825",
+        "photo_url": "https://res.cloudinary.com/jll-global-broker-profile/image/upload/v1730332796/broker_profile_management_PROD/gwbaqg1uaohlkkavzxhx.png",
+        "office_name": "Jones Lang LaSalle Americas, Inc. a licensed real estate broker",
+        "office_phone": "+1484-532-4200"
+      }
+    ]
+  },
+  {
+    "source_name": "jll",
+    "listing_id": "758059",
+    "listing_link": "https://property.jll.com/listings/6154-nancy-ridge-dr-san-diego",
+    "listing_type": "For Lease",
+    "listing_status": "Lease, Sublease",
+    "address": "6154 Nancy Ridge Dr, San Diego, CA, 92121",
+    "coordinates": "32.889023,-117.184633",
+    "street_name": "6154 Nancy Ridge Dr",
+    "city": "San Diego",
+    "state": "CA",
+    "zipcode": "92121",
+    "property_type": "industrial",
+    "building_class": "B",
+    "lease_price": "USD 1.09/SF",
+    "size": "50,000 feet",
+    "property_description": "Now Available for Sublease, Warehouse Space, located at 6154 Nancy Ridge Dr.Available square footage 50,000 SF.Please contact us for further information.",
+    "listing_details": {
+      "aerialViewID": null,
+      "address": "6154 Nancy Ridge Dr",
+      "approxLocation": false,
+      "amenities": [],
+      "buildingClass": "B",
+      "city": "San Diego",
+      "commissionDisclaimer": null,
+      "customRefId": null,
+      "department": null,
+      "district": null,
+      "energyRating": null,
+      "energyRatingUrl": null,
+      "availabilityLabel": null,
+      "floorPlans": {
+        "images": [],
+        "files": []
+      },
+      "hideAvailabilitiesPrice": false,
+      "hidePrice": false,
+      "id": "758059",
+      "labels": [
+        "Lease",
+        "Sublease"
+      ],
+      "latitude": 32.889023,
+      "locationDescription": "North Cities",
+      "longitude": -117.184633,
+      "pageUrl": "/listings/6154-nancy-ridge-dr-san-diego",
+      "postcode": "92121",
+      "propertyType": "industrial",
+      "propertyTypes": [
+        "industrial"
+      ],
+      "refId": "758059",
+      "region": "California",
+      "rentPrice": {
+        "amount": 1.09,
+        "currency": "USD",
+        "unit": "SF"
+      },
+      "salePrice": null,
+      "serviceCharge": null,
+      "state": "CA",
+      "submarket": "Sorrento Mesa",
+      "surfaceArea": {
+        "value": 50000,
+        "unit": "feet",
+        "metrics": [
+          {
+            "unit": "meters",
+            "value": 4645
+          },
+          {
+            "unit": "desks",
+            "value": 464
+          },
+          {
+            "unit": "acres",
+            "value": 1.14784
+          },
+          {
+            "unit": "feet",
+            "value": 50000
+          },
+          {
+            "unit": "hectares",
+            "value": 0.46
+          },
+          {
+            "unit": "tsubo",
+            "value": 1405.1585
+          },
+          {
+            "unit": "rack",
+            "value": 464.5
+          },
+          {
+            "unit": "pyeong",
+            "value": 1405.1585
+          }
+        ],
+        "alternativeUnit": null,
+        "showEstimateDesks": false,
+        "label": "rent"
+      },
+      "surfaceAreas": [
+        {
+          "value": 50000,
+          "unit": "feet",
+          "metrics": [
+            {
+              "unit": "meters",
+              "value": 4645
+            },
+            {
+              "unit": "desks",
+              "value": 464
+            },
+            {
+              "unit": "acres",
+              "value": 1.14784
+            },
+            {
+              "unit": "feet",
+              "value": 50000
+            },
+            {
+              "unit": "hectares",
+              "value": 0.46
+            },
+            {
+              "unit": "tsubo",
+              "value": 1405.1585
+            },
+            {
+              "unit": "rack",
+              "value": 464.5
+            },
+            {
+              "unit": "pyeong",
+              "value": 1405.1585
+            }
+          ],
+          "alternativeUnit": null,
+          "showEstimateDesks": false,
+          "label": "rent"
+        }
+      ],
+      "tenureTypes": [
+        "rent"
+      ],
+      "translations": [],
+      "title": null,
+      "videos": [],
+      "view360URLs": [],
+      "virtualTours": [],
+      "websiteUrl": null,
+      "wls": null,
+      "availabilitiesCount": 1,
+      "energyRatingDescription": null
+    },
+    "photos": [
+      "https://res.cloudinary.com/marketsphere/image/upload/jq1ct3awohdtvkc41791"
+    ],
+    "brochure_pdf": "https://res.cloudinary.com/jll-global-sandbox/image/upload/v1763180439/MyListing/public/prod/property-876407/6154-nrd-sublease-brochure-warehouse.pdf",
+    "agents": [
+      {
+        "name": "Tim Olson",
+        "title": "Market Lead, San Diego",
+        "license": "1364117",
+        "phone_primary": "+1 858 410 1253",
+        "email": "tim.olson@jll.com",
+        "social_media": "https://www.linkedin.com/in/timolsonsd/",
+        "photo_url": "https://res.cloudinary.com/jll-global-broker-profile/image/upload/v1739732261/broker_profile_management_PROD/b36c4govxbhqlepdidcm.jpg",
+        "office_phone": "+1949-885-2900"
+      },
+      {
+        "name": "Grant Schoneman",
+        "title": "Vice Chairman – Life Sciences Group",
+        "license": "1516695",
+        "phone_primary": "+1-858-410-1252",
+        "email": "grant.schoneman@jll.com",
+        "social_media": "https://www.linkedin.com/in/grant-schoneman-63962321/",
+        "photo_url": "https://res.cloudinary.com/jll-global-broker-profile/image/upload/v1730334727/broker_profile_management_PROD/xgrf1lqwwldnfz5gkzxc.jpg",
+        "office_phone": "+1949-885-2900"
+      },
+      {
+        "name": "Greg Moore",
+        "title": "Vice President",
+        "license": "2068852",
+        "phone_primary": "+19164948081",
+        "email": "greg.moore@jll.com",
+        "social_media": "https://www.linkedin.com/in/gregmoorejll",
+        "photo_url": "https://res.cloudinary.com/jll-global-broker-profile/image/upload/v1733679335/broker_profile_management_PROD/p0q59np7idx3iklnsojp.jpg",
+        "office_phone": "+1949-885-2900"
+      }
+    ]
+  },
+  {
+    "source_name": "jll",
+    "listing_id": "626196",
+    "listing_link": "https://property.jll.com/listings/shops-at-la-cantera-15900-la-cantera-pkwy-san-antonio",
+    "listing_type": "For Lease",
+    "listing_status": "Lease",
+    "address": "15900 La Cantera Pkwy, San Antonio, TX, 78256-2587",
+    "coordinates": "29.603389,-98.603682",
+    "street_name": "15900 La Cantera Pkwy",
+    "city": "San Antonio",
+    "state": "TX",
+    "zipcode": "78256-2587",
+    "property_name": "Shops at La Cantera",
+    "property_type": "retail",
+    "building_class": "Unclassified",
+    "location_highlights": [
+      "+/- 7.44 acres with +/- 37,310 SF of specialty small tenant space",
+      "Highly visible",
+      "Focus is on fast casual food, hip sit down dining concepts coupled with passion brand fitness concepts and services",
+      "Patio and outdoor space",
+      "Direct-access to Leon Creek Hike & Bike Trail"
+    ],
+    "size": "1,547 feet",
+    "property_highlights": "+/- 7.44 acres with +/- 37,310 SF of specialty small tenant space; Highly visible; Focus is on fast casual food, hip sit down dining concepts coupled with passion brand fitness concepts and services; Patio and outdoor space; Direct-access to Leon Creek Hike & Bike Trail",
+    "property_description": "Now Available for Lease, Retail, Shops at La Cantera located at 15900 La Cantera Pkwy.Available square footage 1,547 SF.Please contact us for further information.",
+    "listing_details": {
+      "aerialViewID": null,
+      "address": "15900 La Cantera Pkwy",
+      "approxLocation": false,
+      "amenities": [],
+      "buildingClass": "Unclassified",
+      "city": "San Antonio",
+      "commissionDisclaimer": null,
+      "customRefId": null,
+      "department": null,
+      "district": null,
+      "energyRating": null,
+      "energyRatingUrl": null,
+      "availabilityLabel": null,
+      "floorPlans": {
+        "images": [],
+        "files": []
+      },
+      "hideAvailabilitiesPrice": true,
+      "hidePrice": false,
+      "id": "626196",
+      "labels": [
+        "Lease"
+      ],
+      "latitude": 29.603389,
+      "locationDescription": "Suburban",
+      "longitude": -98.603682,
+      "pageUrl": "/listings/shops-at-la-cantera-15900-la-cantera-pkwy-san-antonio",
+      "postcode": "78256-2587",
+      "propertyType": "retail",
+      "propertyTypes": [
+        "retail"
+      ],
+      "refId": "626196",
+      "region": "Texas",
+      "rentPrice": null,
+      "salePrice": null,
+      "serviceCharge": null,
+      "state": "TX",
+      "submarket": "Far Northwest",
+      "surfaceArea": {
+        "value": 1547,
+        "unit": "feet",
+        "metrics": [
+          {
+            "unit": "meters",
+            "value": 144
+          },
+          {
+            "unit": "desks",
+            "value": 14
+          },
+          {
+            "unit": "acres",
+            "value": 0.0355141696
+          },
+          {
+            "unit": "feet",
+            "value": 1547
+          },
+          {
+            "unit": "hectares",
+            "value": 0.0142324
+          },
+          {
+            "unit": "tsubo",
+            "value": 43.47560399
+          },
+          {
+            "unit": "rack",
+            "value": 14.37163
+          },
+          {
+            "unit": "pyeong",
+            "value": 43.47560399
+          }
+        ],
+        "alternativeUnit": null,
+        "showEstimateDesks": false,
+        "label": "rent"
+      },
+      "surfaceAreas": [
+        {
+          "value": 1547,
+          "unit": "feet",
+          "metrics": [
+            {
+              "unit": "meters",
+              "value": 144
+            },
+            {
+              "unit": "desks",
+              "value": 14
+            },
+            {
+              "unit": "acres",
+              "value": 0.0355141696
+            },
+            {
+              "unit": "feet",
+              "value": 1547
+            },
+            {
+              "unit": "hectares",
+              "value": 0.0142324
+            },
+            {
+              "unit": "tsubo",
+              "value": 43.47560399
+            },
+            {
+              "unit": "rack",
+              "value": 14.37163
+            },
+            {
+              "unit": "pyeong",
+              "value": 43.47560399
+            }
+          ],
+          "alternativeUnit": null,
+          "showEstimateDesks": false,
+          "label": "rent"
+        }
+      ],
+      "tenureTypes": [
+        "rent"
+      ],
+      "translations": [],
+      "title": "Shops at La Cantera",
+      "videos": [],
+      "view360URLs": [],
+      "virtualTours": [],
+      "websiteUrl": null,
+      "wls": null,
+      "availabilitiesCount": 1,
+      "energyRatingDescription": null
+    },
+    "photos": [
+      "https://res.cloudinary.com/jll-global-sandbox/image/upload/v1750781091/MyListing/public/prod/tc8dqvqjcxfm5pk3fo8s.jpg",
+      "https://res.cloudinary.com/jll-global-sandbox/image/upload/v1694194068/MyListing/public/prod/ntaw0dxbdaxw3wdqoguk.jpg",
+      "https://res.cloudinary.com/jll-global-sandbox/image/upload/v1750781164/MyListing/public/prod/n3onc1ckmqtmomhfyaa7.jpg",
+      "https://res.cloudinary.com/jll-global-sandbox/image/upload/v1694194165/MyListing/public/prod/ptq1dgww2qrqfusriu4z.jpg",
+      "https://res.cloudinary.com/jll-global-sandbox/image/upload/v1694194124/MyListing/public/prod/gc4y5ct7lujmwtc64wgz.jpg",
+      "https://res.cloudinary.com/jll-global-sandbox/image/upload/v1694194142/MyListing/public/prod/gbdd3oqrffw7om2ttx09.jpg",
+      "https://res.cloudinary.com/jll-global-sandbox/image/upload/v1694194155/MyListing/public/prod/c4yjuxnb9ypgs5f6vsnu.jpg",
+      "https://res.cloudinary.com/jll-global-sandbox/image/upload/v1750781171/MyListing/public/prod/eaoakl0do17akbjluue0.jpg",
+      "https://res.cloudinary.com/jll-global-sandbox/image/upload/v1694194215/MyListing/public/prod/rlgwjfdmxv8uhntkyu3h.jpg",
+      "https://res.cloudinary.com/jll-global-sandbox/image/upload/v1694194222/MyListing/public/prod/gbtu0qffhvxwufnilsja.jpg",
+      "https://res.cloudinary.com/marketsphere/image/upload/grbcimdorscujz8ozsl2",
+      "https://res.cloudinary.com/jll-global-sandbox/image/upload/v1750781084/MyListing/public/prod/xgc3gxb3rxfnagfhrl0r.jpg",
+      "https://res.cloudinary.com/jll-global-sandbox/image/upload/v1750781145/MyListing/public/prod/x1kphozirt8wwouzre7w.jpg"
+    ],
+    "brochure_pdf": "https://res.cloudinary.com/jll-global-sandbox/image/upload/v1750781065/MyListing/public/prod/qa6me7icyadovlszfcqi.pdf",
+    "agents": [
+      {
+        "name": "Barry Haydon",
+        "title": "Executive Vice President",
+        "license": "562633",
+        "phone_primary": "+1 512 593 4878",
+        "email": "barry.haydon@jll.com",
+        "social_media": "https://www.linkedin.com/in/barry-haydon-8aa5436/",
+        "photo_url": "https://res.cloudinary.com/jll-global-broker-profile/image/upload/v1744755456/prod/empzdsi4wzpolvkydoml.jpg",
+        "office_phone": "+1214-438-6210"
+      },
+      {
+        "name": "Josh Green",
+        "title": "Vice President",
+        "license": "724787",
+        "phone_primary": "+1 210 289 7820",
+        "email": "joshua.green@jll.com",
+        "social_media": "https://www.linkedin.com/in/josh-green-a512a514a/",
+        "photo_url": "https://res.cloudinary.com/jll-global-broker-profile/image/upload/v1743714419/prod/nnuamki9bvc36mlhdd38.jpg",
+        "office_phone": "+1214-438-6210"
+      },
+      {
+        "name": "Austin McWilliams",
+        "title": "Executive Vice President",
+        "license": "574957",
+        "phone_primary": "+1 512 368 7063",
+        "email": "austin.mcwilliams@jll.com",
+        "social_media": "https://www.linkedin.com/in/austin-mcwilliams-a02b584b/",
+        "photo_url": "https://res.cloudinary.com/jll-global-broker-profile/image/upload/v1744755196/prod/fhwcwkfpqlfw9lwcnxto.jpg",
+        "office_phone": "+1214-438-6210"
+      }
+    ]
+  },
+  {
+    "source_name": "jll",
+    "listing_id": "514616",
+    "listing_link": "https://property.jll.com/listings/3731-recycle-rd-sacramento",
+    "listing_type": "For Lease",
+    "listing_status": "Lease",
+    "address": "3731 Recycle Rd, Rancho Cordova, CA, 95742",
+    "coordinates": "38.568772,-121.25365",
+    "street_name": "3731 Recycle Rd",
+    "city": "Rancho Cordova",
+    "state": "CA",
+    "zipcode": "95742",
+    "property_type": "industrial",
+    "building_class": "C",
+    "listing_details": {
+      "aerialViewID": null,
+      "address": "3731 Recycle Rd",
+      "approxLocation": false,
+      "amenities": [],
+      "buildingClass": "C",
+      "city": "Rancho Cordova",
+      "commissionDisclaimer": null,
+      "customRefId": null,
+      "department": null,
+      "district": null,
+      "energyRating": null,
+      "energyRatingUrl": null,
+      "availabilityLabel": null,
+      "floorPlans": {
+        "images": [],
+        "files": []
+      },
+      "hideAvailabilitiesPrice": true,
+      "hidePrice": false,
+      "id": "514616",
+      "labels": [
+        "Lease"
+      ],
+      "latitude": 38.568772,
+      "locationDescription": "Sacramento County Ind",
+      "longitude": -121.25365,
+      "pageUrl": "/listings/3731-recycle-rd-sacramento",
+      "postcode": "95742",
+      "propertyType": "industrial",
+      "propertyTypes": [
+        "industrial"
+      ],
+      "refId": "514616",
+      "region": "California",
+      "rentPrice": null,
+      "salePrice": null,
+      "serviceCharge": null,
+      "state": "CA",
+      "submarket": "Sunrise Ind",
+      "surfaceArea": null,
+      "surfaceAreas": [],
+      "tenureTypes": [
+        "rent"
+      ],
+      "translations": [],
+      "title": null,
+      "videos": [],
+      "view360URLs": [],
+      "virtualTours": [],
+      "websiteUrl": null,
+      "wls": null,
+      "availabilitiesCount": 0,
+      "energyRatingDescription": null
+    },
+    "photos": [
+      "https://res.cloudinary.com/jll-global-sandbox/image/upload/v1755279960/MyListing/public/prod/sf2rnsp9ge1ghawq7kie.jpg",
+      "https://res.cloudinary.com/jll-global-sandbox/image/upload/v1755279967/MyListing/public/prod/nilrzy56gevvl2pttqzi.jpg"
+    ],
+    "brochure_pdf": "https://res.cloudinary.com/jll-global-sandbox/image/upload/v1755279979/MyListing/public/prod/property-875546/recyclerd-3731-bro-eml-081325.pdf",
+    "agents": [
+      {
+        "name": "Mike Luca",
+        "title": "Senior Managing Director",
+        "license": "01447904",
+        "phone_primary": "+1 916 214 0466",
+        "email": "mike.luca@jll.com",
+        "social_media": "https://www.linkedin.com/in/mikeluca/",
+        "photo_url": "https://res.cloudinary.com/jll-global-broker-profile/image/upload/v1733677697/broker_profile_management_PROD/afgojcdnjd2wrojloaen.jpg",
+        "office_phone": "+1949-885-2900"
+      },
+      {
+        "name": "Dominic Smith",
+        "title": "Senior Associate",
+        "license": "02106714",
+        "phone_primary": "+1 916 995 9396",
+        "email": "dominic.smith@jll.com",
+        "photo_url": "https://res.cloudinary.com/jll-global-broker-profile/image/upload/v1733677696/broker_profile_management_PROD/eqcauijkfbgxykjuasbn.jpg",
+        "office_phone": "+1949-885-2900"
+      },
+      {
+        "name": "RJ Jimenez",
+        "title": "Associate",
+        "license": "02248675",
+        "phone_primary": "+1 916 440 1837",
+        "email": "rj.jimenez@jll.com",
+        "photo_url": "https://res.cloudinary.com/jll-global-broker-profile/image/upload/v1741353554/broker_profile_management_PROD/fpbgesmaeyshgeanmyrc.jpg",
+        "office_phone": "+1949-885-2900"
+      }
+    ]
+  },
+  {
+    "source_name": "jll",
+    "listing_id": "203456",
+    "listing_link": "https://property.jll.com/listings/6154-nancy-ridge-dr-san-diego-203456",
+    "listing_type": "For Lease",
+    "listing_status": "Lease, Sublease",
+    "address": "6154 Nancy Ridge Dr, San Diego, CA, 92121",
+    "coordinates": "32.889023,-117.184633",
+    "street_name": "6154 Nancy Ridge Dr",
+    "city": "San Diego",
+    "state": "CA",
+    "zipcode": "92121",
+    "property_type": "lab",
+    "building_class": "B",
+    "location_highlights": [
+      "5-story office building",
+      "Exterior signage opportunity",
+      "Parking: 1.48/1,000 SF",
+      "Central Sorrento Mesa location"
+    ],
+    "size": "75,000 feet",
+    "property_highlights": "5-story office building; Exterior signage opportunity; Parking: 1.48/1,000 SF; Central Sorrento Mesa location",
+    "property_description": "Now Available for Sublease, located at 6154 Nancy Ridge Dr.Available square footage 75,000 SF.Please contact us for further information.",
+    "listing_details": {
+      "aerialViewID": null,
+      "address": "6154 Nancy Ridge Dr",
+      "approxLocation": false,
+      "amenities": [],
+      "buildingClass": "B",
+      "city": "San Diego",
+      "commissionDisclaimer": null,
+      "customRefId": null,
+      "department": null,
+      "district": null,
+      "energyRating": null,
+      "energyRatingUrl": null,
+      "availabilityLabel": null,
+      "floorPlans": {
+        "images": [],
+        "files": []
+      },
+      "hideAvailabilitiesPrice": true,
+      "hidePrice": false,
+      "id": "203456",
+      "labels": [
+        "Lease",
+        "Sublease"
+      ],
+      "latitude": 32.889023,
+      "locationDescription": "North Cities",
+      "longitude": -117.184633,
+      "pageUrl": "/listings/6154-nancy-ridge-dr-san-diego-203456",
+      "postcode": "92121",
+      "propertyType": "lab",
+      "propertyTypes": [
+        "lab"
+      ],
+      "refId": "203456",
+      "region": "California",
+      "rentPrice": null,
+      "salePrice": null,
+      "serviceCharge": null,
+      "state": "CA",
+      "submarket": "Sorrento Mesa",
+      "surfaceArea": {
+        "value": 75000,
+        "unit": "feet",
+        "metrics": [
+          {
+            "unit": "meters",
+            "value": 6968
+          },
+          {
+            "unit": "desks",
+            "value": 696
+          },
+          {
+            "unit": "acres",
+            "value": 1.72176
+          },
+          {
+            "unit": "feet",
+            "value": 75000
+          },
+          {
+            "unit": "hectares",
+            "value": 0.69
+          },
+          {
+            "unit": "tsubo",
+            "value": 2107.7377500000002
+          },
+          {
+            "unit": "rack",
+            "value": 696.75
+          },
+          {
+            "unit": "pyeong",
+            "value": 2107.7377500000002
+          }
+        ],
+        "alternativeUnit": null,
+        "showEstimateDesks": false,
+        "label": "rent"
+      },
+      "surfaceAreas": [
+        {
+          "value": 75000,
+          "unit": "feet",
+          "metrics": [
+            {
+              "unit": "meters",
+              "value": 6968
+            },
+            {
+              "unit": "desks",
+              "value": 696
+            },
+            {
+              "unit": "acres",
+              "value": 1.72176
+            },
+            {
+              "unit": "feet",
+              "value": 75000
+            },
+            {
+              "unit": "hectares",
+              "value": 0.69
+            },
+            {
+              "unit": "tsubo",
+              "value": 2107.7377500000002
+            },
+            {
+              "unit": "rack",
+              "value": 696.75
+            },
+            {
+              "unit": "pyeong",
+              "value": 2107.7377500000002
+            }
+          ],
+          "alternativeUnit": null,
+          "showEstimateDesks": false,
+          "label": "rent"
+        }
+      ],
+      "tenureTypes": [
+        "rent"
+      ],
+      "translations": [],
+      "title": null,
+      "videos": [],
+      "view360URLs": [],
+      "virtualTours": [],
+      "websiteUrl": null,
+      "wls": null,
+      "availabilitiesCount": 1,
+      "energyRatingDescription": null
+    },
+    "photos": [
+      "https://res.cloudinary.com/marketsphere/image/upload/fra6yqdxaithwcsbonvj"
+    ],
+    "brochure_pdf": "https://res.cloudinary.com/jll-global-sandbox/image/upload/v1763180880/MyListing/public/prod/property-876408/6154-nrd-sublease-brochure-office.pdf",
+    "agents": [
+      {
+        "name": "Tim Olson",
+        "title": "Market Lead, San Diego",
+        "license": "1364117",
+        "phone_primary": "+1 858 410 1253",
+        "email": "tim.olson@jll.com",
+        "social_media": "https://www.linkedin.com/in/timolsonsd/",
+        "photo_url": "https://res.cloudinary.com/jll-global-broker-profile/image/upload/v1739732261/broker_profile_management_PROD/b36c4govxbhqlepdidcm.jpg",
+        "office_phone": "+1949-885-2900"
+      },
+      {
+        "name": "Grant Schoneman",
+        "title": "Vice Chairman – Life Sciences Group",
+        "license": "1516695",
+        "phone_primary": "+1-858-410-1252",
+        "email": "grant.schoneman@jll.com",
+        "social_media": "https://www.linkedin.com/in/grant-schoneman-63962321/",
+        "photo_url": "https://res.cloudinary.com/jll-global-broker-profile/image/upload/v1730334727/broker_profile_management_PROD/xgrf1lqwwldnfz5gkzxc.jpg",
+        "office_phone": "+1949-885-2900"
+      },
+      {
+        "name": "Greg Moore",
+        "title": "Vice President",
+        "license": "2068852",
+        "phone_primary": "+19164948081",
+        "email": "greg.moore@jll.com",
+        "social_media": "https://www.linkedin.com/in/gregmoorejll",
+        "photo_url": "https://res.cloudinary.com/jll-global-broker-profile/image/upload/v1733679335/broker_profile_management_PROD/p0q59np7idx3iklnsojp.jpg",
+        "office_phone": "+1949-885-2900"
+      }
+    ]
+  },
+  {
+    "source_name": "jll",
+    "listing_id": "200118",
+    "listing_link": "https://property.jll.com/listings/western-geophysical-3750-briarpark-dr-westchase",
+    "listing_type": "For Lease",
+    "listing_status": "Sublease, Lease",
+    "address": "3750 Briarpark Dr, Houston, TX, 77042",
+    "coordinates": "29.723398,-95.550181",
+    "street_name": "3750 Briarpark Dr",
+    "city": "Houston",
+    "state": "TX",
+    "zipcode": "77042",
+    "property_name": "Western Geophysical",
+    "property_type": "office",
+    "building_class": "B",
+    "size": "45,000-90,000 feet",
+    "property_description": "Now available for sublease, office Western Geophysical located at 3750 Briarpark Dr Houston, Texas 77042.Available square footage 45,000 - 90,000 SF.Please contact us for further information.",
+    "listing_details": {
+      "aerialViewID": "xpupT7A_YEtdZstP8bzwFs",
+      "address": "3750 Briarpark Dr",
+      "approxLocation": false,
+      "amenities": [],
+      "buildingClass": "B",
+      "city": "Houston",
+      "commissionDisclaimer": null,
+      "customRefId": null,
+      "department": null,
+      "district": null,
+      "energyRating": null,
+      "energyRatingUrl": null,
+      "availabilityLabel": null,
+      "floorPlans": {
+        "images": [],
+        "files": [
+          {
+            "url": "https://res.cloudinary.com/marketsphere/image/upload/jne1es2qllkxubgxt5tm.pdf",
+            "image": "https://res.cloudinary.com/marketsphere/image/upload/c_scale,h_234,w_181/jne1es2qllkxubgxt5tm.png",
+            "type": "floorplan"
+          },
+          {
+            "url": "https://res.cloudinary.com/marketsphere/image/upload/wrptqz1grjr6uwbhcilm.pdf",
+            "image": "https://res.cloudinary.com/marketsphere/image/upload/c_scale,h_234,w_181/wrptqz1grjr6uwbhcilm.png",
+            "type": "floorplan"
+          }
+        ]
+      },
+      "hideAvailabilitiesPrice": true,
+      "hidePrice": false,
+      "id": "200118",
+      "labels": [
+        "Sublease",
+        "Lease"
+      ],
+      "latitude": 29.723398,
+      "locationDescription": null,
+      "longitude": -95.550181,
+      "pageUrl": "/listings/western-geophysical-3750-briarpark-dr-westchase",
+      "postcode": "77042",
+      "propertyType": "office",
+      "propertyTypes": [
+        "office"
+      ],
+      "refId": "200118",
+      "region": "Texas",
+      "rentPrice": null,
+      "salePrice": null,
+      "serviceCharge": null,
+      "state": "TX",
+      "submarket": "Westchase",
+      "surfaceArea": {
+        "value": {
+          "min": 45000,
+          "max": 90000
+        },
+        "unit": "feet",
+        "metrics": [
+          {
+            "unit": "meters",
+            "value": {
+              "min": 4181,
+              "max": 8361
+            }
+          },
+          {
+            "unit": "desks",
+            "value": {
+              "min": 418,
+              "max": 836
+            }
+          },
+          {
+            "unit": "acres",
+            "value": {
+              "min": 1.033056,
+              "max": 2.066112
+            }
+          },
+          {
+            "unit": "feet",
+            "value": {
+              "min": 45000,
+              "max": 90000
+            }
+          },
+          {
+            "unit": "hectares",
+            "value": {
+              "min": 0.414,
+              "max": 0.828
+            }
+          },
+          {
+            "unit": "tsubo",
+            "value": {
+              "min": 1264.64265,
+              "max": 2529.2853
+            }
+          },
+          {
+            "unit": "rack",
+            "value": {
+              "min": 418.05,
+              "max": 836.1
+            }
+          },
+          {
+            "unit": "pyeong",
+            "value": {
+              "min": 1264.64265,
+              "max": 2529.2853
+            }
+          }
+        ],
+        "alternativeUnit": null,
+        "showEstimateDesks": false,
+        "label": "rent"
+      },
+      "surfaceAreas": [
+        {
+          "value": {
+            "min": 45000,
+            "max": 90000
+          },
+          "unit": "feet",
+          "metrics": [
+            {
+              "unit": "meters",
+              "value": {
+                "min": 4181,
+                "max": 8361
+              }
+            },
+            {
+              "unit": "desks",
+              "value": {
+                "min": 418,
+                "max": 836
+              }
+            },
+            {
+              "unit": "acres",
+              "value": {
+                "min": 1.033056,
+                "max": 2.066112
+              }
+            },
+            {
+              "unit": "feet",
+              "value": {
+                "min": 45000,
+                "max": 90000
+              }
+            },
+            {
+              "unit": "hectares",
+              "value": {
+                "min": 0.414,
+                "max": 0.828
+              }
+            },
+            {
+              "unit": "tsubo",
+              "value": {
+                "min": 1264.64265,
+                "max": 2529.2853
+              }
+            },
+            {
+              "unit": "rack",
+              "value": {
+                "min": 418.05,
+                "max": 836.1
+              }
+            },
+            {
+              "unit": "pyeong",
+              "value": {
+                "min": 1264.64265,
+                "max": 2529.2853
+              }
+            }
+          ],
+          "alternativeUnit": null,
+          "showEstimateDesks": false,
+          "label": "rent"
+        }
+      ],
+      "tenureTypes": [
+        "rent"
+      ],
+      "translations": [],
+      "title": "Western Geophysical",
+      "videos": [],
+      "view360URLs": [],
+      "virtualTours": [],
+      "websiteUrl": null,
+      "wls": null,
+      "availabilitiesCount": 2,
+      "energyRatingDescription": null
+    },
+    "photos": [
+      "https://res.cloudinary.com/marketsphere/image/upload/k7k46nafvfub1kikiamv.jpg"
+    ],
+    "brochure_pdf": "https://property.jll.com/listings/western-geophysical-3750-briarpark-dr-westchase/brochure",
+    "agents": [
+      {
+        "name": "Jerrod McQuain",
+        "title": "Executive Vice President",
+        "license": "517262",
+        "phone_primary": "+1 713 425 1858",
+        "email": "jerrod.mcquain@jll.com",
+        "social_media": "https://www.linkedin.com/in/jerrodmcquain/",
+        "photo_url": "https://res.cloudinary.com/jll-global-broker-profile/image/upload/v1730334984/broker_profile_management_PROD/bvyqnopqieywyvsapuez.jpg",
+        "office_phone": "+1214-438-6210"
+      }
+    ]
+  },
+  {
+    "source_name": "jll",
+    "listing_id": "348705",
+    "listing_link": "https://property.jll.com/listings/4525-sharon-4525-sharon-rd-charlotte",
+    "listing_type": "For Lease",
+    "listing_status": "Lease",
+    "address": "4525 Sharon Rd, Charlotte, NC, 28211",
+    "coordinates": "35.15015,-80.829127",
+    "street_name": "4525 Sharon Rd",
+    "city": "Charlotte",
+    "state": "NC",
+    "zipcode": "28211",
+    "property_name": "4525 Sharon",
+    "property_type": "office",
+    "building_class": "A",
+    "size": "3,929-14,399 feet",
+    "listing_details": {
+      "aerialViewID": null,
+      "address": "4525 Sharon Rd",
+      "approxLocation": false,
+      "amenities": [],
+      "buildingClass": "A",
+      "city": "Charlotte",
+      "commissionDisclaimer": null,
+      "customRefId": null,
+      "department": null,
+      "district": null,
+      "energyRating": null,
+      "energyRatingUrl": null,
+      "availabilityLabel": null,
+      "floorPlans": {
+        "images": [],
+        "files": []
+      },
+      "hideAvailabilitiesPrice": true,
+      "hidePrice": false,
+      "id": "348705",
+      "labels": [
+        "Lease"
+      ],
+      "latitude": 35.15015,
+      "locationDescription": "Suburban",
+      "longitude": -80.829127,
+      "pageUrl": "/listings/4525-sharon-4525-sharon-rd-charlotte",
+      "postcode": "28211",
+      "propertyType": "office",
+      "propertyTypes": [
+        "office"
+      ],
+      "refId": "348705",
+      "region": "North Carolina",
+      "rentPrice": null,
+      "salePrice": null,
+      "serviceCharge": null,
+      "state": "NC",
+      "submarket": "Southpark",
+      "surfaceArea": {
+        "value": {
+          "min": 3929,
+          "max": 14399
+        },
+        "unit": "feet",
+        "metrics": [
+          {
+            "unit": "meters",
+            "value": {
+              "min": 365,
+              "max": 1338
+            }
+          },
+          {
+            "unit": "desks",
+            "value": {
+              "min": 36,
+              "max": 133
+            }
+          },
+          {
+            "unit": "acres",
+            "value": {
+              "min": 0.0901972672,
+              "max": 0.3305549632
+            }
+          },
+          {
+            "unit": "feet",
+            "value": {
+              "min": 3929,
+              "max": 14399
+            }
+          },
+          {
+            "unit": "hectares",
+            "value": {
+              "min": 0.0361468,
+              "max": 0.1324708
+            }
+          },
+          {
+            "unit": "tsubo",
+            "value": {
+              "min": 110.41735493,
+              "max": 404.65754483
+            }
+          },
+          {
+            "unit": "rack",
+            "value": {
+              "min": 36.500409999999995,
+              "max": 133.76671
+            }
+          },
+          {
+            "unit": "pyeong",
+            "value": {
+              "min": 110.41735493,
+              "max": 404.65754483
+            }
+          }
+        ],
+        "alternativeUnit": null,
+        "showEstimateDesks": false,
+        "label": "rent"
+      },
+      "surfaceAreas": [
+        {
+          "value": {
+            "min": 3929,
+            "max": 14399
+          },
+          "unit": "feet",
+          "metrics": [
+            {
+              "unit": "meters",
+              "value": {
+                "min": 365,
+                "max": 1338
+              }
+            },
+            {
+              "unit": "desks",
+              "value": {
+                "min": 36,
+                "max": 133
+              }
+            },
+            {
+              "unit": "acres",
+              "value": {
+                "min": 0.0901972672,
+                "max": 0.3305549632
+              }
+            },
+            {
+              "unit": "feet",
+              "value": {
+                "min": 3929,
+                "max": 14399
+              }
+            },
+            {
+              "unit": "hectares",
+              "value": {
+                "min": 0.0361468,
+                "max": 0.1324708
+              }
+            },
+            {
+              "unit": "tsubo",
+              "value": {
+                "min": 110.41735493,
+                "max": 404.65754483
+              }
+            },
+            {
+              "unit": "rack",
+              "value": {
+                "min": 36.500409999999995,
+                "max": 133.76671
+              }
+            },
+            {
+              "unit": "pyeong",
+              "value": {
+                "min": 110.41735493,
+                "max": 404.65754483
+              }
+            }
+          ],
+          "alternativeUnit": null,
+          "showEstimateDesks": false,
+          "label": "rent"
+        }
+      ],
+      "tenureTypes": [
+        "rent"
+      ],
+      "translations": [],
+      "title": "4525 Sharon",
+      "videos": [],
+      "view360URLs": [],
+      "virtualTours": [],
+      "websiteUrl": null,
+      "wls": null,
+      "availabilitiesCount": 2,
+      "energyRatingDescription": null
+    },
+    "photos": [
+      "https://res.cloudinary.com/jll-global-sandbox/image/upload/v1729104491/MyListing/public/prod/rlkbfgqlrylshvsiop6m.jpg"
+    ],
+    "brochure_pdf": "https://property.jll.com/listings/4525-sharon-4525-sharon-rd-charlotte/brochure",
+    "agents": [
+      {
+        "name": "Kennedy Fertitta",
+        "title": "Associate",
+        "phone_primary": "+1 704 962 7430",
+        "email": "kennedy.fertitta@jll.com",
+        "photo_url": "https://res.cloudinary.com/jll-global-broker-profile/image/upload/v1743532089/prod/ok81j0qythlg0ocn5nuw.jpg"
+      },
+      {
+        "name": "Elizabeth McMillan",
+        "title": "Executive Vice President",
+        "license": "270977",
+        "email": "elizabeth.mcmillan@jll.com",
+        "photo_url": "https://res.cloudinary.com/jll-global-broker-profile/image/upload/v1743529214/prod/yznuyfdzcbo6z6kvvynh.jpg",
+        "office_phone": "+1704-943-2300"
+      }
+    ]
+  },
+  {
+    "source_name": "jll",
+    "listing_id": "27859",
+    "listing_link": "https://property.jll.com/listings/avery-building-6836-carnegie-blvd-charlotte",
+    "listing_type": "For Lease",
+    "listing_status": "Lease",
+    "address": "6836 Carnegie Blvd, Charlotte, NC, 28211",
+    "coordinates": "35.149887,-80.825188",
+    "street_name": "6836 Carnegie Blvd",
+    "city": "Charlotte",
+    "state": "NC",
+    "zipcode": "28211",
+    "property_name": "Avery Building",
+    "property_type": "office",
+    "building_class": "B",
+    "size": "2,076-6,388 feet",
+    "listing_details": {
+      "aerialViewID": null,
+      "address": "6836 Carnegie Blvd",
+      "approxLocation": false,
+      "amenities": [],
+      "buildingClass": "B",
+      "city": "Charlotte",
+      "commissionDisclaimer": null,
+      "customRefId": null,
+      "department": null,
+      "district": null,
+      "energyRating": null,
+      "energyRatingUrl": null,
+      "availabilityLabel": null,
+      "floorPlans": {
+        "images": [],
+        "files": []
+      },
+      "hideAvailabilitiesPrice": true,
+      "hidePrice": false,
+      "id": "27859",
+      "labels": [
+        "Lease"
+      ],
+      "latitude": 35.149887,
+      "locationDescription": "Suburban",
+      "longitude": -80.825188,
+      "pageUrl": "/listings/avery-building-6836-carnegie-blvd-charlotte",
+      "postcode": "28211",
+      "propertyType": "office",
+      "propertyTypes": [
+        "office"
+      ],
+      "refId": "27859",
+      "region": "North Carolina",
+      "rentPrice": null,
+      "salePrice": null,
+      "serviceCharge": null,
+      "state": "NC",
+      "submarket": "Southpark",
+      "surfaceArea": {
+        "value": {
+          "min": 2076,
+          "max": 6388
+        },
+        "unit": "feet",
+        "metrics": [
+          {
+            "unit": "meters",
+            "value": {
+              "min": 193,
+              "max": 593
+            }
+          },
+          {
+            "unit": "desks",
+            "value": {
+              "min": 19,
+              "max": 59
+            }
+          },
+          {
+            "unit": "acres",
+            "value": {
+              "min": 0.0476583168,
+              "max": 0.1466480384
+            }
+          },
+          {
+            "unit": "feet",
+            "value": {
+              "min": 2076,
+              "max": 6388
+            }
+          },
+          {
+            "unit": "hectares",
+            "value": {
+              "min": 0.0190992,
+              "max": 0.0587696
+            }
+          },
+          {
+            "unit": "tsubo",
+            "value": {
+              "min": 58.34218092,
+              "max": 179.52304996
+            }
+          },
+          {
+            "unit": "rack",
+            "value": {
+              "min": 19.28604,
+              "max": 59.344519999999996
+            }
+          },
+          {
+            "unit": "pyeong",
+            "value": {
+              "min": 58.34218092,
+              "max": 179.52304996
+            }
+          }
+        ],
+        "alternativeUnit": null,
+        "showEstimateDesks": false,
+        "label": "rent"
+      },
+      "surfaceAreas": [
+        {
+          "value": {
+            "min": 2076,
+            "max": 6388
+          },
+          "unit": "feet",
+          "metrics": [
+            {
+              "unit": "meters",
+              "value": {
+                "min": 193,
+                "max": 593
+              }
+            },
+            {
+              "unit": "desks",
+              "value": {
+                "min": 19,
+                "max": 59
+              }
+            },
+            {
+              "unit": "acres",
+              "value": {
+                "min": 0.0476583168,
+                "max": 0.1466480384
+              }
+            },
+            {
+              "unit": "feet",
+              "value": {
+                "min": 2076,
+                "max": 6388
+              }
+            },
+            {
+              "unit": "hectares",
+              "value": {
+                "min": 0.0190992,
+                "max": 0.0587696
+              }
+            },
+            {
+              "unit": "tsubo",
+              "value": {
+                "min": 58.34218092,
+                "max": 179.52304996
+              }
+            },
+            {
+              "unit": "rack",
+              "value": {
+                "min": 19.28604,
+                "max": 59.344519999999996
+              }
+            },
+            {
+              "unit": "pyeong",
+              "value": {
+                "min": 58.34218092,
+                "max": 179.52304996
+              }
+            }
+          ],
+          "alternativeUnit": null,
+          "showEstimateDesks": false,
+          "label": "rent"
+        }
+      ],
+      "tenureTypes": [
+        "rent"
+      ],
+      "translations": [],
+      "title": "Avery Building",
+      "videos": [],
+      "view360URLs": [],
+      "virtualTours": [],
+      "websiteUrl": null,
+      "wls": null,
+      "availabilitiesCount": 3,
+      "energyRatingDescription": null
+    },
+    "photos": [
+      "https://res.cloudinary.com/jll-global-sandbox/image/upload/v1729103758/MyListing/public/prod/e2pjmi9ucll4s7kqumdf.jpg",
+      "https://res.cloudinary.com/jll-global-sandbox/image/upload/v1729103767/MyListing/public/prod/og24qfwedzoknhgagucs.jpg",
+      "https://res.cloudinary.com/jll-global-sandbox/image/upload/v1729103773/MyListing/public/prod/tqwjluhneudb0ja5z25i.jpg",
+      "https://res.cloudinary.com/jll-global-sandbox/image/upload/v1729103780/MyListing/public/prod/zoq4nheqn4hr00rf4cfo.jpg",
+      "https://res.cloudinary.com/jll-global-sandbox/image/upload/v1729103787/MyListing/public/prod/lxswhaiakdpcbptjgp3n.jpg"
+    ],
+    "brochure_pdf": "https://res.cloudinary.com/jll-global-sandbox/image/upload/v1729103841/MyListing/public/prod/nbdkmw5g25g67fgnrt6y.pdf",
+    "agents": [
+      {
+        "name": "Kennedy Fertitta",
+        "title": "Associate",
+        "phone_primary": "+1 704 962 7430",
+        "email": "kennedy.fertitta@jll.com",
+        "photo_url": "https://res.cloudinary.com/jll-global-broker-profile/image/upload/v1743532089/prod/ok81j0qythlg0ocn5nuw.jpg"
+      },
+      {
+        "name": "Elizabeth McMillan",
+        "title": "Executive Vice President",
+        "license": "270977",
+        "email": "elizabeth.mcmillan@jll.com",
+        "photo_url": "https://res.cloudinary.com/jll-global-broker-profile/image/upload/v1743529214/prod/yznuyfdzcbo6z6kvvynh.jpg",
+        "office_phone": "+1704-943-2300"
+      }
+    ]
+  },
+  {
+    "source_name": "jll",
+    "listing_id": "263383",
+    "listing_link": "https://property.jll.com/listings/tempe-southern-bldg-b-1236-w-southern-ave-phoenix",
+    "listing_type": "For Lease",
+    "listing_status": "Lease",
+    "address": "1236 W Southern Ave, Tempe, AZ, 85282",
+    "coordinates": "33.393506,-111.957202",
+    "street_name": "1236 W Southern Ave",
+    "city": "Tempe",
+    "state": "AZ",
+    "zipcode": "85282",
+    "property_name": "Tempe Southern - Bldg B",
+    "property_type": "industrial",
+    "building_class": "Unclassified",
+    "location_highlights": [
+      "16'-18' clear height",
+      "Fully fire sprinklered",
+      "GID Zoning; City of Tempe",
+      "Excellent freeway access"
+    ],
+    "size": "4,971-5,052 feet",
+    "property_highlights": "16'-18' clear height; Fully fire sprinklered; GID Zoning; City of Tempe; Excellent freeway access",
+    "listing_details": {
+      "aerialViewID": null,
+      "address": "1236 W Southern Ave",
+      "approxLocation": false,
+      "amenities": [],
+      "buildingClass": "Unclassified",
+      "city": "Tempe",
+      "commissionDisclaimer": null,
+      "customRefId": null,
+      "department": null,
+      "district": null,
+      "energyRating": null,
+      "energyRatingUrl": null,
+      "availabilityLabel": null,
+      "floorPlans": {
+        "images": [],
+        "files": []
+      },
+      "hideAvailabilitiesPrice": true,
+      "hidePrice": false,
+      "id": "263383",
+      "labels": [
+        "Lease"
+      ],
+      "latitude": 33.393506,
+      "locationDescription": "Southeast Valley",
+      "longitude": -111.957202,
+      "pageUrl": "/listings/tempe-southern-bldg-b-1236-w-southern-ave-phoenix",
+      "postcode": "85282",
+      "propertyType": "industrial",
+      "propertyTypes": [
+        "industrial"
+      ],
+      "refId": "263383",
+      "region": "Arizona",
+      "rentPrice": null,
+      "salePrice": null,
+      "serviceCharge": null,
+      "state": "AZ",
+      "submarket": "Tempe Ind",
+      "surfaceArea": {
+        "value": {
+          "min": 4971,
+          "max": 5052
+        },
+        "unit": "feet",
+        "metrics": [
+          {
+            "unit": "meters",
+            "value": {
+              "min": 462,
+              "max": 469
+            }
+          },
+          {
+            "unit": "desks",
+            "value": 46
+          },
+          {
+            "unit": "acres",
+            "value": {
+              "min": 0.1141182528,
+              "max": 0.1159777536
+            }
+          },
+          {
+            "unit": "feet",
+            "value": {
+              "min": 4971,
+              "max": 5052
+            }
+          },
+          {
+            "unit": "hectares",
+            "value": {
+              "min": 0.0457332,
+              "max": 0.0464784
+            }
+          },
+          {
+            "unit": "tsubo",
+            "value": {
+              "min": 139.70085807,
+              "max": 141.97721484
+            }
+          },
+          {
+            "unit": "rack",
+            "value": {
+              "min": 46.180589999999995,
+              "max": 46.93308
+            }
+          },
+          {
+            "unit": "pyeong",
+            "value": {
+              "min": 139.70085807,
+              "max": 141.97721484
+            }
+          }
+        ],
+        "alternativeUnit": null,
+        "showEstimateDesks": false,
+        "label": "rent"
+      },
+      "surfaceAreas": [
+        {
+          "value": {
+            "min": 4971,
+            "max": 5052
+          },
+          "unit": "feet",
+          "metrics": [
+            {
+              "unit": "meters",
+              "value": {
+                "min": 462,
+                "max": 469
+              }
+            },
+            {
+              "unit": "desks",
+              "value": 46
+            },
+            {
+              "unit": "acres",
+              "value": {
+                "min": 0.1141182528,
+                "max": 0.1159777536
+              }
+            },
+            {
+              "unit": "feet",
+              "value": {
+                "min": 4971,
+                "max": 5052
+              }
+            },
+            {
+              "unit": "hectares",
+              "value": {
+                "min": 0.0457332,
+                "max": 0.0464784
+              }
+            },
+            {
+              "unit": "tsubo",
+              "value": {
+                "min": 139.70085807,
+                "max": 141.97721484
+              }
+            },
+            {
+              "unit": "rack",
+              "value": {
+                "min": 46.180589999999995,
+                "max": 46.93308
+              }
+            },
+            {
+              "unit": "pyeong",
+              "value": {
+                "min": 139.70085807,
+                "max": 141.97721484
+              }
+            }
+          ],
+          "alternativeUnit": null,
+          "showEstimateDesks": false,
+          "label": "rent"
+        }
+      ],
+      "tenureTypes": [
+        "rent"
+      ],
+      "translations": [],
+      "title": "Tempe Southern - Bldg B",
+      "videos": [],
+      "view360URLs": [],
+      "virtualTours": [],
+      "websiteUrl": null,
+      "wls": null,
+      "availabilitiesCount": 2,
+      "energyRatingDescription": null
+    },
+    "photos": [
+      "https://res.cloudinary.com/marketsphere/image/upload/nxgp5mtu66szsgderrfd"
+    ],
+    "brochure_pdf": "https://property.jll.com/listings/tempe-southern-bldg-b-1236-w-southern-ave-phoenix/brochure",
+    "agents": [
+      {
+        "name": "Hagen Hyatt",
+        "title": "Senior Vice President",
+        "license": "SA687870000",
+        "phone_primary": "+1 602 282 6275",
+        "email": "hagen.hyatt@jll.com",
+        "social_media": "https://www.linkedin.com/in/hagen-hyatt/",
+        "photo_url": "https://res.cloudinary.com/jll-global-broker-profile/image/upload/v1733679548/broker_profile_management_PROD/x4hb0ze9dvmhtmhkaibp.jpg",
+        "office_phone": "+1"
+      },
+      {
+        "name": "Steven Larsen, SIOR, CCIM",
+        "title": "Vice Chairman",
+        "license": "SA570316000",
+        "phone_primary": "+1 602 282 6296",
+        "email": "steve.larsen@jll.com",
+        "social_media": "https://www.linkedin.com/in/steve-larsen-sior-62b9b3a/",
+        "photo_url": "https://res.cloudinary.com/jll-global-broker-profile/image/upload/v1750964126/prod/uqsbraxp5raorqbvwwtq.jpg",
+        "office_phone": "+1"
+      }
+    ]
+  }
+]

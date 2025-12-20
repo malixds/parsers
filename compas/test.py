@@ -7,6 +7,9 @@ import uuid
 import asyncio
 import httpx
 import re
+from schema import DbDTO, AgentData
+from datetime import date, datetime
+from typing import Optional
 
 headers = {
     'User-Agent': UserAgent().random,
@@ -348,7 +351,9 @@ async def get_all_listing_links_async(location_url: str, concurrency: int = 10):
                     if listing and isinstance(listing, dict):
                         navigation_link = listing.get('navigationPageLink')
                         if navigation_link:
-                            full_url = f'https://www.compass.com/{navigation_link}'
+                            # Убираем начальный слэш, если есть, чтобы избежать двойного слэша
+                            nav_path = navigation_link.lstrip('/')
+                            full_url = f'https://www.compass.com/{nav_path}'
                             first_links.append(full_url)
                 
                 all_links = first_links.copy()
@@ -590,9 +595,9 @@ def extract_initial_data(html: str) -> dict | None:
         return None
 
 
-def extract_listing_data(initial_data: dict, url: str = '') -> dict | None:
+def extract_listing_data(initial_data: dict, url: str = '') -> DbDTO | None:
     """
-    Извлекает нужные поля из window.__INITIAL_DATA__
+    Извлекает нужные поля из window.__INITIAL_DATA__ и возвращает DbDTO объект
     """
     try:
         # Находим данные листинга
@@ -606,50 +611,81 @@ def extract_listing_data(initial_data: dict, url: str = '') -> dict | None:
         # Исправляем URL (убираем двойной слэш)
         fixed_url = url.replace('https://www.compass.com//', 'https://www.compass.com/')
         
-        # Извлекаем нужные поля
-        result = {
-            'url': fixed_url,
-            'price': None,
-            'square_feet': None,
-            'listing_type': None,  # аренда/продажа
-            'description': None,
-            'listing_status': None,
-            'listing_details': None,
-            'photos': [],
-            'brochure_pdf': None,
-            'mls': None,
-            'agents': []
-        }
+        # Извлекаем базовые идентификаторы
+        listing_id = listing.get('listingIdSHA', '') or listing.get('compassPropertyId', '') or listing.get('feedListingId', '')
+        if not listing_id:
+            # Используем URL как fallback для ID
+            listing_id = fixed_url.split('/')[-2] if '/' in fixed_url else fixed_url
+        listing_id = str(listing_id) if listing_id else 'unknown'
+        
+        # Адрес и локация
+        location = listing.get('location', {})
+        address = location.get('prettyAddress', '')
+        if not address:
+            # Формируем адрес из компонентов
+            parts = []
+            if location.get('streetNumber'):
+                parts.append(location['streetNumber'])
+            if location.get('street'):
+                parts.append(location['street'])
+            if location.get('streetType'):
+                parts.append(location['streetType'])
+            if location.get('unitNumber'):
+                parts.append(f"{location.get('unitType', 'Unit')} {location['unitNumber']}")
+            if parts:
+                address = ', '.join(parts)
+            if location.get('city'):
+                address += f", {location['city']}"
+            if location.get('state'):
+                address += f" {location['state']}"
+            if location.get('zipCode'):
+                address += f" {location['zipCode']}"
+        
+        # Координаты
+        coordinates = None
+        if location.get('latitude') and location.get('longitude'):
+            coordinates = f"{location['latitude']},{location['longitude']}"
+        
+        # Тип объявления
+        listing_type_num = listing.get('listingType', 0)
+        listing_type_str = 'For Lease' if listing_type_num == 1 else 'For Sale'
+        
+        # Статус
+        listing_status = listing.get('localizedStatus', '')
+        if not listing_status and 'status' in listing:
+            status_map = {
+                0: 'Active',
+                9: 'Active',
+                12: 'Active',
+                14: 'Coming Soon',
+                10: 'Sold',
+                8: 'Contract Signed',
+            }
+            listing_status = status_map.get(listing['status'], f"Status {listing['status']}")
         
         # Цена
-        price_value = 0
+        sale_price = None
+        lease_price = None
         if 'price' in listing:
             price_data = listing['price']
-            price_value = price_data.get('lastKnown', 0)
-            per_square_foot = price_data.get('perSquareFoot', 0)
-            
-            result['price'] = {
-                'formatted': price_data.get('formatted', ''),
-                'value': price_value,
-                'per_square_foot': per_square_foot
-            }
-        else:
-            result['price'] = {
-                'formatted': '',
-                'value': 0,
-                'per_square_foot': 0
-            }
+            price_formatted = price_data.get('formatted', '')
+            if listing_type_num == 1:
+                lease_price = price_formatted
+            else:
+                sale_price = price_formatted
         
-        # Площадь - проверяем несколько мест
+        # Площадь
         square_feet = 0
+        size_str = None
         if 'size' in listing:
             size_data = listing['size']
             square_feet = size_data.get('squareFeet', 0)
+            if square_feet:
+                size_str = f"{square_feet:,} sqft"
         
         # Если не нашли в size, проверяем в detailedInfo
         if not square_feet and 'detailedInfo' in listing:
             detailed_info = listing['detailedInfo']
-            # Ищем в listingDetails
             if 'listingDetails' in detailed_info:
                 for detail_group in detailed_info['listingDetails']:
                     if 'subCategories' in detail_group:
@@ -661,31 +697,17 @@ def extract_listing_data(initial_data: dict, url: str = '') -> dict | None:
                                         values = field.get('values', [])
                                         if values:
                                             try:
-                                                # Пытаемся извлечь число из строки
                                                 value_str = str(values[0]).replace(',', '').replace(' ', '')
                                                 square_feet = float(value_str)
+                                                size_str = f"{int(square_feet):,} sqft"
                                                 break
                                             except (ValueError, TypeError):
                                                 pass
         
-        result['square_feet'] = int(square_feet) if square_feet else None
-        
-        # Вычисляем per_square_foot, если он не был указан, но есть цена и площадь
-        if (result['price'] and result['price'].get('value') and 
-            result['square_feet'] and result['square_feet'] > 0):
-            if not result['price'].get('per_square_foot') or result['price']['per_square_foot'] == 0:
-                result['price']['per_square_foot'] = round(result['price']['value'] / result['square_feet'], 2)
-        
-        # Тип (аренда/продажа)
-        listing_type = listing.get('listingType', 0)
-        result['listing_type'] = 'rent' if listing_type == 1 else 'sale'
-        
-        # Описание (может быть в разных местах)
-        # НЕ используем contactFormMessage, так как это не описание
+        # Описание
         description = None
         if 'description' in listing and listing['description']:
             description = listing['description']
-            # Проверяем, что это не шаблонное сообщение
             if description.startswith('I would like more information about'):
                 description = None
         
@@ -696,122 +718,192 @@ def extract_listing_data(initial_data: dict, url: str = '') -> dict | None:
                 if description.startswith('I would like more information about'):
                     description = None
         
-        # Также проверяем в detailedInfo
         if not description and 'detailedInfo' in listing:
             detailed_info = listing['detailedInfo']
             if 'description' in detailed_info and detailed_info['description']:
                 description = detailed_info['description']
         
-        result['description'] = description
-        
-        # Listing status
-        result['listing_status'] = listing.get('localizedStatus', '')
-        if not result['listing_status'] and 'status' in listing:
-            # Если нет localizedStatus, используем числовой статус
-            status_map = {
-                0: 'Listed (Active)',
-                9: 'Active',
-                12: 'Active',
-                14: 'Coming Soon',
-                10: 'Sold',
-                8: 'Contract Signed',
-            }
-            result['listing_status'] = status_map.get(listing['status'], f"Status {listing['status']}")
-        
-        # Listing details (таблица) - это detailedInfo.listingDetails
+        # Listing details - преобразуем список в словарь, если нужно
+        listing_details_dict = None
         if 'detailedInfo' in listing:
             detailed_info = listing['detailedInfo']
             if 'listingDetails' in detailed_info:
-                result['listing_details'] = detailed_info['listingDetails']
-            # Также сохраняем keyDetails если есть
-            if 'keyDetails' in detailed_info and not result['listing_details']:
-                result['listing_details'] = detailed_info['keyDetails']
+                details_data = detailed_info['listingDetails']
+                # Если это список, преобразуем в словарь
+                if isinstance(details_data, list):
+                    # Создаем словарь, используя индекс или имя как ключ
+                    listing_details_dict = {}
+                    for idx, item in enumerate(details_data):
+                        if isinstance(item, dict):
+                            # Используем 'name' как ключ, если есть, иначе индекс
+                            key = item.get('name', f'item_{idx}')
+                            listing_details_dict[key] = item
+                        else:
+                            listing_details_dict[f'item_{idx}'] = item
+                elif isinstance(details_data, dict):
+                    listing_details_dict = details_data
+            elif 'keyDetails' in detailed_info:
+                key_details_data = detailed_info['keyDetails']
+                # Если это список, преобразуем в словарь
+                if isinstance(key_details_data, list):
+                    listing_details_dict = {}
+                    for idx, item in enumerate(key_details_data):
+                        if isinstance(item, dict):
+                            key = item.get('name', f'item_{idx}')
+                            listing_details_dict[key] = item
+                        else:
+                            listing_details_dict[f'item_{idx}'] = item
+                elif isinstance(key_details_data, dict):
+                    listing_details_dict = key_details_data
         
-        # Фото - извлекаем все media с category 0 (обычно это фото)
+        # Фото - только URL строки
+        photos_list = []
         if 'media' in listing:
-            photos = []
             for media in listing['media']:
-                # category 0 обычно означает фото
                 if media.get('category', 0) == 0 and 'originalUrl' in media:
                     photo_url = media['originalUrl']
-                    # Преобразуем относительные URL в полные
                     if photo_url.startswith('//'):
                         photo_url = 'https:' + photo_url
                     elif photo_url.startswith('/'):
                         photo_url = 'https://www.compass.com' + photo_url
-                    
-                    photos.append({
-                        'url': photo_url,
-                        'thumbnail': media.get('thumbnailUrl', ''),
-                        'width': media.get('width', 0),
-                        'height': media.get('height', 0)
-                    })
-            result['photos'] = photos
+                    photos_list.append(photo_url)
         
-        # Brochure PDF - ищем только реальные PDF файлы
+        # Brochure PDF
+        brochure_pdf = None
         if 'media' in listing:
             for media in listing['media']:
                 original_url = media.get('originalUrl', '')
-                # Проверяем, что это действительно PDF файл
                 if original_url and original_url.lower().endswith('.pdf'):
-                    brochure_url = original_url
-                    if brochure_url.startswith('//'):
-                        brochure_url = 'https:' + brochure_url
-                    elif brochure_url.startswith('/'):
-                        brochure_url = 'https://www.compass.com' + brochure_url
-                    result['brochure_pdf'] = brochure_url
+                    brochure_pdf = original_url
+                    if brochure_pdf.startswith('//'):
+                        brochure_pdf = 'https:' + brochure_pdf
+                    elif brochure_pdf.startswith('/'):
+                        brochure_pdf = 'https://www.compass.com' + brochure_pdf
                     break
         
-        # MLS - информация из databaseSource
-        mls_info = {}
-        if 'databaseSource' in listing:
-            mls_data = listing['databaseSource']
-            mls_info = {
-                'source_name': mls_data.get('externalSourceName', ''),
-                'source_display_name': mls_data.get('sourceDisplayName', ''),
-                'contributing_datasets': mls_data.get('contributingDatasetList', [])
-            }
-        
-        # Также добавляем mlsStatus если есть
-        if 'mlsStatus' in listing:
-            mls_info['status'] = listing.get('mlsStatus', '')
-        
-        # Проверяем isOffMLS
-        if 'isOffMLS' in listing:
-            mls_info['is_off_mls'] = listing.get('isOffMLS', False)
-        
-        # Добавляем информацию из transaction history если есть
+        # MLS номер
+        mls_number = None
         if 'transactionHistory' in listing and listing['transactionHistory']:
             latest_transaction = listing['transactionHistory'][0]
             if 'source' in latest_transaction:
                 source = latest_transaction['source']
                 if 'externalSourceId' in source:
-                    mls_info['mls_id'] = source.get('externalSourceId', '')
-                if 'sourceDisplayName' in source and not mls_info.get('source_display_name'):
-                    mls_info['source_display_name'] = source.get('sourceDisplayName', '')
+                    mls_number = source.get('externalSourceId', '')
         
-        result['mls'] = mls_info if mls_info else None
-        
-        # Агенты - из fullContacts
+        # Агенты - преобразуем в AgentData
+        agents_list = []
         if 'fullContacts' in listing:
-            agents = []
             for contact in listing['fullContacts']:
-                agent_info = {
-                    'name': contact.get('contactName', ''),
-                    'email': contact.get('email', ''),
-                    'phone': contact.get('phone', ''),
-                    'contact_type': contact.get('contactType', ''),
-                    'license': contact.get('licenseNum', ''),
-                    'profile_url': contact.get('websiteURL', ''),
-                    'company': contact.get('company', '')
-                }
-                # Преобразуем относительные URL в полные
-                if agent_info['profile_url'].startswith('/'):
-                    agent_info['profile_url'] = 'https://www.compass.com' + agent_info['profile_url']
-                agents.append(agent_info)
-            result['agents'] = agents
+                profile_url = contact.get('websiteURL', '')
+                if profile_url.startswith('/'):
+                    profile_url = 'https://www.compass.com' + profile_url
+                
+                # Обрабатываем email - только если он валидный
+                email = contact.get('email')
+                if not email or email.strip() == '':
+                    email = None
+                
+                # Обрабатываем photo_url
+                photo_url = contact.get('profileImageURL')
+                if photo_url:
+                    if photo_url.startswith('//'):
+                        photo_url = 'https:' + photo_url
+                    elif photo_url.startswith('/'):
+                        photo_url = 'https://www.compass.com' + photo_url
+                
+                agent = AgentData(
+                    name=contact.get('contactName'),
+                    license=contact.get('licenseNum'),
+                    phone_primary=contact.get('phone'),
+                    email=email,
+                    photo_url=photo_url,
+                    office_name=contact.get('company'),
+                )
+                agents_list.append(agent)
         
-        return result
+        # Property type
+        property_type = None
+        if 'detailedInfo' in listing:
+            detailed_info = listing['detailedInfo']
+            if 'propertyType' in detailed_info:
+                prop_type = detailed_info['propertyType']
+                if 'masterType' in prop_type and 'GLOBAL' in prop_type['masterType']:
+                    types = prop_type['masterType']['GLOBAL']
+                    if types:
+                        property_type = types[0]
+        
+        # Year built
+        year_built = None
+        if 'detailedInfo' in listing:
+            detailed_info = listing['detailedInfo']
+            if 'keyDetails' in detailed_info:
+                for key_detail in detailed_info['keyDetails']:
+                    if key_detail.get('key') == 'Year Built':
+                        value = key_detail.get('value', '')
+                        if value and value != '-':
+                            try:
+                                year_built = int(value)
+                            except (ValueError, TypeError):
+                                pass
+        
+        # Даты
+        listing_date_obj = None
+        last_updated_obj = None
+        days_on_market = None
+        
+        if 'date' in listing:
+            date_data = listing['date']
+            # updated может быть timestamp в миллисекундах
+            if 'updated' in date_data:
+                updated_ts = date_data['updated']
+                if updated_ts:
+                    try:
+                        # Конвертируем из миллисекунд в секунды
+                        dt = datetime.fromtimestamp(updated_ts / 1000)
+                        last_updated_obj = dt.date()
+                    except (ValueError, TypeError, OSError):
+                        pass
+        
+        # Days on Market
+        if 'detailedInfo' in listing:
+            detailed_info = listing['detailedInfo']
+            if 'keyDetails' in detailed_info:
+                for key_detail in detailed_info['keyDetails']:
+                    if 'Days on Market' in key_detail.get('key', ''):
+                        days_on_market = key_detail.get('value', '')
+        
+        # Создаем DbDTO объект
+        dto = DbDTO(
+            source_name="compass",
+            listing_id=listing_id,
+            listing_link=fixed_url,
+            listing_type=listing_type_str,
+            listing_status=listing_status,
+            address=address if address else "Address not found",
+            coordinates=coordinates,
+            building_number=location.get('streetNumber'),
+            street_name=location.get('street'),
+            unit_number=location.get('unitNumber'),
+            city=location.get('city'),
+            state=location.get('state'),
+            zipcode=location.get('zipCode'),
+            sale_price=sale_price,
+            lease_price=lease_price,
+            size=size_str,
+            property_type=property_type,
+            property_description=description,
+            listing_details=listing_details_dict,
+            photos=photos_list if photos_list else None,
+            brochure_pdf=brochure_pdf,
+            mls_number=mls_number,
+            agents=agents_list if agents_list else None,
+            year_built=year_built,
+            listing_date=listing_date_obj,
+            last_updated=last_updated_obj,
+            days_on_market=days_on_market,
+        )
+        
+        return dto
         
     except Exception as e:
         print(f"Ошибка при извлечении данных листинга: {e}")
@@ -820,9 +912,9 @@ def extract_listing_data(initial_data: dict, url: str = '') -> dict | None:
         return None
 
 
-async def parse_listing(client: httpx.AsyncClient, url: str, semaphore: asyncio.Semaphore) -> dict | None:
+async def parse_listing(client: httpx.AsyncClient, url: str, semaphore: asyncio.Semaphore) -> DbDTO | None:
     """
-    Парсит одно объявление по URL
+    Парсит одно объявление по URL и возвращает DbDTO объект
     """
     async with semaphore:
         try:
@@ -842,9 +934,9 @@ async def parse_listing(client: httpx.AsyncClient, url: str, semaphore: asyncio.
                 print(f"⚠ Не удалось извлечь __INITIAL_DATA__ из {url}")
                 return None
             
-            listing_data = extract_listing_data(initial_data, url)
-            if listing_data:
-                return listing_data
+            dto = extract_listing_data(initial_data, url)
+            if dto:
+                return dto
             else:
                 print(f"⚠ Не удалось извлечь данные листинга из {url}")
                 return None
@@ -854,7 +946,7 @@ async def parse_listing(client: httpx.AsyncClient, url: str, semaphore: asyncio.
             return None
 
 
-async def parse_listings_async(listing_urls: list[str], concurrency: int = 10, limit: int = None) -> list[dict]:
+async def parse_listings_async(listing_urls: list[str], concurrency: int = 10, limit: int = None) -> list[DbDTO]:
     """
     Асинхронно парсит список объявлений
     
@@ -864,7 +956,7 @@ async def parse_listings_async(listing_urls: list[str], concurrency: int = 10, l
         limit: Ограничение количества объявлений для обработки (для теста)
     
     Returns:
-        list: Список словарей с данными объявлений
+        list: Список DbDTO объектов с данными объявлений
     """
     if limit:
         listing_urls = listing_urls[:limit]
@@ -885,13 +977,13 @@ async def parse_listings_async(listing_urls: list[str], concurrency: int = 10, l
             print(f"❌ Ошибка при обработке объявления {i+1}: {result}")
         elif result:
             parsed_listings.append(result)
-            print(f"✓ Обработано объявление {len(parsed_listings)}/{len(listing_urls)}: {result.get('url', '')}")
+            print(f"✓ Обработано объявление {len(parsed_listings)}/{len(listing_urls)}: {result.listing_link}")
     
     print(f"\nУспешно обработано: {len(parsed_listings)} из {len(listing_urls)}")
     return parsed_listings
 
 
-def parse_listings(listing_urls: list[str], concurrency: int = 10, limit: int = None) -> list[dict]:
+def parse_listings(listing_urls: list[str], concurrency: int = 10, limit: int = None) -> list[DbDTO]:
     """
     Синхронная обертка для парсинга объявлений
     """
@@ -929,7 +1021,9 @@ if __name__ == "__main__":
     print("=" * 60)
     output_file = 'listings_data.json'
     with open(output_file, 'w', encoding='utf-8') as f:
-        json.dump(listings_data, f, ensure_ascii=False, indent=2)
+        # Преобразуем DbDTO объекты в словари для JSON
+        listings_dict = [dto.model_dump(exclude_none=True) for dto in listings_data]
+        json.dump(listings_dict, f, ensure_ascii=False, indent=2, default=str)
     
     print(f"\n✓ Данные сохранены в файл '{output_file}'")
     print(f"✓ Обработано объявлений: {len(listings_data)}")
@@ -937,4 +1031,5 @@ if __name__ == "__main__":
     # Показываем пример первого объявления
     if listings_data:
         print(f"\nПример данных первого объявления:")
-        print(json.dumps(listings_data[0], ensure_ascii=False, indent=2)[:500] + "...")
+        first_dict = listings_data[0].model_dump(exclude_none=True)
+        print(json.dumps(first_dict, ensure_ascii=False, indent=2, default=str)[:500] + "...")

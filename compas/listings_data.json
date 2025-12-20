@@ -1,0 +1,4227 @@
+[
+  {
+    "source_name": "compass",
+    "listing_id": "1860362300582057817",
+    "listing_link": "https://www.compass.com/homedetails/1001-Queen-St-Honolulu-HI-96814/V5N0C_pid/",
+    "listing_type": "For Sale",
+    "listing_status": "Coming Soon",
+    "address": "1001 Queen Street",
+    "coordinates": "21.2951495,-157.852942",
+    "building_number": "1001",
+    "street_name": "Queen",
+    "city": "Honolulu",
+    "state": "HI",
+    "zipcode": "96814",
+    "property_type": "Townhouse",
+    "sale_price": "$890,000",
+    "property_description": "Experience elevated island living in this stunning penthouse level residence at Ae‘o with extra tall 10 foot ceilings, in one of Honolulu’s most sought-after luxury condominiums in the heart of Ward Village. #PH3907 also comes with storage, making it the perfect home or investment opportunity. As you step inside, you’re greeted by floor-to-ceiling windows that frame sweeping Kaka’ako city, ocean, and mountain views, flooding the space with natural light. The open layout maximizes space & flow, featuring a gourmet kitchen with sleek cabinetry, quartz countertops, and Bosch appliances. The spacious bedroom provides a serene retreat with a walk in closet, while the spa-like bathroom boasts contemporary design. Living at Ae‘o means access to resort-style amenities, including a stunning rooftop terrace, two pools, fitness center, sauna, private movie theater, karaoke room, guest suites, and multiple entertainment areas. Plus, enjoy the convenience of direct access to Whole Foods Market downstairs and being just steps from Ward Village’s premier shopping, dining, and entertainment. Don’t miss your chance to own a luxury home in the heart of Honolulu. Schedule your showing today!",
+    "last_updated": "2025-10-01",
+    "days_on_market": "-",
+    "listing_details": {
+      "Key Details": {
+        "name": "Key Details",
+        "subCategories": [
+          {
+            "name": "Key Details",
+            "fields": [
+              {
+                "key": "Neighbourhood",
+                "values": [
+                  "Ward Village",
+                  "Ala Moana-Kakaako",
+                  "Honolulu",
+                  "Oahu",
+                  "Honolulu County"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "Summary": {
+        "name": "Summary",
+        "subCategories": [
+          {
+            "name": "Location and General Information",
+            "fields": [
+              {
+                "key": "City",
+                "values": [
+                  "Honolulu"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Taxes and HOA Information",
+            "fields": [
+              {
+                "key": "Parcel Number",
+                "values": [
+                  "1-2-3-002-106-0448"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "Property": {
+        "name": "Property",
+        "subCategories": [
+          {
+            "name": "Lot Information",
+            "fields": [
+              {
+                "key": "Property Type",
+                "values": [
+                  "Condo/Townhouse"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Property and Assessments",
+            "fields": [
+              {
+                "key": "Foreclosure",
+                "values": [
+                  "No"
+                ]
+              },
+              {
+                "key": "Fractional Ownership",
+                "values": [
+                  "No"
+                ]
+              },
+              {
+                "key": "TMK Area",
+                "values": [
+                  "448"
+                ]
+              },
+              {
+                "key": "TMK Division",
+                "values": [
+                  "1"
+                ]
+              },
+              {
+                "key": "TMK Parcel",
+                "values": [
+                  "106"
+                ]
+              },
+              {
+                "key": "TMKPLAT",
+                "values": [
+                  "2"
+                ]
+              },
+              {
+                "key": "TMK Section",
+                "values": [
+                  "3"
+                ]
+              },
+              {
+                "key": "TMK Zone",
+                "values": [
+                  "2"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "Interior and Exterior Features": {
+        "name": "Interior and Exterior Features",
+        "subCategories": [
+          {
+            "name": "Interior Features",
+            "fields": [
+              {
+                "key": "Baths Total",
+                "values": [
+                  "1.0"
+                ]
+              },
+              {
+                "key": "Beds Total",
+                "values": [
+                  "1.0"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "Agent": {
+        "name": "Agent",
+        "subCategories": [
+          {
+            "name": "Sale and Listing",
+            "fields": [
+              {
+                "key": "MLS Area Major",
+                "values": [
+                  "Metro"
+                ]
+              },
+              {
+                "key": "Status",
+                "values": [
+                  "Coming Soon"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "photos": [
+      "https://www.compass.com/m/0/a5febe3f-e279-417f-9adb-aad1db1e4736/origin.jpg",
+      "https://www.compass.com/m/0/d436c091-9eaa-4dc1-a813-214121570a00/origin.jpg",
+      "https://www.compass.com/m/0/6dc09972-6108-4e01-9eb5-f72dd65216e1/origin.jpg",
+      "https://www.compass.com/m/0/8064cadd-411e-4897-878e-cf8dcbffc684/origin.jpg",
+      "https://www.compass.com/m/0/e600f1e8-82a1-44ca-8d85-951ece89a551/origin.jpg",
+      "https://www.compass.com/m/0/2f5e9202-2ac2-46f7-af18-e8fc0dba4a65/origin.jpg",
+      "https://www.compass.com/m/0/e66687f1-cc8b-4516-92f2-b3d37051c373/origin.jpg",
+      "https://www.compass.com/m/0/4a430121-a191-49b2-bc31-9aec81b665e3/origin.jpg",
+      "https://www.compass.com/m/0/2229f3fd-bcbc-46e3-9856-f3cb29fb1eb8/origin.jpg",
+      "https://www.compass.com/m/0/51b0da16-3617-44ab-96f0-70014f4a4caa/origin.jpg",
+      "https://www.compass.com/m/0/44ae11a7-7964-4d2f-92a7-1f23df69c975/origin.jpg",
+      "https://www.compass.com/m/0/245e08de-e92e-4962-887e-f9782bd1a8d2/origin.jpg",
+      "https://www.compass.com/m/0/4ecdbfba-4dea-4460-b3fd-0279d7b526b1/origin.jpg",
+      "https://www.compass.com/m/0/60b2c166-362a-4415-82df-e3ce2d40454f/origin.jpg",
+      "https://www.compass.com/m/0/1068d98a-74f9-4fa0-9444-804405b97b45/origin.jpg",
+      "https://www.compass.com/m/0/4c2dc4ff-1cd3-40ac-920d-0bd8374308af/origin.jpg",
+      "https://www.compass.com/m/0/e326ed34-fe00-4394-ba62-feccd84b5666/origin.jpg",
+      "https://www.compass.com/m/0/5ff41c6c-0437-455b-bc96-0263c2ae59c2/origin.jpg",
+      "https://www.compass.com/m/0/2afa710b-8f9c-4785-91f1-038d355bb556/origin.jpg",
+      "https://www.compass.com/m/0/4bbab920-12f4-4275-bb8e-b65a7550cc49/origin.jpg",
+      "https://www.compass.com/m/0/6cf0588b-c15f-4f74-a37c-fb235c8da110/origin.jpg",
+      "https://www.compass.com/m/0/a4fcefed-6e2a-4917-9096-ecd14bc227f7/origin.jpg",
+      "https://www.compass.com/m/0/d8286c2e-b785-4219-bea7-b1ec4f2be490/origin.jpg",
+      "https://www.compass.com/m/0/b428bfda-8d96-44a0-83ac-1381bb3cb724/origin.jpg",
+      "https://www.compass.com/m/0/13c02117-4275-46f0-8163-41ca4084e2aa/origin.jpg",
+      "https://www.compass.com/m/0/3a92d351-45db-415e-91dd-cc3f4429b03b/origin.jpg",
+      "https://www.compass.com/m/0/f7a9073a-5431-4384-aab0-38567f2a55c4/origin.jpg",
+      "https://www.compass.com/m/0/11d46b70-4cea-43a5-b117-2fcaac2eb5dd/origin.jpg",
+      "https://www.compass.com/m/0/461f8863-d598-4786-8bf1-613506fce058/origin.jpg"
+    ],
+    "agents": [
+      {
+        "name": "Ben Fieman",
+        "license": "RB-23470",
+        "phone_primary": "8084007007",
+        "email": "ben.fieman@compass.com",
+        "photo_url": "https://www.compass.com/m3/9888323fe760e3c6f2294c6a604e0673337b060e/300x300.jpg",
+        "office_name": "Compass"
+      },
+      {
+        "name": "Henry Hume",
+        "license": "RS-87091",
+        "phone_primary": "3107750676",
+        "email": "henry.hume@compass.com",
+        "photo_url": "https://www.compass.com/m/13/2425ac15-f738-4063-859c-9c44bb3c98f2/origin.jpg",
+        "office_name": "Compass"
+      }
+    ]
+  },
+  {
+    "source_name": "compass",
+    "listing_id": "1914105126131739449",
+    "listing_link": "https://www.compass.com/homedetails/87-849-Farrington-Hwy-Unit-C-Waianae-HI-96792/VA5IE_pid/",
+    "listing_type": "For Sale",
+    "listing_status": "Coming Soon",
+    "address": "87-849 Farrington Highway, Unit C",
+    "coordinates": "21.406451,-158.178142",
+    "building_number": "87-849",
+    "street_name": "Farrington",
+    "unit_number": "C",
+    "city": "Waianae",
+    "state": "HI",
+    "zipcode": "96792",
+    "property_type": "Multi Family",
+    "sale_price": "$1,850,000",
+    "size": "2,554 sqft",
+    "last_updated": "2025-08-25",
+    "days_on_market": "-",
+    "listing_details": {
+      "Key Details": {
+        "name": "Key Details",
+        "subCategories": [
+          {
+            "name": "Key Details",
+            "fields": [
+              {
+                "key": "Neighbourhood",
+                "values": [
+                  "Maili",
+                  "Oahu",
+                  "Honolulu County",
+                  "Waianae"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "Summary": {
+        "name": "Summary",
+        "subCategories": [
+          {
+            "name": "Location and General Information",
+            "fields": [
+              {
+                "key": "City",
+                "values": [
+                  "Waianae"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Taxes and HOA Information",
+            "fields": [
+              {
+                "key": "Parcel Number",
+                "values": [
+                  "1-8-7-023-044-0000"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "Property": {
+        "name": "Property",
+        "subCategories": [
+          {
+            "name": "Lot Information",
+            "fields": [
+              {
+                "key": "SQFT Roofed Living",
+                "values": [
+                  "2554.0"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Property and Assessments",
+            "fields": [
+              {
+                "key": "Foreclosure",
+                "values": [
+                  "No"
+                ]
+              },
+              {
+                "key": "Fractional Ownership",
+                "values": [
+                  "No"
+                ]
+              },
+              {
+                "key": "TMK Area",
+                "values": [
+                  "1"
+                ]
+              },
+              {
+                "key": "TMK Division",
+                "values": [
+                  "1"
+                ]
+              },
+              {
+                "key": "TMK Parcel",
+                "values": [
+                  "44"
+                ]
+              },
+              {
+                "key": "TMKPLAT",
+                "values": [
+                  "23"
+                ]
+              },
+              {
+                "key": "TMK Section",
+                "values": [
+                  "7"
+                ]
+              },
+              {
+                "key": "TMK Zone",
+                "values": [
+                  "8"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "Interior and Exterior Features": {
+        "name": "Interior and Exterior Features",
+        "subCategories": [
+          {
+            "name": "Interior Features",
+            "fields": [
+              {
+                "key": "Baths Total",
+                "values": [
+                  "0.0"
+                ]
+              },
+              {
+                "key": "Beds Total",
+                "values": [
+                  "4.0"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "Agent": {
+        "name": "Agent",
+        "subCategories": [
+          {
+            "name": "Sale and Listing",
+            "fields": [
+              {
+                "key": "MLS Area Major",
+                "values": [
+                  "Leeward"
+                ]
+              },
+              {
+                "key": "Status",
+                "values": [
+                  "Coming Soon"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "photos": [
+      "https://www.compass.com/m/0/eedf6f77-2c8b-4bf7-8dc6-ad7fed08c30e/origin.jpg",
+      "https://www.compass.com/m/0/91e8be06-2fd8-4f79-94e5-931759d310f0/origin.jpg",
+      "https://www.compass.com/m/0/105b003f-9af1-438d-92b7-9e086e7102f5/origin.jpg",
+      "https://www.compass.com/m/0/973def80-821a-46ed-8718-6a3b7fccda5c/origin.jpg",
+      "https://www.compass.com/m/0/e3c6b475-6719-4e3e-aedc-c14a717d14e0/origin.jpg",
+      "https://www.compass.com/m/0/6ea6733f-9ab1-4a1d-b4e0-7b9564f9499b/origin.jpg",
+      "https://www.compass.com/m/0/7386499f-42cd-485a-b541-678faf9c4191/origin.jpg",
+      "https://www.compass.com/m/0/30b14ad7-2595-43a0-b399-53d25428a824/origin.jpg",
+      "https://www.compass.com/m/0/f76b75f0-438d-423c-a9a2-05487119d223/origin.jpg",
+      "https://www.compass.com/m/0/fc75fa30-96f8-4f8c-b176-e2a32bb3c77a/origin.jpg",
+      "https://www.compass.com/m/0/73dd7d42-e801-4d92-94a5-5633e62c0167/origin.jpg",
+      "https://www.compass.com/m/0/b3093edc-ccd7-4f01-87b6-6ee809fb7aca/origin.jpg",
+      "https://www.compass.com/m/0/0f295c73-9b27-44e8-b011-b36fc968496e/origin.jpg",
+      "https://www.compass.com/m/0/5817550a-c44a-41c1-89c8-b67b390722d7/origin.jpg",
+      "https://www.compass.com/m/0/b3b4878b-d0c4-4f06-a44a-9915242dfa66/origin.jpg",
+      "https://www.compass.com/m/0/ae2b6d99-5d26-4aa5-9206-e5e983009328/origin.jpg",
+      "https://www.compass.com/m/0/584852c3-7db6-4204-a55d-cea2006f8af1/origin.jpg",
+      "https://www.compass.com/m/0/90120a09-8185-495b-a5fa-91fb63f6c493/origin.jpg",
+      "https://www.compass.com/m/0/858918a5-31aa-4ecb-9936-9ffec18c0165/origin.jpg",
+      "https://www.compass.com/m/0/5c1af2af-bbb8-4d68-a2cb-bc62e1594d89/origin.jpg",
+      "https://www.compass.com/m/0/30776fd6-ddeb-4e4a-afe0-358ad2749889/origin.jpg",
+      "https://www.compass.com/m/0/e4929cc2-f076-41e0-889d-18a19dba5627/origin.jpg",
+      "https://www.compass.com/m/0/11d70547-0e6c-4da0-83cf-9d86b02648d5/origin.jpg",
+      "https://www.compass.com/m/0/0a325d12-9e47-4b9b-9811-7c810cdd7dda/origin.jpg",
+      "https://www.compass.com/m/0/ffb7f90d-057a-455e-986a-7fed76acb449/origin.jpg",
+      "https://www.compass.com/m/0/457c0e14-eb6b-46e5-9afd-da348e261700/origin.jpg"
+    ],
+    "agents": [
+      {
+        "name": "Ben Fieman",
+        "license": "RB-23470",
+        "phone_primary": "8084007007",
+        "email": "ben.fieman@compass.com",
+        "photo_url": "https://www.compass.com/m3/9888323fe760e3c6f2294c6a604e0673337b060e/300x300.jpg",
+        "office_name": "Compass"
+      },
+      {
+        "name": "Henry Hume",
+        "license": "RS-87091",
+        "phone_primary": "3107750676",
+        "email": "henry.hume@compass.com",
+        "photo_url": "https://www.compass.com/m/13/2425ac15-f738-4063-859c-9c44bb3c98f2/origin.jpg",
+        "office_name": "Compass"
+      }
+    ]
+  },
+  {
+    "source_name": "compass",
+    "listing_id": "1948819160437957273",
+    "listing_link": "https://www.compass.com/homedetails/583-Kamoku-St-Unit-1907-Honolulu-HI-96826/LYKEY_pid/",
+    "listing_type": "For Sale",
+    "listing_status": "Coming Soon",
+    "address": "583 Kamoku Street, Unit 1907",
+    "coordinates": "21.2858488,-157.8234843",
+    "building_number": "583",
+    "street_name": "Kamoku",
+    "unit_number": "1907",
+    "city": "Honolulu",
+    "state": "HI",
+    "zipcode": "96826",
+    "property_type": "Condo",
+    "sale_price": "$680,000",
+    "size": "1,413 sqft",
+    "last_updated": "2025-10-14",
+    "days_on_market": "-",
+    "listing_details": {
+      "Key Details": {
+        "name": "Key Details",
+        "subCategories": [
+          {
+            "name": "Key Details",
+            "fields": [
+              {
+                "key": "Neighbourhood",
+                "values": [
+                  "Kapiolani",
+                  "McCully-Moiliili",
+                  "Honolulu",
+                  "Oahu",
+                  "Honolulu County"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "Summary": {
+        "name": "Summary",
+        "subCategories": [
+          {
+            "name": "Location and General Information",
+            "fields": [
+              {
+                "key": "City",
+                "values": [
+                  "Honolulu"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Taxes and HOA Information",
+            "fields": [
+              {
+                "key": "Parcel Number",
+                "values": [
+                  "1-2-7-020-009-0063"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "Property": {
+        "name": "Property",
+        "subCategories": [
+          {
+            "name": "Lot Information",
+            "fields": [
+              {
+                "key": "Property Type",
+                "values": [
+                  "Condo/Townhouse"
+                ]
+              },
+              {
+                "key": "SQFT Roofed Living",
+                "values": [
+                  "1413.0"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Property and Assessments",
+            "fields": [
+              {
+                "key": "Foreclosure",
+                "values": [
+                  "No"
+                ]
+              },
+              {
+                "key": "Fractional Ownership",
+                "values": [
+                  "No"
+                ]
+              },
+              {
+                "key": "TMK Area",
+                "values": [
+                  "63"
+                ]
+              },
+              {
+                "key": "TMK Division",
+                "values": [
+                  "1"
+                ]
+              },
+              {
+                "key": "TMK Parcel",
+                "values": [
+                  "9"
+                ]
+              },
+              {
+                "key": "TMKPLAT",
+                "values": [
+                  "20"
+                ]
+              },
+              {
+                "key": "TMK Section",
+                "values": [
+                  "7"
+                ]
+              },
+              {
+                "key": "TMK Zone",
+                "values": [
+                  "2"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "Interior and Exterior Features": {
+        "name": "Interior and Exterior Features",
+        "subCategories": [
+          {
+            "name": "Interior Features",
+            "fields": [
+              {
+                "key": "Baths Total",
+                "values": [
+                  "2.0"
+                ]
+              },
+              {
+                "key": "Beds Total",
+                "values": [
+                  "2.0"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "Agent": {
+        "name": "Agent",
+        "subCategories": [
+          {
+            "name": "Sale and Listing",
+            "fields": [
+              {
+                "key": "MLS Area Major",
+                "values": [
+                  "Metro"
+                ]
+              },
+              {
+                "key": "Status",
+                "values": [
+                  "Coming Soon"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "photos": [
+      "https://www.compass.com/m/0/d8a5bdc8-fe2b-47f7-951d-a12f0f140b84/origin.jpg"
+    ],
+    "agents": [
+      {
+        "name": "Ben Fieman",
+        "license": "RB-23470",
+        "phone_primary": "8084007007",
+        "email": "ben.fieman@compass.com",
+        "photo_url": "https://www.compass.com/m3/9888323fe760e3c6f2294c6a604e0673337b060e/300x300.jpg",
+        "office_name": "Compass"
+      },
+      {
+        "name": "Henry Hume",
+        "license": "RS-87091",
+        "phone_primary": "3107750676",
+        "email": "henry.hume@compass.com",
+        "photo_url": "https://www.compass.com/m/13/2425ac15-f738-4063-859c-9c44bb3c98f2/origin.jpg",
+        "office_name": "Compass"
+      }
+    ]
+  },
+  {
+    "source_name": "compass",
+    "listing_id": "1996246931881479457",
+    "listing_link": "https://www.compass.com/homedetails/4509-Opana-Pl-Haiku-HI-96708/V7V2Q_pid/",
+    "listing_type": "For Sale",
+    "listing_status": "Coming Soon",
+    "address": "4509 Opana Place",
+    "coordinates": "20.9222607,-156.2808558",
+    "building_number": "4509",
+    "street_name": "Opana",
+    "city": "Haiku",
+    "state": "HI",
+    "zipcode": "96708",
+    "property_type": "Single Family",
+    "year_built": 1994,
+    "sale_price": "$1,895,000",
+    "size": "3,103 sqft",
+    "property_description": "Spacious two-story home set on 2 acres, move-in ready and offering rental income potential and flexible living while you build your dream detached cottage! (Permits approved and ready to go), with CPR potential. In close proximity to Ulumalu Road and Hana Highway, this private property sits at the end of a cul-de-sac and is surrounded by other two-acre parcels. The long, private driveway is lined with majestic old-growth royal palms, an irreplaceable and striking feature that creates a grand sense of arrival. The single-family residence features 3 bedrooms and 2 bathrooms upstairs, an open floor plan, and seamless indoor-outdoor living and dining spaces. The large kitchen includes bar seating, custom hardwood cabinetry, granite countertops, a gas range, generous storage. Downstairs offers additional living spaces. Recent upgrades include a brand-new roof, stucco exterior, and plaster interior. Enjoy expansive views of the entire property from every window, porch, and lanai. Conveniently located 10 to 15 minutes from Paia Town, Ho‘okipa, and world-class surfing, windsurfing, and kiting beaches, and less than 10 minutes from Haiku Town Center, restaurants, shops, gyms and more. This private paradise is connected to county water and electricity and features mature fruit trees with endless possibilities. No HOA fees. Schedule your private showing today.",
+    "last_updated": "2025-12-20",
+    "days_on_market": "-",
+    "listing_details": {
+      "Key Details": {
+        "name": "Key Details",
+        "subCategories": [
+          {
+            "name": "Key Details",
+            "fields": [
+              {
+                "key": "Neighbourhood",
+                "values": [
+                  "Ulumalu",
+                  "Maui",
+                  "North Shore Maui",
+                  "Maui County",
+                  "Haiku"
+                ]
+              },
+              {
+                "key": "Land Tenure",
+                "values": [
+                  "FS - Fee Simple"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "Summary": {
+        "name": "Summary",
+        "subCategories": [
+          {
+            "name": "Location and General Information",
+            "fields": [
+              {
+                "key": "City",
+                "values": [
+                  "Haiku"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Taxes and HOA Information",
+            "fields": [
+              {
+                "key": "Parcel Number",
+                "values": [
+                  "2-2-8-2-201"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "Property": {
+        "name": "Property",
+        "subCategories": [
+          {
+            "name": "Lot Information",
+            "fields": [
+              {
+                "key": "Property Type",
+                "values": [
+                  "Single Family"
+                ]
+              },
+              {
+                "key": "SQFT Roofed Living",
+                "values": [
+                  "3103.0"
+                ]
+              },
+              {
+                "key": "Lot Size Area",
+                "values": [
+                  "87120.0"
+                ]
+              },
+              {
+                "key": "Year Built",
+                "values": [
+                  "1994"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Property and Assessments",
+            "fields": [
+              {
+                "key": "Foreclosure",
+                "values": [
+                  "No"
+                ]
+              },
+              {
+                "key": "Fractional Ownership",
+                "values": [
+                  "No"
+                ]
+              },
+              {
+                "key": "TMK Area",
+                "values": [
+                  "87120"
+                ]
+              },
+              {
+                "key": "TMK Division",
+                "values": [
+                  "2"
+                ]
+              },
+              {
+                "key": "TMK Parcel",
+                "values": [
+                  "201"
+                ]
+              },
+              {
+                "key": "TMKPLAT",
+                "values": [
+                  "2"
+                ]
+              },
+              {
+                "key": "TMK Section",
+                "values": [
+                  "8"
+                ]
+              },
+              {
+                "key": "TMK Zone",
+                "values": [
+                  "2"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "Interior and Exterior Features": {
+        "name": "Interior and Exterior Features",
+        "subCategories": [
+          {
+            "name": "Interior Features",
+            "fields": [
+              {
+                "key": "Baths Total",
+                "values": [
+                  "2.0"
+                ]
+              },
+              {
+                "key": "Beds Total",
+                "values": [
+                  "3.0"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "Agent": {
+        "name": "Agent",
+        "subCategories": [
+          {
+            "name": "Sale and Listing",
+            "fields": [
+              {
+                "key": "MLS Area Major",
+                "values": [
+                  "Maui"
+                ]
+              },
+              {
+                "key": "Status",
+                "values": [
+                  "Coming Soon"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "photos": [
+      "https://www.compass.com/m/0/cbf035c5-7a59-4f7f-826a-6778b173becb/origin.jpg",
+      "https://www.compass.com/m/0/ca904900-9953-471c-a2e5-2fe0dba2f6fb/origin.jpg",
+      "https://www.compass.com/m/0/cf68f157-23b9-448f-9f9e-ad2b31f4406b/origin.jpg",
+      "https://www.compass.com/m/0/eaa5b21e-038b-4800-b432-bfc7d27c72a2/origin.jpg",
+      "https://www.compass.com/m/0/ec6a350e-1f9d-4371-9892-bf34de8c2dc7/origin.jpg",
+      "https://www.compass.com/m/0/9f6eabc6-4872-44f4-aa64-cc1555fa1bb6/origin.jpg",
+      "https://www.compass.com/m/0/e151964c-0738-4ef2-84a0-201e1f3acb3c/origin.jpg"
+    ],
+    "agents": [
+      {
+        "name": "Christopher Barca",
+        "license": "RB-20936",
+        "phone_primary": "8082691053",
+        "email": "christopher.barca@compass.com",
+        "photo_url": "https://www.compass.com/m3/0b76bfd08dcf7c072d4d5db23d9911f4c77d936a/300x300.jpg",
+        "office_name": "Compass"
+      }
+    ]
+  },
+  {
+    "source_name": "compass",
+    "listing_id": "1998861567556086257",
+    "listing_link": "https://www.compass.com/homedetails/Ukiuki-Loop-Lahaina-HI-96761/22FZJA_pid/",
+    "listing_type": "For Sale",
+    "listing_status": "Coming Soon",
+    "address": "Uki'uki Loop",
+    "street_name": "Uki'uki",
+    "city": "Lahaina",
+    "state": "HI",
+    "zipcode": "96761",
+    "property_type": "Land",
+    "sale_price": "$1,300,000",
+    "property_description": "265 Uki Uki Loop at Mahana Estates is a premier 0.744-acre parcel that captures the very best of Kapalua’s breathtaking natural beauty and elevated lifestyle. Gently sloping and backing directly onto the 6th hole of the world-famous Plantation Course, this homesite commands unobstructed ocean views across Kapalua Bay to Molokini, while the West Maui Mountains provide a dramatic, verdant backdrop. Experience radiant sunrises over the mountains and unforgettable sunsets over the Pacific. This shovel-ready lot includes completed building plans for a 3,716-square-foot custom estate plus 1,203 square feet of covered lanai space, thoughtfully designed for seamless indoor-outdoor living. The layout features 4 bedrooms, 4.5 bathrooms, a dedicated office, and a separate guest wing with two bedrooms, two bathrooms, and a lock-off option. The outdoor design includes a 27.6' x 18' swimming pool, a separate elevated spa, and a dedicated Baja shelf for sun lounging. A 538-square-foot garage completes the plan. Mahana Estates is a gated, low-density community offering private water, underground utilities, completed infrastructure, and protective height restrictions to preserve view corridors. The lot's gentle topography supports efficient construction and optimal home placement. Just minutes from the world-class amenities of Kapalua Resort, including the Spa Montage, Kapalua Bay and Plantation Golf Courses, scenic hiking trails, and the golden sands of Flemings Beach, Lot 15 offers a rare opportunity to create a legacy estate in one of Maui’s most prestigious resort communities.\n\n",
+    "last_updated": "2025-12-20",
+    "days_on_market": "-",
+    "listing_details": {
+      "Key Details": {
+        "name": "Key Details",
+        "subCategories": [
+          {
+            "name": "Key Details",
+            "fields": [
+              {
+                "key": "View",
+                "values": [
+                  "Ocean"
+                ]
+              },
+              {
+                "key": "Neighbourhood",
+                "values": [
+                  "Maui",
+                  "Maui County",
+                  "Lahaina"
+                ]
+              },
+              {
+                "key": "Land Tenure",
+                "values": [
+                  "FS - Fee Simple"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "Summary": {
+        "name": "Summary",
+        "subCategories": [
+          {
+            "name": "Location and General Information",
+            "fields": [
+              {
+                "key": "City",
+                "values": [
+                  "Lahaina"
+                ]
+              },
+              {
+                "key": "Location",
+                "values": [
+                  "Residential"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Taxes and HOA Information",
+            "fields": [
+              {
+                "key": "Parcel Number",
+                "values": [
+                  "2-4-2-10-15-0000"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "Property": {
+        "name": "Property",
+        "subCategories": [
+          {
+            "name": "Lot Information",
+            "fields": [
+              {
+                "key": "Property Frontage",
+                "values": [
+                  "Golf Course"
+                ]
+              },
+              {
+                "key": "Property Type",
+                "values": [
+                  "Land"
+                ]
+              },
+              {
+                "key": "Lot Size Area",
+                "values": [
+                  "32409.0"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Property and Assessments",
+            "fields": [
+              {
+                "key": "Foreclosure",
+                "values": [
+                  "No"
+                ]
+              },
+              {
+                "key": "Fractional Ownership",
+                "values": [
+                  "No"
+                ]
+              },
+              {
+                "key": "TMK Area",
+                "values": [
+                  "2"
+                ]
+              },
+              {
+                "key": "TMK Condo Property Regime Number",
+                "values": [
+                  "0"
+                ]
+              },
+              {
+                "key": "TMK Division",
+                "values": [
+                  "2"
+                ]
+              },
+              {
+                "key": "TMK Parcel",
+                "values": [
+                  "15"
+                ]
+              },
+              {
+                "key": "TMKPLAT",
+                "values": [
+                  "10"
+                ]
+              },
+              {
+                "key": "TMK Section",
+                "values": [
+                  "2"
+                ]
+              },
+              {
+                "key": "TMK Zone",
+                "values": [
+                  "4"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Utilities",
+            "fields": [
+              {
+                "key": "Utilities",
+                "values": [
+                  "Underground Electricity"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "Interior and Exterior Features": {
+        "name": "Interior and Exterior Features",
+        "subCategories": [
+          {
+            "name": "Interior Features",
+            "fields": [
+              {
+                "key": "Baths Total",
+                "values": [
+                  "0.0"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "Agent": {
+        "name": "Agent",
+        "subCategories": [
+          {
+            "name": "Sale and Listing",
+            "fields": [
+              {
+                "key": "MLS Area Major",
+                "values": [
+                  "Maui"
+                ]
+              },
+              {
+                "key": "Status",
+                "values": [
+                  "Coming Soon"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "photos": [
+      "https://www.compass.com/m/0/e9af5765-7197-4a6b-aa10-e8a5c42b1e02/origin.jpg",
+      "https://www.compass.com/m/0/20f402a4-f75c-4996-a51b-a9376fe585d1/origin.jpg",
+      "https://www.compass.com/m/0/08e9d020-5101-4d20-83e6-67569ae7f509/origin.jpg",
+      "https://www.compass.com/m/0/8beacdc1-e70e-460b-aa5d-2e0a4303d9ac/origin.jpg",
+      "https://www.compass.com/m/0/7502292a-6425-4175-8a1b-7ba25ebb234c/origin.jpg",
+      "https://www.compass.com/m/0/1ce77862-0cd0-4fd6-b407-b8663dcbbc90/origin.jpg",
+      "https://www.compass.com/m/0/69116174-2594-41d4-aa58-95020065d900/origin.jpg",
+      "https://www.compass.com/m/0/5408cffb-fed7-48a9-a60f-460c143085c4/origin.jpg",
+      "https://www.compass.com/m/0/43768880-b0cc-410c-83c9-df3dd912a60d/origin.jpg",
+      "https://www.compass.com/m/0/cd5afcb6-124f-4491-afe3-ca8f3fe09bae/origin.jpg",
+      "https://www.compass.com/m/0/029a72af-c6a9-4e7d-bcf5-87aa41e64397/origin.jpg",
+      "https://www.compass.com/m/0/16e5d820-2ebe-4826-9e37-eeced82334cf/origin.jpg",
+      "https://www.compass.com/m/0/2a115649-6a3e-414e-9318-f6c4c5efe284/origin.jpg",
+      "https://www.compass.com/m/0/80eff3b7-259c-4f32-8d33-7e615c00062b/origin.jpg",
+      "https://www.compass.com/m/0/5dce9318-6c05-43f0-9459-4af891f1558e/origin.jpg",
+      "https://www.compass.com/m/0/aed5d774-a615-4b3c-a002-44fb17bfef23/origin.jpg",
+      "https://www.compass.com/m/0/95db26ff-e309-4533-b133-ecfb4dc11e7a/origin.jpg",
+      "https://www.compass.com/m/0/7947c2c3-f02d-4577-aca0-b73ac0d5dfda/origin.jpg",
+      "https://www.compass.com/m/0/d2fbe113-fe34-45b9-b958-10d501d40825/origin.jpg",
+      "https://www.compass.com/m/0/cf6325dc-ac2a-4625-b202-74eb7e197eec/origin.jpg",
+      "https://www.compass.com/m/0/7f483506-3d2f-4ef0-ad39-273ef8835c68/origin.jpg",
+      "https://www.compass.com/m/0/dafabe45-0832-4f99-8014-a56dd8c5a813/origin.jpg",
+      "https://www.compass.com/m/0/889ab198-2f13-4671-9275-bfe8ce0ca869/origin.jpg",
+      "https://www.compass.com/m/0/34511d14-6578-4ee2-b859-c55ad9d32b63/origin.jpg",
+      "https://www.compass.com/m/0/9f189f44-568c-4b6f-8b14-1235512bac2f/origin.jpg",
+      "https://www.compass.com/m/0/75c15077-c8f5-4acb-84e4-470162f1f4b1/origin.jpg",
+      "https://www.compass.com/m/0/b3d2e78a-a5d8-475c-9b40-bbdaa75378b0/origin.jpg",
+      "https://www.compass.com/m/0/188412cd-eb91-4b54-9fec-fbd12bc5d8cd/origin.jpg",
+      "https://www.compass.com/m/0/7217d361-aab9-47ef-99c7-a187859ff7ad/origin.jpg",
+      "https://www.compass.com/m/0/3e315480-750c-45c0-9061-31659a302ae5/origin.jpg",
+      "https://www.compass.com/m/0/17f631c2-a86e-455a-9076-350dde1daee2/origin.jpg",
+      "https://www.compass.com/m/0/f30954e5-c6a2-487d-8f3a-db596e8b5858/origin.jpg",
+      "https://www.compass.com/m/0/591260b7-dec0-4296-bbe6-65235714afab/origin.jpg",
+      "https://www.compass.com/m/0/9d4cb40e-07e5-41f4-8d51-acfc4e0ea8aa/origin.jpg",
+      "https://www.compass.com/m/0/d3dd78b5-e1a2-4278-a81d-19ce3bbab053/origin.jpg"
+    ],
+    "agents": [
+      {
+        "name": "Chelsea Dimin",
+        "license": "RB-22400",
+        "phone_primary": "8082507633",
+        "email": "chelsea.dimin@compass.com",
+        "photo_url": "https://www.compass.com/m/13/d1da1919-5b33-48e1-b1df-b18687990dac/origin.jpg",
+        "office_name": "Compass"
+      }
+    ]
+  },
+  {
+    "source_name": "compass",
+    "listing_id": "1999961549642745313",
+    "listing_link": "https://www.compass.com/homedetails/249-Kap-li-St-Unit-701A-Honolulu-HI-96815/VNT5B_pid/",
+    "listing_type": "For Sale",
+    "listing_status": "Active",
+    "address": "249 Kapīli Street, Unit 701A",
+    "coordinates": "21.2769551,-157.8219323",
+    "building_number": "249",
+    "street_name": "Kapīli",
+    "unit_number": "701A",
+    "city": "Honolulu",
+    "state": "HI",
+    "zipcode": "96815",
+    "property_type": "Condo",
+    "year_built": 1974,
+    "sale_price": "$241,700",
+    "size": "454 sqft",
+    "property_description": "Lots of potential with this rare top floor 1 Bedroom/2 Bath \"value add\" opportunity at Pacific Islander. Property is being rented as two separate studios - each with their own entrance and full bath. Unit 701A has an updated kitchenette but both units have a lot of upside potential - tenants are paying below market rents - $1100/month each. Located in the heart of Waikiki, Pacific Islander is a pet friendly building and is just a short distance from Waikiki Beach as well as numerous shops and tasty restaurants. The building has community laundry and parking stalls are available for rent by waitlist. Bike/Moped/Motorcycle parking is also available. Maintenance Fee includes Electricity, Water/Sewer, Hot Water & Basic Cable and the building also has secured \"key fob\" entrance. Great opportunity rent out both units or live in one and earn rental income on the other.",
+    "last_updated": "2025-12-20",
+    "days_on_market": "0",
+    "listing_details": {
+      "Key Details": {
+        "name": "Key Details",
+        "subCategories": [
+          {
+            "name": "Key Details",
+            "fields": [
+              {
+                "key": "Architectural Style",
+                "values": [
+                  "High-Rise 7+ Stories"
+                ]
+              },
+              {
+                "key": "View",
+                "values": [
+                  "City"
+                ]
+              },
+              {
+                "key": "Zoning",
+                "values": [
+                  "X2 - Apartment Precinct"
+                ]
+              },
+              {
+                "key": "Neighbourhood",
+                "values": [
+                  "WAIKIKI"
+                ]
+              },
+              {
+                "key": "Flood Zone",
+                "values": [
+                  "Zone AE"
+                ]
+              },
+              {
+                "key": "Stories/Levels",
+                "values": [
+                  "4-7"
+                ]
+              },
+              {
+                "key": "Land Tenure",
+                "values": [
+                  "FS - Fee Simple"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "Summary": {
+        "name": "Summary",
+        "subCategories": [
+          {
+            "name": "Location and General Information",
+            "fields": [
+              {
+                "key": "City",
+                "values": [
+                  "Honolulu"
+                ]
+              },
+              {
+                "key": "County Or Parish",
+                "values": [
+                  "Oahu"
+                ]
+              },
+              {
+                "key": "State Or Province",
+                "values": [
+                  "HI"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Taxes and HOA Information",
+            "fields": [
+              {
+                "key": "Association Fee Includes",
+                "values": [
+                  "Electricity",
+                  "Hot Water",
+                  "Other Common Expenses",
+                  "Sewer",
+                  "Water"
+                ]
+              },
+              {
+                "key": "Association Fee Total",
+                "values": [
+                  "$1,461"
+                ]
+              },
+              {
+                "key": "Tax Amount",
+                "values": [
+                  "$82.08"
+                ]
+              },
+              {
+                "key": "Tax Assessed Value",
+                "values": [
+                  "$281,400.00"
+                ]
+              },
+              {
+                "key": "Tax Assessed Value Improvements",
+                "values": [
+                  "$180,600.00"
+                ]
+              },
+              {
+                "key": "Tax Assessed Value Land",
+                "values": [
+                  "$100,800.00"
+                ]
+              },
+              {
+                "key": "Tax Excemption Owner Occupancy",
+                "values": [
+                  "0"
+                ]
+              },
+              {
+                "key": "Tax Year",
+                "values": [
+                  "2025"
+                ]
+              },
+              {
+                "key": "Parcel Number",
+                "values": [
+                  "1-2-6-024-041-0044"
+                ]
+              },
+              {
+                "key": "HOA YN",
+                "values": [
+                  "Yes"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Parking",
+            "fields": [
+              {
+                "key": "Parking Additional",
+                "values": [
+                  "0"
+                ]
+              },
+              {
+                "key": "Parking Features",
+                "values": [
+                  "None",
+                  "Street"
+                ]
+              },
+              {
+                "key": "Parking Total",
+                "values": [
+                  "0"
+                ]
+              },
+              {
+                "key": "Condo Parking Unit",
+                "values": [
+                  "0"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "Property": {
+        "name": "Property",
+        "subCategories": [
+          {
+            "name": "Lot Information",
+            "fields": [
+              {
+                "key": "Building Name",
+                "values": [
+                  "Pacific Islander"
+                ]
+              },
+              {
+                "key": "Floor Number",
+                "values": [
+                  "7"
+                ]
+              },
+              {
+                "key": "Property Type",
+                "values": [
+                  "Condo/Townhouse"
+                ]
+              },
+              {
+                "key": "Open Other Spaces Total",
+                "values": [
+                  "79.0"
+                ]
+              },
+              {
+                "key": "SQFT Roofed Living",
+                "values": [
+                  "454.0"
+                ]
+              },
+              {
+                "key": "Sqft Total",
+                "values": [
+                  "533.0"
+                ]
+              },
+              {
+                "key": "Land Recorded",
+                "values": [
+                  "Land Court"
+                ]
+              },
+              {
+                "key": "Lot Size Area",
+                "values": [
+                  "6708.0"
+                ]
+              },
+              {
+                "key": "Year Built",
+                "values": [
+                  "1974"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Property and Assessments",
+            "fields": [
+              {
+                "key": "Appliances",
+                "values": [
+                  "Cable TV",
+                  "Refrigerator"
+                ]
+              },
+              {
+                "key": "Photo Count",
+                "values": [
+                  "8"
+                ]
+              },
+              {
+                "key": "New Development Construction",
+                "values": [
+                  "No"
+                ]
+              },
+              {
+                "key": "Property Condition",
+                "values": [
+                  "Average",
+                  "Fair"
+                ]
+              },
+              {
+                "key": "Special Listing Conditions",
+                "values": [
+                  "None"
+                ]
+              },
+              {
+                "key": "Disclosures",
+                "values": [
+                  "1031 Exchange",
+                  "Pets Allowed (Verify)",
+                  "Property Disclosure Stmt"
+                ]
+              },
+              {
+                "key": "Foreclosure",
+                "values": [
+                  "No"
+                ]
+              },
+              {
+                "key": "Fractional Ownership",
+                "values": [
+                  "No"
+                ]
+              },
+              {
+                "key": "TMK Area",
+                "values": [
+                  "126"
+                ]
+              },
+              {
+                "key": "TMK Condo Property Regime Number",
+                "values": [
+                  "44"
+                ]
+              },
+              {
+                "key": "TMK Division",
+                "values": [
+                  "1"
+                ]
+              },
+              {
+                "key": "TMK Parcel",
+                "values": [
+                  "41"
+                ]
+              },
+              {
+                "key": "TMKPLAT",
+                "values": [
+                  "24"
+                ]
+              },
+              {
+                "key": "TMK Section",
+                "values": [
+                  "6"
+                ]
+              },
+              {
+                "key": "TMK Zone",
+                "values": [
+                  "2"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "Interior and Exterior Features": {
+        "name": "Interior and Exterior Features",
+        "subCategories": [
+          {
+            "name": "Exterior Features",
+            "fields": [
+              {
+                "key": "Amenities",
+                "values": [
+                  "Community Laundry"
+                ]
+              },
+              {
+                "key": "Construction Materials",
+                "values": [
+                  "Concrete"
+                ]
+              },
+              {
+                "key": "Elevators Number Of",
+                "values": [
+                  "1"
+                ]
+              },
+              {
+                "key": "Flooring",
+                "values": [
+                  "Vinyl",
+                  "W/W Carpet"
+                ]
+              },
+              {
+                "key": "Security Features",
+                "values": [
+                  "Key"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Interior Features",
+            "fields": [
+              {
+                "key": "Baths Full",
+                "values": [
+                  "2"
+                ]
+              },
+              {
+                "key": "Baths Half",
+                "values": [
+                  "0"
+                ]
+              },
+              {
+                "key": "Baths Total",
+                "values": [
+                  "2.0"
+                ]
+              },
+              {
+                "key": "Beds Total",
+                "values": [
+                  "1.0"
+                ]
+              },
+              {
+                "key": "Furnished",
+                "values": [
+                  "None"
+                ]
+              },
+              {
+                "key": "Room Count",
+                "values": [
+                  "0"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "Multi Family": {
+        "name": "Multi Family",
+        "subCategories": [
+          {
+            "name": "Multi-Family Information",
+            "fields": [
+              {
+                "key": "Unit Features",
+                "values": [
+                  "Bedroom on 1st Level",
+                  "Corner/End",
+                  "Full Bath on 1st Floor",
+                  "Odd# Unit"
+                ]
+              },
+              {
+                "key": "Unit Number",
+                "values": [
+                  "701A"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Income & Expenses",
+            "fields": [
+              {
+                "key": "Maintenance Fee Amount",
+                "values": [
+                  "$1,461.14"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "Agent": {
+        "name": "Agent",
+        "subCategories": [
+          {
+            "name": "Sale and Listing",
+            "fields": [
+              {
+                "key": "DOM",
+                "values": [
+                  "0"
+                ]
+              },
+              {
+                "key": "Immoviewer",
+                "values": [
+                  "No"
+                ]
+              },
+              {
+                "key": "Listing Service",
+                "values": [
+                  "Full Service"
+                ]
+              },
+              {
+                "key": "Management Company Name",
+                "values": [
+                  "Hawaiiana"
+                ]
+              },
+              {
+                "key": "Management Company Phone",
+                "values": [
+                  "808 593-9100"
+                ]
+              },
+              {
+                "key": "MLS",
+                "values": [
+                  "HI Central"
+                ]
+              },
+              {
+                "key": "MLS Area Major",
+                "values": [
+                  "Metro"
+                ]
+              },
+              {
+                "key": "Status",
+                "values": [
+                  "Active"
+                ]
+              },
+              {
+                "key": "Public Remarks",
+                "values": [
+                  "Lots of potential with this rare top floor 1 Bedroom/2 Bath \"value add\" opportunity at Pacific Islander. Property is being rented as two separate studios - each with their own entrance and full bath. Unit 701A has an updated kitchenette but both units have a lot of upside potential - tenants are paying below market rents - $1100/month each. Located in the heart of Waikiki, Pacific Islander is a pet friendly building and is just a short distance from Waikiki Beach as well as numerous shops and tasty restaurants. The building has community laundry and parking stalls are available for rent by waitlist. Bike/Moped/Motorcycle parking is also available. Maintenance Fee includes Electricity, Water/Sewer, Hot Water & Basic Cable and the building also has secured \"key fob\" entrance. Great opportunity rent out both units or live in one and earn rental income on the other."
+                ]
+              },
+              {
+                "key": "Possession",
+                "values": [
+                  "At Closing"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Showing and Remarks",
+            "fields": [
+              {
+                "key": "Showing Instructions",
+                "values": [
+                  "Two Day Notice Reqd",
+                  "Call Listor",
+                  "Listor Must Be Present"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "Rental": {
+        "name": "Rental",
+        "subCategories": [
+          {
+            "name": "Rent Information",
+            "fields": [
+              {
+                "key": "Occupant Type",
+                "values": [
+                  "Tenant"
+                ]
+              },
+              {
+                "key": "Total Actual Rent",
+                "values": [
+                  "$2,000.00"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "photos": [
+      "https://www.compass.com/m/fbe333d9dc95eced6f286ed5d0ae799fcdd002a3_img_0_e2a61/origin.jpg",
+      "https://www.compass.com/m/fbe333d9dc95eced6f286ed5d0ae799fcdd002a3_img_1_10552/origin.jpg",
+      "https://www.compass.com/m/fbe333d9dc95eced6f286ed5d0ae799fcdd002a3_img_2_fbdbd/origin.jpg",
+      "https://www.compass.com/m/fbe333d9dc95eced6f286ed5d0ae799fcdd002a3_img_3_96d66/origin.jpg",
+      "https://www.compass.com/m/fbe333d9dc95eced6f286ed5d0ae799fcdd002a3_img_4_9b44b/origin.jpg",
+      "https://www.compass.com/m/fbe333d9dc95eced6f286ed5d0ae799fcdd002a3_img_5_2e857/origin.jpg",
+      "https://www.compass.com/m/fbe333d9dc95eced6f286ed5d0ae799fcdd002a3_img_6_711b6/origin.jpg",
+      "https://www.compass.com/m/fbe333d9dc95eced6f286ed5d0ae799fcdd002a3_img_7_9fe70/origin.jpg"
+    ],
+    "agents": [
+      {
+        "name": "Bryan J Vukelich",
+        "license": "RB-23916",
+        "phone_primary": "(808) 354-5772",
+        "email": "bryan@halepunahawaii.com",
+        "office_name": "Halepuna Real Estate Hawaii"
+      }
+    ]
+  },
+  {
+    "source_name": "compass",
+    "listing_id": "1999819284203019297",
+    "listing_link": "https://www.compass.com/homedetails/1212-Punahou-St-Unit-2903-Honolulu-HI-96826/VOATQ_pid/",
+    "listing_type": "For Sale",
+    "listing_status": "Active",
+    "address": "1212 Punahou Street, Unit 2903",
+    "coordinates": "21.29966,-157.835648",
+    "building_number": "1212",
+    "street_name": "Punahou",
+    "unit_number": "2903",
+    "city": "Honolulu",
+    "state": "HI",
+    "zipcode": "96826",
+    "property_type": "Condo",
+    "year_built": 1974,
+    "sale_price": "$518,000",
+    "size": "981 sqft",
+    "property_description": "High floor with fabulous views of Diamond Head, city, ocean. Overlooks Central Union Church. Building has recently completed its plumbing project and SELLER HAS PAID OFF THE ASSESSMENT! Brand new range and range hood. Drapes just 2 years old. Plumbing and electrical fixtures inspected and cleared.  2 new toilets. Natural light brightens the unit. Lot of storage in hallway. Central location to schools, hospital, churches, shopping--all the benefits of living in town! Lots of guest parking and nice amenities, including a heated pool, meeting room, BBQ area, 24-hour security, bike rack, surfboard storage. New pool/pool deck/pool furnishings. Meeting/party room newly refurbished  Maintenance fee is for 2026 (increase of 4%). VA-approved. Sorry, not pet-friendly. If your buyer is looking for a good location/convenience, space, storage, 24/7 security patrol, useful amenities, call to see this 2/2!",
+    "last_updated": "2025-12-20",
+    "days_on_market": "0",
+    "listing_details": {
+      "Key Details": {
+        "name": "Key Details",
+        "subCategories": [
+          {
+            "name": "Key Details",
+            "fields": [
+              {
+                "key": "Architectural Style",
+                "values": [
+                  "High-Rise 7+ Stories"
+                ]
+              },
+              {
+                "key": "View",
+                "values": [
+                  "City",
+                  "Coastline",
+                  "Diamond Head",
+                  "Mountain",
+                  "Ocean",
+                  "Sunrise"
+                ]
+              },
+              {
+                "key": "Zoning",
+                "values": [
+                  "13 - A-3 High Density Apartment"
+                ]
+              },
+              {
+                "key": "Neighbourhood",
+                "values": [
+                  "PUNAHOU"
+                ]
+              },
+              {
+                "key": "Flood Zone",
+                "values": [
+                  "Zone X"
+                ]
+              },
+              {
+                "key": "Stories/Levels",
+                "values": [
+                  "21+"
+                ]
+              },
+              {
+                "key": "Land Tenure",
+                "values": [
+                  "FS - Fee Simple"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "Summary": {
+        "name": "Summary",
+        "subCategories": [
+          {
+            "name": "Location and General Information",
+            "fields": [
+              {
+                "key": "City",
+                "values": [
+                  "Honolulu"
+                ]
+              },
+              {
+                "key": "County Or Parish",
+                "values": [
+                  "Oahu"
+                ]
+              },
+              {
+                "key": "State Or Province",
+                "values": [
+                  "HI"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Taxes and HOA Information",
+            "fields": [
+              {
+                "key": "Association Fee 2 Includes",
+                "values": [
+                  "None"
+                ]
+              },
+              {
+                "key": "Association Fee Includes",
+                "values": [
+                  "Cable TV",
+                  "Hot Water",
+                  "Internet Service",
+                  "Other Common Expenses",
+                  "Sewer",
+                  "Water"
+                ]
+              },
+              {
+                "key": "Association Fee Total",
+                "values": [
+                  "$1,164"
+                ]
+              },
+              {
+                "key": "Tax Amount",
+                "values": [
+                  "$114.00"
+                ]
+              },
+              {
+                "key": "Tax Assessed Value",
+                "values": [
+                  "$550,900.00"
+                ]
+              },
+              {
+                "key": "Tax Assessed Value Improvements",
+                "values": [
+                  "$478,400.00"
+                ]
+              },
+              {
+                "key": "Tax Assessed Value Land",
+                "values": [
+                  "$72,500.00"
+                ]
+              },
+              {
+                "key": "Tax Excemption Owner Occupancy",
+                "values": [
+                  "160000"
+                ]
+              },
+              {
+                "key": "Tax Year",
+                "values": [
+                  "2025"
+                ]
+              },
+              {
+                "key": "Parcel Number",
+                "values": [
+                  "1-2-4-007-002-0179"
+                ]
+              },
+              {
+                "key": "HOA YN",
+                "values": [
+                  "Yes"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "School Information",
+            "fields": [
+              {
+                "key": "Elementary School",
+                "values": [
+                  "Lincoln"
+                ]
+              },
+              {
+                "key": "High School",
+                "values": [
+                  "Roosevelt"
+                ]
+              },
+              {
+                "key": "Middle Or Junior School",
+                "values": [
+                  "Stevenson"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Parking",
+            "fields": [
+              {
+                "key": "Parking Additional",
+                "values": [
+                  "0"
+                ]
+              },
+              {
+                "key": "Parking Features",
+                "values": [
+                  "Assigned",
+                  "Covered - 1",
+                  "Guest",
+                  "Open - 3+",
+                  "Other",
+                  "Secured Entry"
+                ]
+              },
+              {
+                "key": "Parking Total",
+                "values": [
+                  "1"
+                ]
+              },
+              {
+                "key": "Condo Parking Unit",
+                "values": [
+                  "203"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "Property": {
+        "name": "Property",
+        "subCategories": [
+          {
+            "name": "Lot Information",
+            "fields": [
+              {
+                "key": "Building Name",
+                "values": [
+                  "Banyan Tree Plaza"
+                ]
+              },
+              {
+                "key": "Floor Number",
+                "values": [
+                  "29"
+                ]
+              },
+              {
+                "key": "Property Type",
+                "values": [
+                  "Condo/Townhouse"
+                ]
+              },
+              {
+                "key": "Open Other Spaces Total",
+                "values": [
+                  "78.0"
+                ]
+              },
+              {
+                "key": "SQFT Roofed Living",
+                "values": [
+                  "981.0"
+                ]
+              },
+              {
+                "key": "Sqft Total",
+                "values": [
+                  "1059.0"
+                ]
+              },
+              {
+                "key": "Land Recorded",
+                "values": [
+                  "Land Court"
+                ]
+              },
+              {
+                "key": "Lot Size Area",
+                "values": [
+                  "92478.0"
+                ]
+              },
+              {
+                "key": "Year Built",
+                "values": [
+                  "1974"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Property and Assessments",
+            "fields": [
+              {
+                "key": "Appliances",
+                "values": [
+                  "Auto Garage Door Opener",
+                  "Ceiling Fan",
+                  "Chandelier",
+                  "Disposal",
+                  "Drapes",
+                  "Dryer",
+                  "Range Hood",
+                  "Range/Oven",
+                  "Refrigerator",
+                  "Smoke Detector",
+                  "Washer"
+                ]
+              },
+              {
+                "key": "Photo Count",
+                "values": [
+                  "20"
+                ]
+              },
+              {
+                "key": "New Development Construction",
+                "values": [
+                  "No"
+                ]
+              },
+              {
+                "key": "Property Condition",
+                "values": [
+                  "Above Average",
+                  "Average"
+                ]
+              },
+              {
+                "key": "Special Listing Conditions",
+                "values": [
+                  "None"
+                ]
+              },
+              {
+                "key": "Disclosures",
+                "values": [
+                  "Property Disclosure Stmt"
+                ]
+              },
+              {
+                "key": "Foreclosure",
+                "values": [
+                  "No"
+                ]
+              },
+              {
+                "key": "Fractional Ownership",
+                "values": [
+                  "No"
+                ]
+              },
+              {
+                "key": "TMK Area",
+                "values": [
+                  "124"
+                ]
+              },
+              {
+                "key": "TMK Condo Property Regime Number",
+                "values": [
+                  "179"
+                ]
+              },
+              {
+                "key": "TMK Division",
+                "values": [
+                  "1"
+                ]
+              },
+              {
+                "key": "TMK Parcel",
+                "values": [
+                  "2"
+                ]
+              },
+              {
+                "key": "TMKPLAT",
+                "values": [
+                  "7"
+                ]
+              },
+              {
+                "key": "TMK Section",
+                "values": [
+                  "4"
+                ]
+              },
+              {
+                "key": "TMK Zone",
+                "values": [
+                  "2"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "Interior and Exterior Features": {
+        "name": "Interior and Exterior Features",
+        "subCategories": [
+          {
+            "name": "Exterior Features",
+            "fields": [
+              {
+                "key": "Amenities",
+                "values": [
+                  "BBQ",
+                  "Car Wash",
+                  "Pool on Property",
+                  "Resident Manager",
+                  "Security Guard",
+                  "Trash Chute"
+                ]
+              },
+              {
+                "key": "Construction Materials",
+                "values": [
+                  "Concrete"
+                ]
+              },
+              {
+                "key": "Elevators Number Of",
+                "values": [
+                  "3"
+                ]
+              },
+              {
+                "key": "Flooring",
+                "values": [
+                  "Ceramic Tile",
+                  "W/W Carpet"
+                ]
+              },
+              {
+                "key": "Security Features",
+                "values": [
+                  "Key",
+                  "Security Patrol",
+                  "Video"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Interior Features",
+            "fields": [
+              {
+                "key": "Baths Full",
+                "values": [
+                  "2"
+                ]
+              },
+              {
+                "key": "Baths Half",
+                "values": [
+                  "0"
+                ]
+              },
+              {
+                "key": "Baths Total",
+                "values": [
+                  "2.0"
+                ]
+              },
+              {
+                "key": "Beds Total",
+                "values": [
+                  "2.0"
+                ]
+              },
+              {
+                "key": "Furnished",
+                "values": [
+                  "Partial"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "Multi Family": {
+        "name": "Multi Family",
+        "subCategories": [
+          {
+            "name": "Multi-Family Information",
+            "fields": [
+              {
+                "key": "Unit Features",
+                "values": [
+                  "Bedroom on 1st Level"
+                ]
+              },
+              {
+                "key": "Unit Number",
+                "values": [
+                  "2903"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Income & Expenses",
+            "fields": [
+              {
+                "key": "Maintenance Fee Amount",
+                "values": [
+                  "$1,163.70"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "Agent": {
+        "name": "Agent",
+        "subCategories": [
+          {
+            "name": "Sale and Listing",
+            "fields": [
+              {
+                "key": "DOM",
+                "values": [
+                  "0"
+                ]
+              },
+              {
+                "key": "Immoviewer",
+                "values": [
+                  "No"
+                ]
+              },
+              {
+                "key": "Listing Service",
+                "values": [
+                  "Full Service"
+                ]
+              },
+              {
+                "key": "Lock Box",
+                "values": [
+                  "Yes"
+                ]
+              },
+              {
+                "key": "Management Company Name",
+                "values": [
+                  "Hawaiiana"
+                ]
+              },
+              {
+                "key": "Management Company Phone",
+                "values": [
+                  "808-593-9100"
+                ]
+              },
+              {
+                "key": "MLS",
+                "values": [
+                  "HI Central"
+                ]
+              },
+              {
+                "key": "MLS Area Major",
+                "values": [
+                  "Metro"
+                ]
+              },
+              {
+                "key": "Status",
+                "values": [
+                  "Active"
+                ]
+              },
+              {
+                "key": "Public Remarks",
+                "values": [
+                  "High floor with fabulous views of Diamond Head, city, ocean.  Overlooks Central Union Church.  Building has recently completed its plumbing project and SELLER HAS PAID OFF THE ASSESSMENT! Brand new range and range hood. Drapes just 2 years old.  Plumbing and electrical fixtures inspected and cleared.  2 new toilets.  Natural light brightens the unit.  Lot of storage in hallway.  Central location to schools, hospital, churches, shopping--all the benefits of living in town!  Lots of guest parking and nice amenities, including a heated pool, meeting room, BBQ area, 24-hour security, bike rack, surfboard storage.  New pool/pool deck/pool furnishings.  Meeting/party room newly refurbished  Maintenance fee is for 2026 (increase of 4%).  VA-approved.  Sorry, not pet-friendly.  If your buyer is looking for a good location/convenience, space, storage, 24/7 security patrol, useful amenities, call to see this 2/2!"
+                ]
+              },
+              {
+                "key": "Possession",
+                "values": [
+                  "At Closing"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Showing and Remarks",
+            "fields": [
+              {
+                "key": "Showing Instructions",
+                "values": [
+                  "<8 Hrs Notice Reqd",
+                  "Call Listor"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "Rental": {
+        "name": "Rental",
+        "subCategories": [
+          {
+            "name": "Rent Information",
+            "fields": [
+              {
+                "key": "Occupant Type",
+                "values": [
+                  "Vacant"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "photos": [
+      "https://www.compass.com/m/236ac4695baf68afc1eee1acd1cf63fecf79990d_img_0_b36a4/origin.jpg",
+      "https://www.compass.com/m/236ac4695baf68afc1eee1acd1cf63fecf79990d_img_1_7f98d/origin.jpg",
+      "https://www.compass.com/m/236ac4695baf68afc1eee1acd1cf63fecf79990d_img_2_b1a06/origin.jpg",
+      "https://www.compass.com/m/236ac4695baf68afc1eee1acd1cf63fecf79990d_img_3_649a1/origin.jpg",
+      "https://www.compass.com/m/236ac4695baf68afc1eee1acd1cf63fecf79990d_img_4_a3ac9/origin.jpg",
+      "https://www.compass.com/m/236ac4695baf68afc1eee1acd1cf63fecf79990d_img_5_08eb4/origin.jpg",
+      "https://www.compass.com/m/236ac4695baf68afc1eee1acd1cf63fecf79990d_img_6_33b18/origin.jpg",
+      "https://www.compass.com/m/236ac4695baf68afc1eee1acd1cf63fecf79990d_img_7_12440/origin.jpg",
+      "https://www.compass.com/m/236ac4695baf68afc1eee1acd1cf63fecf79990d_img_8_79e88/origin.jpg",
+      "https://www.compass.com/m/236ac4695baf68afc1eee1acd1cf63fecf79990d_img_9_49436/origin.jpg",
+      "https://www.compass.com/m/236ac4695baf68afc1eee1acd1cf63fecf79990d_img_10_aad1f/origin.jpg",
+      "https://www.compass.com/m/236ac4695baf68afc1eee1acd1cf63fecf79990d_img_11_9e71d/origin.jpg",
+      "https://www.compass.com/m/236ac4695baf68afc1eee1acd1cf63fecf79990d_img_12_e82c6/origin.jpg",
+      "https://www.compass.com/m/236ac4695baf68afc1eee1acd1cf63fecf79990d_img_13_69145/origin.jpg",
+      "https://www.compass.com/m/236ac4695baf68afc1eee1acd1cf63fecf79990d_img_14_8fc51/origin.jpg",
+      "https://www.compass.com/m/236ac4695baf68afc1eee1acd1cf63fecf79990d_img_15_af309/origin.jpg",
+      "https://www.compass.com/m/236ac4695baf68afc1eee1acd1cf63fecf79990d_img_16_3dfde/origin.jpg",
+      "https://www.compass.com/m/236ac4695baf68afc1eee1acd1cf63fecf79990d_img_17_294cc/origin.jpg",
+      "https://www.compass.com/m/236ac4695baf68afc1eee1acd1cf63fecf79990d_img_18_1c50d/origin.jpg",
+      "https://www.compass.com/m/236ac4695baf68afc1eee1acd1cf63fecf79990d_img_19_5a7b6/origin.jpg"
+    ],
+    "agents": [
+      {
+        "name": "Ann Aiko Shinsato",
+        "license": "RB-15114",
+        "phone_primary": "(808) 392-3649",
+        "email": "ponorealty@hawaiiantel.net",
+        "office_name": "Pono Realty"
+      }
+    ]
+  },
+  {
+    "source_name": "compass",
+    "listing_id": "1999871666748028089",
+    "listing_link": "https://www.compass.com/homedetails/1700-Ala-Moana-Blvd-Unit-1501-Honolulu-HI-96815/VAGG1_pid/",
+    "listing_type": "For Sale",
+    "listing_status": "Active",
+    "address": "1700 Ala Moana Boulevard, Unit 1501",
+    "coordinates": "21.286675,-157.838913",
+    "building_number": "1700",
+    "street_name": "Ala Moana",
+    "unit_number": "1501",
+    "city": "Honolulu",
+    "state": "HI",
+    "zipcode": "96815",
+    "property_type": "Condo",
+    "year_built": 1984,
+    "sale_price": "$369,000",
+    "size": "365 sqft",
+    "property_description": "LEGAL NUC Currently used as a short-term rental, this FULLY FURNISHED STUDIO/1 BATH with assigned parking awaits in the stunning Waikiki Marina Condos. You or your tenants will love the serene vibe with pool, jacuzzi, BBQ area, and tennis court. Right across from Ilikai Hotel & Luxury Suites and Ala Wai Boat Harbor. Quick walk/drive to historic Waikiki, Ala Moana Shopping Center, world famous beaches, eateries, and more!",
+    "last_updated": "2025-12-20",
+    "days_on_market": "0",
+    "listing_details": {
+      "Key Details": {
+        "name": "Key Details",
+        "subCategories": [
+          {
+            "name": "Key Details",
+            "fields": [
+              {
+                "key": "Architectural Style",
+                "values": [
+                  "High-Rise 7+ Stories"
+                ]
+              },
+              {
+                "key": "View",
+                "values": [
+                  "City",
+                  "Marina/Canal",
+                  "Ocean"
+                ]
+              },
+              {
+                "key": "Zoning",
+                "values": [
+                  "X2 - Apartment Precinct"
+                ]
+              },
+              {
+                "key": "Neighbourhood",
+                "values": [
+                  "WAIKIKI"
+                ]
+              },
+              {
+                "key": "Flood Zone",
+                "values": [
+                  "Zone AE"
+                ]
+              },
+              {
+                "key": "Stories/Levels",
+                "values": [
+                  "One"
+                ]
+              },
+              {
+                "key": "Land Tenure",
+                "values": [
+                  "FS - Fee Simple"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "Summary": {
+        "name": "Summary",
+        "subCategories": [
+          {
+            "name": "Location and General Information",
+            "fields": [
+              {
+                "key": "City",
+                "values": [
+                  "Honolulu"
+                ]
+              },
+              {
+                "key": "County Or Parish",
+                "values": [
+                  "Oahu"
+                ]
+              },
+              {
+                "key": "State Or Province",
+                "values": [
+                  "HI"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Taxes and HOA Information",
+            "fields": [
+              {
+                "key": "Association Fee 2 Includes",
+                "values": [
+                  "Sewer"
+                ]
+              },
+              {
+                "key": "Association Fee Includes",
+                "values": [
+                  "Electricity",
+                  "Gas",
+                  "Hot Water",
+                  "Water"
+                ]
+              },
+              {
+                "key": "Association Fee Total",
+                "values": [
+                  "$1,000"
+                ]
+              },
+              {
+                "key": "Tax Amount",
+                "values": [
+                  "$248.60"
+                ]
+              },
+              {
+                "key": "Tax Assessed Value",
+                "values": [
+                  "$325,000.00"
+                ]
+              },
+              {
+                "key": "Tax Assessed Value Improvements",
+                "values": [
+                  "$242,900.00"
+                ]
+              },
+              {
+                "key": "Tax Assessed Value Land",
+                "values": [
+                  "$82,100.00"
+                ]
+              },
+              {
+                "key": "Tax Excemption Owner Occupancy",
+                "values": [
+                  "0"
+                ]
+              },
+              {
+                "key": "Tax Year",
+                "values": [
+                  "2025"
+                ]
+              },
+              {
+                "key": "Parcel Number",
+                "values": [
+                  "1-2-6-011-008-0033"
+                ]
+              },
+              {
+                "key": "HOA YN",
+                "values": [
+                  "Yes"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Parking",
+            "fields": [
+              {
+                "key": "Parking Additional",
+                "values": [
+                  "0"
+                ]
+              },
+              {
+                "key": "Parking Features",
+                "values": [
+                  "Open - 1"
+                ]
+              },
+              {
+                "key": "Parking Total",
+                "values": [
+                  "1"
+                ]
+              },
+              {
+                "key": "Condo Parking Unit",
+                "values": [
+                  "1501"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "Property": {
+        "name": "Property",
+        "subCategories": [
+          {
+            "name": "Lot Information",
+            "fields": [
+              {
+                "key": "Building Name",
+                "values": [
+                  "Waikiki Marina Condominium"
+                ]
+              },
+              {
+                "key": "Floor Number",
+                "values": [
+                  "15"
+                ]
+              },
+              {
+                "key": "Property Type",
+                "values": [
+                  "Condo/Townhouse"
+                ]
+              },
+              {
+                "key": "SQFT Roofed Living",
+                "values": [
+                  "365.0"
+                ]
+              },
+              {
+                "key": "Sqft Total",
+                "values": [
+                  "365.0"
+                ]
+              },
+              {
+                "key": "Land Recorded",
+                "values": [
+                  "Land Court"
+                ]
+              },
+              {
+                "key": "Lot Size Area",
+                "values": [
+                  "38768.0"
+                ]
+              },
+              {
+                "key": "Year Built",
+                "values": [
+                  "1984"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Property and Assessments",
+            "fields": [
+              {
+                "key": "Appliances",
+                "values": [
+                  "AC Window Unit",
+                  "Microwave Hood",
+                  "Refrigerator"
+                ]
+              },
+              {
+                "key": "Photo Count",
+                "values": [
+                  "13"
+                ]
+              },
+              {
+                "key": "New Development Construction",
+                "values": [
+                  "No"
+                ]
+              },
+              {
+                "key": "Property Condition",
+                "values": [
+                  "Average"
+                ]
+              },
+              {
+                "key": "Special Listing Conditions",
+                "values": [
+                  "None"
+                ]
+              },
+              {
+                "key": "Disclosures",
+                "values": [
+                  "Property Disclosure Stmt",
+                  "See Remarks"
+                ]
+              },
+              {
+                "key": "Foreclosure",
+                "values": [
+                  "No"
+                ]
+              },
+              {
+                "key": "Fractional Ownership",
+                "values": [
+                  "No"
+                ]
+              },
+              {
+                "key": "TMK Area",
+                "values": [
+                  "126"
+                ]
+              },
+              {
+                "key": "TMK Condo Property Regime Number",
+                "values": [
+                  "33"
+                ]
+              },
+              {
+                "key": "TMK Division",
+                "values": [
+                  "1"
+                ]
+              },
+              {
+                "key": "TMK Parcel",
+                "values": [
+                  "8"
+                ]
+              },
+              {
+                "key": "TMKPLAT",
+                "values": [
+                  "11"
+                ]
+              },
+              {
+                "key": "TMK Section",
+                "values": [
+                  "6"
+                ]
+              },
+              {
+                "key": "TMK Zone",
+                "values": [
+                  "2"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "Interior and Exterior Features": {
+        "name": "Interior and Exterior Features",
+        "subCategories": [
+          {
+            "name": "Exterior Features",
+            "fields": [
+              {
+                "key": "Amenities",
+                "values": [
+                  "BBQ",
+                  "Pool on Property",
+                  "Resident Manager",
+                  "Security Guard",
+                  "Tennis Court"
+                ]
+              },
+              {
+                "key": "Construction Materials",
+                "values": [
+                  "Concrete"
+                ]
+              },
+              {
+                "key": "Flooring",
+                "values": [
+                  "Ceramic Tile",
+                  "Laminate"
+                ]
+              },
+              {
+                "key": "Security Features",
+                "values": [
+                  "Card",
+                  "Key"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Interior Features",
+            "fields": [
+              {
+                "key": "Baths Full",
+                "values": [
+                  "1"
+                ]
+              },
+              {
+                "key": "Baths Half",
+                "values": [
+                  "0"
+                ]
+              },
+              {
+                "key": "Baths Total",
+                "values": [
+                  "1.0"
+                ]
+              },
+              {
+                "key": "Beds Total",
+                "values": [
+                  "0.0"
+                ]
+              },
+              {
+                "key": "Furnished",
+                "values": [
+                  "Full"
+                ]
+              },
+              {
+                "key": "Room Count",
+                "values": [
+                  "0"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "Multi Family": {
+        "name": "Multi Family",
+        "subCategories": [
+          {
+            "name": "Multi-Family Information",
+            "fields": [
+              {
+                "key": "Unit Features",
+                "values": [
+                  "Odd# Unit",
+                  "Single Level"
+                ]
+              },
+              {
+                "key": "Unit Number",
+                "values": [
+                  "1501"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Income & Expenses",
+            "fields": [
+              {
+                "key": "Maintenance Fee Amount",
+                "values": [
+                  "$1,000.00"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "Agent": {
+        "name": "Agent",
+        "subCategories": [
+          {
+            "name": "Sale and Listing",
+            "fields": [
+              {
+                "key": "DOM",
+                "values": [
+                  "0"
+                ]
+              },
+              {
+                "key": "Immoviewer",
+                "values": [
+                  "No"
+                ]
+              },
+              {
+                "key": "Listing Service",
+                "values": [
+                  "Full Service"
+                ]
+              },
+              {
+                "key": "Management Company Name",
+                "values": [
+                  "Hawaiiana"
+                ]
+              },
+              {
+                "key": "Management Company Phone",
+                "values": [
+                  "(808) 593-9100"
+                ]
+              },
+              {
+                "key": "MLS",
+                "values": [
+                  "HI Central"
+                ]
+              },
+              {
+                "key": "MLS Area Major",
+                "values": [
+                  "Metro"
+                ]
+              },
+              {
+                "key": "Status",
+                "values": [
+                  "Active"
+                ]
+              },
+              {
+                "key": "Public Remarks",
+                "values": [
+                  "LEGAL NUC Currently used as a short-term rental, this FULLY FURNISHED STUDIO/1 BATH with assigned parking awaits in the stunning Waikiki Marina Condos. You or your tenants will love the serene vibe with pool, jacuzzi, BBQ area, and tennis court. Right across from Ilikai Hotel & Luxury Suites and Ala Wai Boat Harbor. Quick walk/drive to historic Waikiki, Ala Moana Shopping Center, world famous beaches, eateries, and more!"
+                ]
+              },
+              {
+                "key": "Possession",
+                "values": [
+                  "45 Days or Less"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Showing and Remarks",
+            "fields": [
+              {
+                "key": "Showing Instructions",
+                "values": [
+                  "Appointment Only"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "Rental": {
+        "name": "Rental",
+        "subCategories": [
+          {
+            "name": "Rent Information",
+            "fields": [
+              {
+                "key": "Occupant Type",
+                "values": [
+                  "Tenant"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "photos": [
+      "https://www.compass.com/m/84d8ac5f1825b576da28df46f0e8d9d4cd00d975_img_0_fdf15/origin.jpg",
+      "https://www.compass.com/m/84d8ac5f1825b576da28df46f0e8d9d4cd00d975_img_1_8bce5/origin.jpg",
+      "https://www.compass.com/m/84d8ac5f1825b576da28df46f0e8d9d4cd00d975_img_2_9d423/origin.jpg",
+      "https://www.compass.com/m/84d8ac5f1825b576da28df46f0e8d9d4cd00d975_img_3_47119/origin.jpg",
+      "https://www.compass.com/m/84d8ac5f1825b576da28df46f0e8d9d4cd00d975_img_4_1c321/origin.jpg",
+      "https://www.compass.com/m/84d8ac5f1825b576da28df46f0e8d9d4cd00d975_img_5_17a6f/origin.jpg",
+      "https://www.compass.com/m/84d8ac5f1825b576da28df46f0e8d9d4cd00d975_img_6_e2ce2/origin.jpg",
+      "https://www.compass.com/m/84d8ac5f1825b576da28df46f0e8d9d4cd00d975_img_7_bb96c/origin.jpg",
+      "https://www.compass.com/m/84d8ac5f1825b576da28df46f0e8d9d4cd00d975_img_8_2f23b/origin.jpg",
+      "https://www.compass.com/m/84d8ac5f1825b576da28df46f0e8d9d4cd00d975_img_9_9b3b3/origin.jpg",
+      "https://www.compass.com/m/84d8ac5f1825b576da28df46f0e8d9d4cd00d975_img_10_f4e35/origin.jpg",
+      "https://www.compass.com/m/84d8ac5f1825b576da28df46f0e8d9d4cd00d975_img_11_b1e83/origin.jpg",
+      "https://www.compass.com/m/84d8ac5f1825b576da28df46f0e8d9d4cd00d975_img_12_eec2a/origin.jpg"
+    ],
+    "agents": [
+      {
+        "name": "Raymond Kam Prosek",
+        "license": "RS-87671",
+        "phone_primary": "(808) 495-1571",
+        "email": "raymondyouragent@gmail.com",
+        "office_name": "Hawaii Property Mgmt Team LLC"
+      }
+    ]
+  },
+  {
+    "source_name": "compass",
+    "listing_id": "1999712104249824209",
+    "listing_link": "https://www.compass.com/homedetails/94-1100-Kunia-Rd-Unit-9-Waipahu-HI-96797/VCIXZ_pid/",
+    "listing_type": "For Sale",
+    "listing_status": "Active",
+    "address": "94-1100 Kunia Road, Unit 9",
+    "coordinates": "21.4302456,-158.0565621",
+    "building_number": "94-1100",
+    "street_name": "Kunia",
+    "unit_number": "9",
+    "city": "Waipahu",
+    "state": "HI",
+    "zipcode": "96797",
+    "property_type": "Land",
+    "sale_price": "$1,000,000",
+    "property_description": "Kunia loa ridge farmlands! Five (5!) acre parcel! Great location at the top with ouststanding views from waianae to diamond head to wahiawa! Leasehold property until 2109! EASY ACCESS FROM H1 to KUNIA EXIT. Owner open to selling portion of lot.",
+    "last_updated": "2025-12-20",
+    "days_on_market": "0",
+    "listing_details": {
+      "Key Details": {
+        "name": "Key Details",
+        "subCategories": [
+          {
+            "name": "Key Details",
+            "fields": [
+              {
+                "key": "View",
+                "values": [
+                  "Coastline",
+                  "Diamond Head",
+                  "Mountain",
+                  "Ocean",
+                  "Sunrise",
+                  "Sunset"
+                ]
+              },
+              {
+                "key": "Zoning",
+                "values": [
+                  "51 - AG-1 Restricted Agricultur"
+                ]
+              },
+              {
+                "key": "Neighbourhood",
+                "values": [
+                  "AG/PRESERVE"
+                ]
+              },
+              {
+                "key": "Flood Zone",
+                "values": [
+                  "Zone X"
+                ]
+              },
+              {
+                "key": "Land Tenure",
+                "values": [
+                  "LH - Leasehold"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "Summary": {
+        "name": "Summary",
+        "subCategories": [
+          {
+            "name": "Location and General Information",
+            "fields": [
+              {
+                "key": "Topography",
+                "values": [
+                  "Gentle Slope",
+                  "Level"
+                ]
+              },
+              {
+                "key": "City",
+                "values": [
+                  "Waipahu"
+                ]
+              },
+              {
+                "key": "County Or Parish",
+                "values": [
+                  "Oahu"
+                ]
+              },
+              {
+                "key": "State Or Province",
+                "values": [
+                  "HI"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Taxes and HOA Information",
+            "fields": [
+              {
+                "key": "Association Community Name",
+                "values": [
+                  "KLRF"
+                ]
+              },
+              {
+                "key": "Association Phone",
+                "values": [
+                  "808-524-9310"
+                ]
+              },
+              {
+                "key": "Fee Options",
+                "values": [
+                  "None"
+                ]
+              },
+              {
+                "key": "Tax Amount",
+                "values": [
+                  "$156.00"
+                ]
+              },
+              {
+                "key": "Tax Assessed Value",
+                "values": [
+                  "$984,700.00"
+                ]
+              },
+              {
+                "key": "Tax Assessed Value Improvements",
+                "values": [
+                  "$.00"
+                ]
+              },
+              {
+                "key": "Tax Assessed Value Land",
+                "values": [
+                  "$984,700.00"
+                ]
+              },
+              {
+                "key": "Tax Year",
+                "values": [
+                  "2025"
+                ]
+              },
+              {
+                "key": "Parcel Number",
+                "values": [
+                  "1-9-2-004-013-0009"
+                ]
+              },
+              {
+                "key": "Additional Parcels",
+                "values": [
+                  "Yes"
+                ]
+              },
+              {
+                "key": "HOA YN",
+                "values": [
+                  "Yes"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "Property": {
+        "name": "Property",
+        "subCategories": [
+          {
+            "name": "Lot Information",
+            "fields": [
+              {
+                "key": "Property Sub Type",
+                "values": [
+                  "Land"
+                ]
+              },
+              {
+                "key": "Property Type",
+                "values": [
+                  "Lots/Acres/Farms"
+                ]
+              },
+              {
+                "key": "Road Frontage",
+                "values": [
+                  "Private Rd"
+                ]
+              },
+              {
+                "key": "Land Recorded",
+                "values": [
+                  "Regular System"
+                ]
+              },
+              {
+                "key": "Lot Size Area",
+                "values": [
+                  "217800.0"
+                ]
+              },
+              {
+                "key": "Land Use",
+                "values": [
+                  "Agricultural"
+                ]
+              },
+              {
+                "key": "Possible Use",
+                "values": [
+                  "Farm"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Property and Assessments",
+            "fields": [
+              {
+                "key": "Improvements",
+                "values": [
+                  "None"
+                ]
+              },
+              {
+                "key": "Photo Count",
+                "values": [
+                  "15"
+                ]
+              },
+              {
+                "key": "Restrictions",
+                "values": [
+                  "Covenants"
+                ]
+              },
+              {
+                "key": "Special Listing Conditions",
+                "values": [
+                  "None"
+                ]
+              },
+              {
+                "key": "Disclosures",
+                "values": [
+                  "None"
+                ]
+              },
+              {
+                "key": "Foreclosure",
+                "values": [
+                  "No"
+                ]
+              },
+              {
+                "key": "Set Backs",
+                "values": [
+                  "Special"
+                ]
+              },
+              {
+                "key": "TMK Area",
+                "values": [
+                  "192"
+                ]
+              },
+              {
+                "key": "TMK Condo Property Regime Number",
+                "values": [
+                  "9"
+                ]
+              },
+              {
+                "key": "TMK Division",
+                "values": [
+                  "1"
+                ]
+              },
+              {
+                "key": "TMK Parcel",
+                "values": [
+                  "13"
+                ]
+              },
+              {
+                "key": "TMKPLAT",
+                "values": [
+                  "4"
+                ]
+              },
+              {
+                "key": "TMK Section",
+                "values": [
+                  "2"
+                ]
+              },
+              {
+                "key": "TMK Zone",
+                "values": [
+                  "9"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Utilities",
+            "fields": [
+              {
+                "key": "Utilities",
+                "values": [
+                  "Private Water"
+                ]
+              },
+              {
+                "key": "Sewer",
+                "values": [
+                  "None"
+                ]
+              },
+              {
+                "key": "Utilities Meters",
+                "values": [
+                  "Water"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "Interior and Exterior Features": {
+        "name": "Interior and Exterior Features",
+        "subCategories": [
+          {
+            "name": "Exterior Features",
+            "fields": [
+              {
+                "key": "Easements",
+                "values": [
+                  "Street Widening"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "Multi Family": {
+        "name": "Multi Family",
+        "subCategories": [
+          {
+            "name": "Multi-Family Information",
+            "fields": [
+              {
+                "key": "Unit Number",
+                "values": [
+                  "9"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Income & Expenses",
+            "fields": [
+              {
+                "key": "Maintenance Fee Amount",
+                "values": [
+                  "$780.00"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "Agent": {
+        "name": "Agent",
+        "subCategories": [
+          {
+            "name": "Sale and Listing",
+            "fields": [
+              {
+                "key": "DOM",
+                "values": [
+                  "0"
+                ]
+              },
+              {
+                "key": "Immoviewer",
+                "values": [
+                  "No"
+                ]
+              },
+              {
+                "key": "Listing Service",
+                "values": [
+                  "Full Service"
+                ]
+              },
+              {
+                "key": "MLS",
+                "values": [
+                  "HI Central"
+                ]
+              },
+              {
+                "key": "MLS Area Major",
+                "values": [
+                  "Makakilo"
+                ]
+              },
+              {
+                "key": "Status",
+                "values": [
+                  "Active"
+                ]
+              },
+              {
+                "key": "Public Remarks",
+                "values": [
+                  "KUNIA LOA RIDGE FARMLANDS!  FIVE (5!) acre parcel!  GREAT LOCATION AT THE TOP WITH OUSTSTANDING VIEWS FROM WAIANAE TO DIAMOND HEAD TO WAHIAWA! LEASEHOLD PROPERTY UNTIL 2109!  EASY ACCESS FROM H1 to KUNIA EXIT.  OWNER OPEN TO SELLING PORTION OF LOT."
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "Rental": {
+        "name": "Rental",
+        "subCategories": [
+          {
+            "name": "Rent Information",
+            "fields": [
+              {
+                "key": "Lease Expiration Year",
+                "values": [
+                  "2109"
+                ]
+              },
+              {
+                "key": "Lease Fee Month",
+                "values": [
+                  "$.00"
+                ]
+              },
+              {
+                "key": "Lessor Name",
+                "values": [
+                  "KLRF"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "photos": [
+      "https://www.compass.com/m/2734e1fb891dd6c90d9c74a4ae3c6f47a2257be8_img_0_e41b5/origin.jpg",
+      "https://www.compass.com/m/2734e1fb891dd6c90d9c74a4ae3c6f47a2257be8_img_1_940c6/origin.jpg",
+      "https://www.compass.com/m/2734e1fb891dd6c90d9c74a4ae3c6f47a2257be8_img_2_a0ced/origin.jpg",
+      "https://www.compass.com/m/2734e1fb891dd6c90d9c74a4ae3c6f47a2257be8_img_3_b98fc/origin.jpg",
+      "https://www.compass.com/m/2734e1fb891dd6c90d9c74a4ae3c6f47a2257be8_img_4_6b625/origin.jpg",
+      "https://www.compass.com/m/2734e1fb891dd6c90d9c74a4ae3c6f47a2257be8_img_5_d8f59/origin.jpg",
+      "https://www.compass.com/m/2734e1fb891dd6c90d9c74a4ae3c6f47a2257be8_img_6_44f88/origin.jpg",
+      "https://www.compass.com/m/2734e1fb891dd6c90d9c74a4ae3c6f47a2257be8_img_7_efc8f/origin.jpg",
+      "https://www.compass.com/m/2734e1fb891dd6c90d9c74a4ae3c6f47a2257be8_img_8_16e94/origin.jpg",
+      "https://www.compass.com/m/2734e1fb891dd6c90d9c74a4ae3c6f47a2257be8_img_9_e9824/origin.jpg",
+      "https://www.compass.com/m/2734e1fb891dd6c90d9c74a4ae3c6f47a2257be8_img_10_7f523/origin.jpg",
+      "https://www.compass.com/m/2734e1fb891dd6c90d9c74a4ae3c6f47a2257be8_img_11_5560d/origin.jpg",
+      "https://www.compass.com/m/2734e1fb891dd6c90d9c74a4ae3c6f47a2257be8_img_12_63aeb/origin.jpg",
+      "https://www.compass.com/m/2734e1fb891dd6c90d9c74a4ae3c6f47a2257be8_img_13_70ccd/origin.jpg"
+    ],
+    "agents": [
+      {
+        "name": "Brian Uy",
+        "license": "RB-16514",
+        "phone_primary": "(808) 222-1788",
+        "email": "BrianUy@icloud.com",
+        "office_name": "LT Services"
+      }
+    ]
+  },
+  {
+    "source_name": "compass",
+    "listing_id": "1999681026797670537",
+    "listing_link": "https://www.compass.com/homedetails/4324-Kaikoo-Pl-Honolulu-HI-96816/VCBGJ_pid/",
+    "listing_type": "For Sale",
+    "listing_status": "Active",
+    "address": "4324 Kaikoo Place",
+    "coordinates": "21.2559238,-157.7938657",
+    "building_number": "4324",
+    "street_name": "Kaikoo",
+    "city": "Honolulu",
+    "state": "HI",
+    "zipcode": "96816",
+    "property_type": "Single Family",
+    "year_built": 1986,
+    "sale_price": "$37,500,000",
+    "size": "21,266 sqft",
+    "property_description": "The Hemmeter Estate is a rare, oceanfront estate located at the end of Kaikoo Place on Black Point. Featuring an extraordinary 339.45 linear feet of ocean frontage, this property offers one of the most expansive coastal settings in Hawaii, with exceptional frontage in the heart of Kaikoo. Blending Hawaiian natural elements with European Renaissance–inspired design, the residence showcases exceptional craftsmanship throughout. Set on 35,870 sq ft of land, the estate offers approximately 21,266 sq ft of interior living, complemented by extensive covered and open lanais ideal for entertaining. Highlights include cast-bronze entry doors, coffered Venetian-inspired ceilings, Italian perlato marble staircases and flooring, carved and finished on-site, a two-story oceanfront living room, and refined Art Deco bronze detailing. Amenities include a private theater, library, entertaining lounge, and grotto pool. The expansive primary suite spans nearly 5,000 sq ft and features dual dressing rooms, a fitness area, and sweeping coastline views. The Hemmeter Estate is an irreplaceable oceanfront estate distinguished by scale, privacy, and architectural significance.",
+    "last_updated": "2025-12-20",
+    "days_on_market": "0",
+    "listing_details": {
+      "Key Details": {
+        "name": "Key Details",
+        "subCategories": [
+          {
+            "name": "Key Details",
+            "fields": [
+              {
+                "key": "Architectural Style",
+                "values": [
+                  "Detach Single Family"
+                ]
+              },
+              {
+                "key": "View",
+                "values": [
+                  "Coastline",
+                  "Diamond Head",
+                  "Garden",
+                  "Mountain",
+                  "Ocean",
+                  "Other",
+                  "Sunrise",
+                  "Sunset"
+                ]
+              },
+              {
+                "key": "Zoning",
+                "values": [
+                  "04 - R-7.5 Residential District"
+                ]
+              },
+              {
+                "key": "Neighbourhood",
+                "values": [
+                  "DIAMOND HEAD"
+                ]
+              },
+              {
+                "key": "Flood Zone",
+                "values": [
+                  "Zone VE",
+                  "Zone X"
+                ]
+              },
+              {
+                "key": "Stories/Levels",
+                "values": [
+                  "Three+"
+                ]
+              },
+              {
+                "key": "Land Tenure",
+                "values": [
+                  "FS - Fee Simple"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "Summary": {
+        "name": "Summary",
+        "subCategories": [
+          {
+            "name": "Location and General Information",
+            "fields": [
+              {
+                "key": "Topography",
+                "values": [
+                  "Down Slope",
+                  "Level",
+                  "Steep Slope",
+                  "Terraced"
+                ]
+              },
+              {
+                "key": "City",
+                "values": [
+                  "Honolulu"
+                ]
+              },
+              {
+                "key": "County Or Parish",
+                "values": [
+                  "Oahu"
+                ]
+              },
+              {
+                "key": "State Or Province",
+                "values": [
+                  "HI"
+                ]
+              },
+              {
+                "key": "Location",
+                "values": [
+                  "Inside"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Taxes and HOA Information",
+            "fields": [
+              {
+                "key": "Association Fee 2 Includes",
+                "values": [
+                  "None",
+                  "Sewer"
+                ]
+              },
+              {
+                "key": "Tax Amount",
+                "values": [
+                  "$13,386.90"
+                ]
+              },
+              {
+                "key": "Tax Assessed Value",
+                "values": [
+                  "$14,740,600.00"
+                ]
+              },
+              {
+                "key": "Tax Assessed Value Improvements",
+                "values": [
+                  "$5,683,500.00"
+                ]
+              },
+              {
+                "key": "Tax Assessed Value Land",
+                "values": [
+                  "$9,057,100.00"
+                ]
+              },
+              {
+                "key": "Tax Excemption Owner Occupancy",
+                "values": [
+                  "0.00"
+                ]
+              },
+              {
+                "key": "Tax Year",
+                "values": [
+                  "2025"
+                ]
+              },
+              {
+                "key": "Parcel Number",
+                "values": [
+                  "1-3-1-041-031-0000"
+                ]
+              },
+              {
+                "key": "HOA YN",
+                "values": [
+                  "No"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Parking",
+            "fields": [
+              {
+                "key": "Parking Features",
+                "values": [
+                  "3 Car+",
+                  "Driveway",
+                  "Garage"
+                ]
+              },
+              {
+                "key": "Parking Total",
+                "values": [
+                  "8"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Virtual Tour",
+            "fields": [
+              {
+                "key": "Virtual Tour URL Unbranded",
+                "values": [
+                  "https://drive.google.com/file/d/1y5Grov7GK4NK51JVbSvK3PbbcyJOh78_/view?usp=sharing"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "Property": {
+        "name": "Property",
+        "subCategories": [
+          {
+            "name": "Lot Information",
+            "fields": [
+              {
+                "key": "Builder Name",
+                "values": [
+                  "Hemmeter"
+                ]
+              },
+              {
+                "key": "Property Frontage",
+                "values": [
+                  "Ocean"
+                ]
+              },
+              {
+                "key": "Property Sub Type",
+                "values": [
+                  "Single Family"
+                ]
+              },
+              {
+                "key": "Property Type",
+                "values": [
+                  "Single Family"
+                ]
+              },
+              {
+                "key": "Remodelled",
+                "values": [
+                  "Partial"
+                ]
+              },
+              {
+                "key": "Road Frontage",
+                "values": [
+                  "County Rd",
+                  "Paved Rd"
+                ]
+              },
+              {
+                "key": "SQFT Garage Carport",
+                "values": [
+                  "1735.0"
+                ]
+              },
+              {
+                "key": "Open Other Spaces Total",
+                "values": [
+                  "4375.0"
+                ]
+              },
+              {
+                "key": "SQFT Roofed Living",
+                "values": [
+                  "21266.0"
+                ]
+              },
+              {
+                "key": "Sqft Total",
+                "values": [
+                  "25641.0"
+                ]
+              },
+              {
+                "key": "Land Recorded",
+                "values": [
+                  "Land Court"
+                ]
+              },
+              {
+                "key": "Lot Features",
+                "values": [
+                  "Clear",
+                  "Irregular",
+                  "Rim Lot"
+                ]
+              },
+              {
+                "key": "Lot Size Area",
+                "values": [
+                  "35870.0"
+                ]
+              },
+              {
+                "key": "Year Built",
+                "values": [
+                  "1986"
+                ]
+              },
+              {
+                "key": "Year Remodeled",
+                "values": [
+                  "2019"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Property and Assessments",
+            "fields": [
+              {
+                "key": "Appliances",
+                "values": [
+                  "AC Central",
+                  "Attic Fan",
+                  "Auto Garage Door Opener",
+                  "Blinds",
+                  "Book Shelves",
+                  "Cable TV",
+                  "Chandelier",
+                  "Compactor",
+                  "Dishwasher",
+                  "Disposal",
+                  "Drapes",
+                  "Dryer",
+                  "Fireplace",
+                  "Heat Pump",
+                  "Lawn Sprinkler",
+                  "Microwave",
+                  "Other",
+                  "Refrigerator",
+                  "Security System",
+                  "Smoke Detector",
+                  "Washer",
+                  "Water Heater"
+                ]
+              },
+              {
+                "key": "Photo Count",
+                "values": [
+                  "19"
+                ]
+              },
+              {
+                "key": "New Development Construction",
+                "values": [
+                  "No"
+                ]
+              },
+              {
+                "key": "Property Condition",
+                "values": [
+                  "Average"
+                ]
+              },
+              {
+                "key": "Special Listing Conditions",
+                "values": [
+                  "None"
+                ]
+              },
+              {
+                "key": "Disclosures",
+                "values": [
+                  "Property Disclosure Stmt"
+                ]
+              },
+              {
+                "key": "Foreclosure",
+                "values": [
+                  "No"
+                ]
+              },
+              {
+                "key": "Fractional Ownership",
+                "values": [
+                  "No"
+                ]
+              },
+              {
+                "key": "Exclusions",
+                "values": [
+                  "Other"
+                ]
+              },
+              {
+                "key": "Condo Property Regime",
+                "values": [
+                  "No"
+                ]
+              },
+              {
+                "key": "Set Backs",
+                "values": [
+                  "Of Record"
+                ]
+              },
+              {
+                "key": "Supplement Count",
+                "values": [
+                  "0"
+                ]
+              },
+              {
+                "key": "TMK Area",
+                "values": [
+                  "131"
+                ]
+              },
+              {
+                "key": "TMK Condo Property Regime Number",
+                "values": [
+                  "0"
+                ]
+              },
+              {
+                "key": "TMK Division",
+                "values": [
+                  "1"
+                ]
+              },
+              {
+                "key": "TMK Parcel",
+                "values": [
+                  "31"
+                ]
+              },
+              {
+                "key": "TMKPLAT",
+                "values": [
+                  "41"
+                ]
+              },
+              {
+                "key": "TMK Section",
+                "values": [
+                  "1"
+                ]
+              },
+              {
+                "key": "TMK Zone",
+                "values": [
+                  "3"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Utilities",
+            "fields": [
+              {
+                "key": "Utilities",
+                "values": [
+                  "Cable",
+                  "Connected",
+                  "Gas",
+                  "Internet",
+                  "Public Water",
+                  "Sewer Fee",
+                  "Telephone",
+                  "Underground Electricity",
+                  "Water"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "Interior and Exterior Features": {
+        "name": "Interior and Exterior Features",
+        "subCategories": [
+          {
+            "name": "Exterior Features",
+            "fields": [
+              {
+                "key": "Amenities",
+                "values": [
+                  "Bedroom on 1st Floor",
+                  "Entry",
+                  "Full Bath on 1st Floor",
+                  "Landscaped",
+                  "Maids/Guest Qrters",
+                  "Other",
+                  "Patio/Deck",
+                  "Storage",
+                  "Wall/Fence"
+                ]
+              },
+              {
+                "key": "Construction Materials",
+                "values": [
+                  "Concrete",
+                  "Double Wall",
+                  "Masonry/Stucco",
+                  "Slab",
+                  "Stone"
+                ]
+              },
+              {
+                "key": "Easements",
+                "values": [
+                  "None"
+                ]
+              },
+              {
+                "key": "Flooring",
+                "values": [
+                  "Hardwood",
+                  "Marble/Granite",
+                  "Vinyl",
+                  "W/W Carpet"
+                ]
+              },
+              {
+                "key": "Pool Features",
+                "values": [
+                  "Heated",
+                  "In Ground",
+                  "Plaster",
+                  "Pool on Property"
+                ]
+              },
+              {
+                "key": "Roof",
+                "values": [
+                  "Aluminum/Steel",
+                  "Other",
+                  "Tile"
+                ]
+              },
+              {
+                "key": "Security Features",
+                "values": [
+                  "Key",
+                  "Video"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Interior Features",
+            "fields": [
+              {
+                "key": "Baths Full",
+                "values": [
+                  "7"
+                ]
+              },
+              {
+                "key": "Baths Half",
+                "values": [
+                  "2"
+                ]
+              },
+              {
+                "key": "Baths Total",
+                "values": [
+                  "7.02"
+                ]
+              },
+              {
+                "key": "Beds Total",
+                "values": [
+                  "5.0"
+                ]
+              },
+              {
+                "key": "Furnished",
+                "values": [
+                  "Partial"
+                ]
+              },
+              {
+                "key": "Room Count",
+                "values": [
+                  "0"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "Agent": {
+        "name": "Agent",
+        "subCategories": [
+          {
+            "name": "Sale and Listing",
+            "fields": [
+              {
+                "key": "DOM",
+                "values": [
+                  "0"
+                ]
+              },
+              {
+                "key": "Immoviewer",
+                "values": [
+                  "No"
+                ]
+              },
+              {
+                "key": "Listing Service",
+                "values": [
+                  "Full Service"
+                ]
+              },
+              {
+                "key": "MLS",
+                "values": [
+                  "HI Central"
+                ]
+              },
+              {
+                "key": "MLS Area Major",
+                "values": [
+                  "DiamondHd"
+                ]
+              },
+              {
+                "key": "Status",
+                "values": [
+                  "Active"
+                ]
+              },
+              {
+                "key": "Public Remarks",
+                "values": [
+                  "The Hemmeter Estate is a rare, oceanfront estate located at the end of Kaikoo Place on Black Point. Featuring an extraordinary 339.45 linear feet of ocean frontage, this property offers one of the most expansive coastal settings in Hawaii, with exceptional frontage in the heart of Kaikoo. Blending Hawaiian natural elements with European Renaissance–inspired design, the residence showcases exceptional craftsmanship throughout. Set on 35,870 sq ft of land, the estate offers approximately 21,266 sq ft of interior living, complemented by extensive covered and open lanais ideal for entertaining. Highlights include cast-bronze entry doors, coffered Venetian-inspired ceilings, Italian perlato marble staircases and flooring, carved and finished on-site, a two-story oceanfront living room, and refined Art Deco bronze detailing. Amenities include a private theater, library, entertaining lounge, and grotto pool. The expansive primary suite spans nearly 5,000 sq ft and features dual dressing rooms, a fitness area, and sweeping coastline views. The Hemmeter Estate is an irreplaceable oceanfront estate distinguished by scale, privacy, and architectural significance."
+                ]
+              },
+              {
+                "key": "Possession",
+                "values": [
+                  "At Closing"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Showing and Remarks",
+            "fields": [
+              {
+                "key": "Showing Instructions",
+                "values": [
+                  "Two Day Notice Reqd",
+                  "Appointment Only",
+                  "Call Listor",
+                  "Listor Must Be Present"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "Rental": {
+        "name": "Rental",
+        "subCategories": [
+          {
+            "name": "Rent Information",
+            "fields": [
+              {
+                "key": "Occupant Type",
+                "values": [
+                  "Owner"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "photos": [
+      "https://www.compass.com/m/ca349b7ef65b9eebffc4634b41b5e13bed84b3e8_img_0_267a7/origin.jpg",
+      "https://www.compass.com/m/ca349b7ef65b9eebffc4634b41b5e13bed84b3e8_img_1_a49e2/origin.jpg",
+      "https://www.compass.com/m/ca349b7ef65b9eebffc4634b41b5e13bed84b3e8_img_2_fc561/origin.jpg",
+      "https://www.compass.com/m/ca349b7ef65b9eebffc4634b41b5e13bed84b3e8_img_3_33555/origin.jpg",
+      "https://www.compass.com/m/ca349b7ef65b9eebffc4634b41b5e13bed84b3e8_img_4_a4bd4/origin.jpg",
+      "https://www.compass.com/m/ca349b7ef65b9eebffc4634b41b5e13bed84b3e8_img_5_2a7ee/origin.jpg",
+      "https://www.compass.com/m/ca349b7ef65b9eebffc4634b41b5e13bed84b3e8_img_6_65146/origin.jpg",
+      "https://www.compass.com/m/ca349b7ef65b9eebffc4634b41b5e13bed84b3e8_img_7_310e1/origin.jpg",
+      "https://www.compass.com/m/ca349b7ef65b9eebffc4634b41b5e13bed84b3e8_img_8_1cabf/origin.jpg",
+      "https://www.compass.com/m/ca349b7ef65b9eebffc4634b41b5e13bed84b3e8_img_9_f4ad1/origin.jpg",
+      "https://www.compass.com/m/ca349b7ef65b9eebffc4634b41b5e13bed84b3e8_img_10_7673e/origin.jpg",
+      "https://www.compass.com/m/ca349b7ef65b9eebffc4634b41b5e13bed84b3e8_img_11_4fe58/origin.jpg",
+      "https://www.compass.com/m/ca349b7ef65b9eebffc4634b41b5e13bed84b3e8_img_12_315e6/origin.jpg",
+      "https://www.compass.com/m/ca349b7ef65b9eebffc4634b41b5e13bed84b3e8_img_13_f64aa/origin.jpg",
+      "https://www.compass.com/m/ca349b7ef65b9eebffc4634b41b5e13bed84b3e8_img_14_edca7/origin.jpg",
+      "https://www.compass.com/m/ca349b7ef65b9eebffc4634b41b5e13bed84b3e8_img_15_39cc8/origin.jpg",
+      "https://www.compass.com/m/ca349b7ef65b9eebffc4634b41b5e13bed84b3e8_img_16_1f592/origin.jpg",
+      "https://www.compass.com/m/ca349b7ef65b9eebffc4634b41b5e13bed84b3e8_img_17_aff61/origin.jpg",
+      "https://www.compass.com/m/ca349b7ef65b9eebffc4634b41b5e13bed84b3e8_img_18_3cff7/origin.jpg"
+    ],
+    "agents": [
+      {
+        "name": "Anne Hogan Perry",
+        "license": "RB-15815",
+        "phone_primary": "8082866474",
+        "email": "anneperry@compass.com",
+        "photo_url": "https://www.compass.com/m3/b93df3c117b5167ed61ba848fc5b373e5ec62d37/300x300.jpg",
+        "office_name": "Compass"
+      }
+    ]
+  }
+]
