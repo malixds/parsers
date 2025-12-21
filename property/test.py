@@ -472,12 +472,12 @@ if __name__ == "__main__":
     
     print(f"\nВсего собрано ссылок: {len(all_urls)}")
     
-    # Шаг 2: Парсим объявления (для теста ограничиваем до 10)
+    # Шаг 2: Парсим объявления (обрабатываем все)
     print("\n" + "=" * 60)
     print("ШАГ 2: Парсинг объявлений")
     print("=" * 60)
-    TEST_LIMIT = 10  # Для теста ограничиваем до 10 объявлений
-    listings_data = parse_listings(all_urls, concurrency=10, limit=TEST_LIMIT)
+    print(f"Обрабатываем все {len(all_urls)} объявлений...")
+    listings_data = parse_listings(all_urls, concurrency=10, limit=None)
     
     # Шаг 3: Сохраняем в JSON
     print("\n" + "=" * 60)
