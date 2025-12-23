@@ -152,7 +152,7 @@ class DbDTO(BaseModel):
     virtual_tour: Optional[str] = Field(None, description="Link to marketing virtual tour")
 
     # Agents (list)
-    agents: Optional[List[AgentData]] = Field(None, description="List of agents")
+    agents: list[dict[str, Any]] | List[AgentData] | dict[str, Any] | None = Field(None, description="List of agents")
     agency_phone: Optional[str] = Field(None)
 
     is_deleted: Optional[bool] = Field(None)

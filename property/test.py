@@ -7,7 +7,7 @@ import uuid
 import asyncio
 import httpx
 import re
-from schema import DbDTO, AgentData
+from schema import DbDTO
 from datetime import date, datetime
 from typing import Optional
 
@@ -221,44 +221,14 @@ def convert_jll_to_dto(page_props: dict, url: str) -> DbDTO | None:
         if virtual_tours:
             virtual_tour = virtual_tours[0] if isinstance(virtual_tours[0], str) else None
         
-        # Агенты
-        agents_list = []
+        # Агенты - сохраняем массив brokers как есть
         brokers = property_data.get("brokers", [])
         if not brokers:
             # Пробуем из корня page_props
             brokers = page_props.get("brokers", [])
         
-        for broker in brokers:
-            email = broker.get("email")
-            if not email or email.strip() == "":
-                email = None
-            
-            # Получаем лицензию из brokerLicenses
-            license_num = None
-            broker_licenses = broker.get("brokerLicenses", [])
-            if broker_licenses and len(broker_licenses) > 0:
-                license_num = broker_licenses[0].get("licenseNumber")
-            
-            # Получаем офисную информацию из entityLicenses
-            office_name = None
-            office_phone = None
-            entity_licenses = broker.get("entityLicenses", [])
-            if entity_licenses and len(entity_licenses) > 0:
-                office_name = entity_licenses[0].get("company")
-                office_phone = entity_licenses[0].get("mainOfficePhone")
-            
-            agent = AgentData(
-                name=broker.get("name"),
-                title=broker.get("jobTitle"),
-                license=license_num,
-                phone_primary=broker.get("telephone"),
-                email=email,
-                photo_url=broker.get("photo"),
-                office_name=office_name,
-                office_phone=office_phone,
-                social_media=broker.get("linkedin"),
-            )
-            agents_list.append(agent)
+        # Сохраняем brokers как список словарей
+        agents_list = brokers if brokers else None
         
         # Property type
         property_type = property_data.get("propertyType")
