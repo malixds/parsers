@@ -704,6 +704,39 @@ def extract_listing_data(initial_data: dict, url: str = '') -> DbDTO | None:
                                             except (ValueError, TypeError):
                                                 pass
         
+        # Lot size
+        lot_size_str = None
+        if 'detailedInfo' in listing:
+            detailed_info = listing['detailedInfo']
+            if 'keyDetails' in detailed_info:
+                for key_detail in detailed_info['keyDetails']:
+                    key = key_detail.get('key', '').lower()
+                    if 'lot size' in key or 'lot' in key:
+                        value = key_detail.get('value', '')
+                        if value and value != '-':
+                            lot_size_str = value
+                            break
+            
+            # Если не нашли в keyDetails, проверяем в listingDetails
+            if not lot_size_str and 'listingDetails' in detailed_info:
+                for detail_group in detailed_info['listingDetails']:
+                    if 'subCategories' in detail_group:
+                        for subcat in detail_group['subCategories']:
+                            if 'fields' in subcat:
+                                for field in subcat['fields']:
+                                    key = field.get('key', '').lower()
+                                    if 'lot size' in key or 'lot' in key:
+                                        values = field.get('values', [])
+                                        if values:
+                                            lot_size_str = str(values[0])
+                                            break
+                                if lot_size_str:
+                                    break
+                            if lot_size_str:
+                                break
+                    if lot_size_str:
+                        break
+        
         # Описание
         description = None
         if 'description' in listing and listing['description']:
@@ -863,6 +896,16 @@ def extract_listing_data(initial_data: dict, url: str = '') -> DbDTO | None:
                         last_updated_obj = dt.date()
                     except (ValueError, TypeError, OSError):
                         pass
+            # listed может быть timestamp в миллисекундах
+            if 'listed' in date_data:
+                listed_ts = date_data['listed']
+                if listed_ts:
+                    try:
+                        # Конвертируем из миллисекунд в секунды
+                        dt = datetime.fromtimestamp(listed_ts / 1000)
+                        listing_date_obj = dt.date()
+                    except (ValueError, TypeError, OSError):
+                        pass
         
         # Days on Market
         if 'detailedInfo' in listing:
@@ -871,6 +914,16 @@ def extract_listing_data(initial_data: dict, url: str = '') -> DbDTO | None:
                 for key_detail in detailed_info['keyDetails']:
                     if 'Days on Market' in key_detail.get('key', ''):
                         days_on_market = key_detail.get('value', '')
+        
+        # Если days_on_market равно "-", проверяем daysOnMarket в listing
+        if days_on_market == "-":
+            days_on_market_num = listing.get('daysOnMarket')
+            if days_on_market_num is not None:
+                # Если есть числовое значение, используем его
+                days_on_market = str(days_on_market_num)
+            else:
+                # Если нет числового значения, ставим None
+                days_on_market = None
         
         # Создаем DbDTO объект
         dto = DbDTO(
@@ -890,6 +943,7 @@ def extract_listing_data(initial_data: dict, url: str = '') -> DbDTO | None:
             sale_price=sale_price,
             lease_price=lease_price,
             size=size_str,
+            lot_size=lot_size_str,
             property_type=property_type,
             property_description=description,
             listing_details=listing_details_dict,
