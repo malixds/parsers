@@ -2,7 +2,6 @@ import requests
 from fake_useragent import UserAgent
 import xml.etree.ElementTree as ET
 import json
-import time
 import uuid
 import asyncio
 import httpx
@@ -11,88 +10,124 @@ from schema import DbDTO, AgentData
 from datetime import date, datetime
 from typing import Optional
 
-headers = {
-    'User-Agent': UserAgent().random,
-}
-
-response = requests.get(
-    'https://www.compass.com/robots.txt',
-    headers=headers,
-)
+# Константы для URL
+BASE_URL = 'https://www.compass.com'
+SITEMAPS_BASE_PATH = f'{BASE_URL}/sitemaps'
 
 sitemaps = [
-    'https://www.compass.com/sitemaps/for-sale/index.xml',
-    'https://www.compass.com/sitemaps/for-rent/index.xml',
-    'https://www.compass.com/sitemaps/agent-pages/index.xml',
-    'https://www.compass.com/sitemaps/agent-office-pages/index.xml',
-    'https://www.compass.com/sitemaps/agent-location-pages/index.xml',
-    'https://www.compass.com/sitemaps/static/index.xml',
-    'https://www.compass.com/sitemaps/recently-sold/index.xml',
-    'https://www.compass.com/sitemaps/building/index.xml',
-    'https://www.compass.com/sitemaps/neighborhood-guides/index.xml',
-    'https://www.compass.com/sitemaps/newsroom/index.xml',
-    'https://www.compass.com/xmlsitemaps/pdp/for-sale-by-compass_index_pdp.xml',
-    'https://www.compass.com/xmlsitemaps/pdp/for-rent-by-compass_index_pdp.xml',
-    'https://www.compass.com/xmlsitemaps/pdp/for-sale-by-agent_index_pdp.xml',
-    'https://www.compass.com/xmlsitemaps/pdp/for-sale-by-owner_index_pdp.xml',
-    'https://www.compass.com/xmlsitemaps/pdp/for-rent_index_pdp.xml',
-    'https://www.compass.com/xmlsitemaps/pdp/pending_index_pdp.xml',
-    'https://www.compass.com/xmlsitemaps/pdp/recently-sold_index_pdp.xml',
-    'https://www.compass.com/xmlsitemaps/pdp/off-market_index_pdp.xml',
-    'https://www.compass.com/xmlsitemaps/ldp/for-sale-by-compass_index_ldp.xml',
-    'https://www.compass.com/xmlsitemaps/ldp/for-rent-by-compass_index_ldp.xml',
-    'https://www.compass.com/xmlsitemaps/ldp/for-sale-by-agent_index_ldp.xml',
-    'https://www.compass.com/xmlsitemaps/ldp/for-sale-by-owner_index_ldp.xml',
-    'https://www.compass.com/xmlsitemaps/ldp/for-rent_index_ldp.xml',
-    'https://www.compass.com/xmlsitemaps/ldp/pending_index_ldp.xml',
-    'https://www.compass.com/xmlsitemaps/ldp/recently-sold_index_ldp.xml',
-    'https://www.compass.com/xmlsitemaps/ldp/off-market_index_ldp.xml',
+    f'{SITEMAPS_BASE_PATH}/for-sale/index.xml',
+    f'{SITEMAPS_BASE_PATH}/for-rent/index.xml'
 ]
 
-# Пример: парсинг sitemap index
-sitemap_url = 'https://www.compass.com/sitemaps/for-sale/index.xml'
-response = requests.get(sitemap_url, headers=headers)
+# Парсинг всех sitemap index
+namespace = {'ns': 'http://www.sitemaps.org/schemas/sitemap/0.9'}
 
-if response.status_code == 200:
-    # Парсим XML
-    root = ET.fromstring(response.content)
+
+def get_new_user_agent() -> str:
+    """Генерирует новый случайный User-Agent"""
+    return UserAgent().random
+
+
+def update_user_agent_in_headers(headers: dict) -> dict:
+    """Обновляет User-Agent в заголовках"""
+    headers = headers.copy()
+    headers['User-Agent'] = get_new_user_agent()
+    return headers
+
+
+def process_sitemaps_generator(headers: dict = None):
+    """
+    Генератор, который постепенно обрабатывает все sitemap файлы и возвращает URL по мере их получения.
+    Это позволяет обрабатывать данные потоково, не накапливая все URL в памяти.
     
-    # Определяем namespace для sitemap
-    namespace = {'ns': 'http://www.sitemaps.org/schemas/sitemap/0.9'}
+    Yields:
+        str: URL страницы из sitemap
+    """
+    if headers is None:
+        headers = {
+            'User-Agent': UserAgent().random,
+        }
     
-    # Извлекаем все ссылки на sitemap файлы
-    sitemap_links = []
-    for sitemap_elem in root.findall('ns:sitemap', namespace):
-        loc = sitemap_elem.find('ns:loc', namespace)
-        lastmod = sitemap_elem.find('ns:lastmod', namespace)
-        if loc is not None:
-            sitemap_info = {
-                'url': loc.text,
-                'lastmod': lastmod.text if lastmod is not None else None
-            }
-            sitemap_links.append(sitemap_info)
-            print(f"Sitemap: {sitemap_info['url']} (Last modified: {sitemap_info['lastmod']})")
+    total_urls_count = 0
     
-    print(f"\nВсего найдено sitemap файлов: {len(sitemap_links)}")
-    
-    # Пример: парсим первый sitemap файл для получения URL страниц
-    if sitemap_links:
-        print(f"\nПарсим первый sitemap: {sitemap_links[0]['url']}")
-        sitemap_response = requests.get(sitemap_links[0]['url'], headers=headers)
-        if sitemap_response.status_code == 200:
-            sitemap_root = ET.fromstring(sitemap_response.content)
-            urls = []
-            for url_elem in sitemap_root.findall('ns:url', namespace):
-                loc = url_elem.find('ns:loc', namespace)
-                if loc is not None:
-                    urls.append(loc.text)
+    for sitemap_url in sitemaps:
+        print(f"\n{'='*60}")
+        print(f"Обработка sitemap: {sitemap_url}")
+        print(f"{'='*60}")
+        
+        # Пытаемся получить sitemap с retry при 403
+        max_retries = 3
+        response = None
+        for attempt in range(max_retries):
+            response = requests.get(sitemap_url, headers=headers)
+            if response.status_code == 200:
+                break
+            elif response.status_code == 403:
+                if attempt < max_retries - 1:
+                    print(f"  403 ошибка, попытка {attempt + 1}/{max_retries}: заменяем User-Agent...")
+                    headers = update_user_agent_in_headers(headers)
+                else:
+                    print(f"  403 ошибка после {max_retries} попыток")
+            else:
+                break
+        
+        if response and response.status_code == 200:
+            # Парсим XML
+            root = ET.fromstring(response.content)
             
-            print(f"Найдено URL страниц: {len(urls)}")
-            print("Первые 5 URL:")
-            for url in urls[:5]:
-                print(f"  - {url}")
-else:
-    print(f"Ошибка при получении sitemap: {response.status_code}")
+            # Извлекаем все ссылки на sitemap файлы
+            sitemap_links = []
+            for sitemap_elem in root.findall('ns:sitemap', namespace):
+                loc = sitemap_elem.find('ns:loc', namespace)
+                lastmod = sitemap_elem.find('ns:lastmod', namespace)
+                if loc is not None:
+                    sitemap_info = {
+                        'url': loc.text,
+                        'lastmod': lastmod.text if lastmod is not None else None
+                    }
+                    sitemap_links.append(sitemap_info)
+                    print(f"Sitemap: {sitemap_info['url']} (Last modified: {sitemap_info['lastmod']})")
+            
+            print(f"\nВсего найдено sitemap файлов: {len(sitemap_links)}")
+            
+            # Парсим все sitemap файлы для получения URL страниц
+            if sitemap_links:
+                for idx, sitemap_info in enumerate(sitemap_links, 1):
+                    print(f"\nПарсим sitemap {idx}/{len(sitemap_links)}: {sitemap_info['url']}")
+                    # Пытаемся получить sitemap файл с retry при 403
+                    max_retries = 3
+                    sitemap_response = None
+                    for attempt in range(max_retries):
+                        sitemap_response = requests.get(sitemap_info['url'], headers=headers)
+                        if sitemap_response.status_code == 200:
+                            break
+                        elif sitemap_response.status_code == 403:
+                            if attempt < max_retries - 1:
+                                print(f"  403 ошибка, попытка {attempt + 1}/{max_retries}: заменяем User-Agent...")
+                                headers = update_user_agent_in_headers(headers)
+                            else:
+                                print(f"  403 ошибка после {max_retries} попыток")
+                        else:
+                            break
+                    
+                    if sitemap_response and sitemap_response.status_code == 200:
+                        sitemap_root = ET.fromstring(sitemap_response.content)
+                        urls_count = 0
+                        for url_elem in sitemap_root.findall('ns:url', namespace):
+                            loc = url_elem.find('ns:loc', namespace)
+                            if loc is not None:
+                                # Возвращаем URL по мере получения
+                                yield loc.text
+                                urls_count += 1
+                                total_urls_count += 1
+                        
+                        print(f"  Найдено URL страниц: {urls_count}")
+                    else:
+                        print(f"  Ошибка при получении sitemap {sitemap_info['url']}: {sitemap_response.status_code}")
+        else:
+            print(f"Ошибка при получении sitemap {sitemap_url}: {response.status_code}")
+    
+    print(f"\nВсего обработано URL из всех sitemap файлов: {total_urls_count}")
 
 # ========== Получение всех ссылок на объявления с пагинацией (асинхронная версия) ==========
 
@@ -163,15 +198,35 @@ async def fetch_page_links(
     }
     
     try:
-        response = await client.post(
-            api_url,
-            params=params,
-            json=json_data,
-            headers=post_headers,
-            timeout=30.0
-        )
-        response.raise_for_status()
+        # Пытаемся выполнить запрос с retry при 403
+        max_retries = 3
+        response = None
+        for attempt in range(max_retries):
+            response = await client.post(
+                api_url,
+                params=params,
+                json=json_data,
+                headers=post_headers,
+                timeout=30.0
+            )
+            if response.status_code == 200:
+                break
+            elif response.status_code == 403:
+                if attempt < max_retries - 1:
+                    print(f"  403 ошибка, попытка {attempt + 1}/{max_retries}: заменяем User-Agent...")
+                    post_headers = update_user_agent_in_headers(post_headers)
+                else:
+                    print(f"  403 ошибка после {max_retries} попыток")
+                    response.raise_for_status()
+                    break
+            else:
+                response.raise_for_status()
+                break
         
+        if not response:
+            raise Exception("Не удалось получить ответ от сервера")
+        
+        response.raise_for_status()
         data = response.json()
         
         # Извлекаем данные из ответа
@@ -203,7 +258,7 @@ async def fetch_page_links(
             if listing and isinstance(listing, dict):
                 navigation_link = listing.get('navigationPageLink')
                 if navigation_link:
-                    full_url = f'https://www.compass.com{navigation_link}'
+                    full_url = f'{BASE_URL}{navigation_link}'
                     page_links.append(full_url)
         
         return (page, page_links)
@@ -231,19 +286,19 @@ async def get_all_listing_links_async(location_url: str, concurrency: int = 10):
     }
     
     post_headers = {
-    'User-Agent': UserAgent().random,
-    'Accept': '*/*',
-    'Accept-Language': 'en-US,en;q=0.5',
+        'User-Agent': UserAgent().random,
+        'Accept': '*/*',
+        'Accept-Language': 'en-US,en;q=0.5',
         'Referer': location_url,
-    'Content-Type': 'application/json',
-    'Origin': 'https://www.compass.com',
-    'Sec-GPC': '1',
-    'Connection': 'keep-alive',
-    'Sec-Fetch-Dest': 'empty',
-    'Sec-Fetch-Mode': 'cors',
-    'Sec-Fetch-Site': 'same-origin',
-    'Priority': 'u=6',
-}
+        'Content-Type': 'application/json',
+        'Origin': BASE_URL,
+        'Sec-GPC': '1',
+        'Connection': 'keep-alive',
+        'Sec-Fetch-Dest': 'empty',
+        'Sec-Fetch-Mode': 'cors',
+        'Sec-Fetch-Site': 'same-origin',
+        'Priority': 'u=6',
+    }
 
     num_per_page = 40
     search_result_id = str(uuid.uuid4())
@@ -306,7 +361,28 @@ async def get_all_listing_links_async(location_url: str, concurrency: int = 10):
                     'purpose': 'search',
                 }
 
-                response = await client.post(api_url, params=params, json=json_data, headers=post_headers, timeout=30.0)
+                # Пытаемся выполнить запрос с retry при 403
+                max_retries = 3
+                response = None
+                for attempt in range(max_retries):
+                    response = await client.post(api_url, params=params, json=json_data, headers=post_headers, timeout=30.0)
+                    if response.status_code == 200:
+                        break
+                    elif response.status_code == 403:
+                        if attempt < max_retries - 1:
+                            print(f"  403 ошибка, попытка {attempt + 1}/{max_retries}: заменяем User-Agent...")
+                            post_headers = update_user_agent_in_headers(post_headers)
+                        else:
+                            print(f"  403 ошибка после {max_retries} попыток")
+                            response.raise_for_status()
+                            break
+                    else:
+                        response.raise_for_status()
+                        break
+                
+                if not response:
+                    raise Exception("Не удалось получить ответ от сервера")
+                
                 response.raise_for_status()
                 data = response.json()
                 
@@ -353,7 +429,7 @@ async def get_all_listing_links_async(location_url: str, concurrency: int = 10):
                         if navigation_link:
                             # Убираем начальный слэш, если есть, чтобы избежать двойного слэша
                             nav_path = navigation_link.lstrip('/')
-                            full_url = f'https://www.compass.com/{nav_path}'
+                            full_url = f'{BASE_URL}/{nav_path}'
                             first_links.append(full_url)
                 
                 all_links = first_links.copy()
@@ -363,19 +439,15 @@ async def get_all_listing_links_async(location_url: str, concurrency: int = 10):
                 total_items = 0
                 if 'lolResults' in data:
                     total_items = data['lolResults'].get('totalItems', 0)
-                    print(f"DEBUG: lolResults.totalItems = {total_items}")
                 elif 'data' in data and isinstance(data['data'], dict):
                     total_items = data['data'].get('totalItems', 0)
-                    print(f"DEBUG: data.totalItems = {total_items}")
                 
                 # Также проверяем другие возможные поля
                 if total_items == 0:
                     if 'total' in data:
                         total_items = data.get('total', 0)
-                        print(f"DEBUG: total = {total_items}")
                     if 'totalCount' in data:
                         total_items = data.get('totalCount', 0)
-                        print(f"DEBUG: totalCount = {total_items}")
                 
                 if total_items > 0:
                     total_pages = (total_items + num_per_page - 1) // num_per_page
@@ -384,7 +456,6 @@ async def get_all_listing_links_async(location_url: str, concurrency: int = 10):
                     # Если не знаем общее количество, будем запрашивать до пустого ответа
                     total_pages = None
                     print("Не удалось определить общее количество страниц, будем запрашивать до пустого ответа")
-                    print(f"DEBUG: Структура ответа: {list(data.keys())}")
             except Exception as e:
                 print(f"Ошибка при получении начальных данных: {e}")
                 import traceback
@@ -450,6 +521,8 @@ async def get_all_listing_links_async(location_url: str, concurrency: int = 10):
             # Сначала делаем несколько параллельных запросов
             batch_size = concurrency * 2
             max_pages = 1000  # Максимальное количество страниц на случай бесконечного цикла
+            page = 1
+            start = num_per_page
             
             while page < max_pages:
                 batch_tasks = []
@@ -609,7 +682,7 @@ def extract_listing_data(initial_data: dict, url: str = '') -> DbDTO | None:
             return None
         
         # Исправляем URL (убираем двойной слэш)
-        fixed_url = url.replace('https://www.compass.com//', 'https://www.compass.com/')
+        fixed_url = url.replace(f'{BASE_URL}//', f'{BASE_URL}/')
         
         # Извлекаем базовые идентификаторы
         listing_id = listing.get('listingIdSHA', '') or listing.get('compassPropertyId', '') or listing.get('feedListingId', '')
@@ -798,7 +871,7 @@ def extract_listing_data(initial_data: dict, url: str = '') -> DbDTO | None:
                     if photo_url.startswith('//'):
                         photo_url = 'https:' + photo_url
                     elif photo_url.startswith('/'):
-                        photo_url = 'https://www.compass.com' + photo_url
+                        photo_url = BASE_URL + photo_url
                     photos_list.append(photo_url)
         
         # Brochure PDF
@@ -811,7 +884,7 @@ def extract_listing_data(initial_data: dict, url: str = '') -> DbDTO | None:
                     if brochure_pdf.startswith('//'):
                         brochure_pdf = 'https:' + brochure_pdf
                     elif brochure_pdf.startswith('/'):
-                        brochure_pdf = 'https://www.compass.com' + brochure_pdf
+                        brochure_pdf = BASE_URL + brochure_pdf
                     break
         
         # MLS номер
@@ -829,7 +902,7 @@ def extract_listing_data(initial_data: dict, url: str = '') -> DbDTO | None:
             for contact in listing['fullContacts']:
                 profile_url = contact.get('websiteURL', '')
                 if profile_url.startswith('/'):
-                    profile_url = 'https://www.compass.com' + profile_url
+                    profile_url = BASE_URL + profile_url
                 
                 # Обрабатываем email - только если он валидный
                 email = contact.get('email')
@@ -842,7 +915,7 @@ def extract_listing_data(initial_data: dict, url: str = '') -> DbDTO | None:
                     if photo_url.startswith('//'):
                         photo_url = 'https:' + photo_url
                     elif photo_url.startswith('/'):
-                        photo_url = 'https://www.compass.com' + photo_url
+                        photo_url = BASE_URL + photo_url
                 
                 agent = AgentData(
                     name=contact.get('contactName'),
@@ -978,7 +1051,26 @@ async def parse_listing(client: httpx.AsyncClient, url: str, semaphore: asyncio.
                 'Accept-Language': 'en-US,en;q=0.5',
             }
             
-            response = await client.get(url, headers=headers, timeout=30.0, follow_redirects=True)
+            # Пытаемся выполнить запрос с retry при 403
+            max_retries = 3
+            response = None
+            for attempt in range(max_retries):
+                response = await client.get(url, headers=headers, timeout=30.0, follow_redirects=True)
+                if response.status_code == 200:
+                    break
+                elif response.status_code == 403:
+                    if attempt < max_retries - 1:
+                        headers = update_user_agent_in_headers(headers)
+                    else:
+                        response.raise_for_status()
+                        break
+                else:
+                    response.raise_for_status()
+                    break
+            
+            if not response:
+                raise Exception("Не удалось получить ответ от сервера")
+            
             response.raise_for_status()
             
             html = response.text
@@ -1007,7 +1099,7 @@ async def parse_listings_async(listing_urls: list[str], concurrency: int = 10, l
     Args:
         listing_urls: Список URL объявлений
         concurrency: Количество одновременных запросов
-        limit: Ограничение количества объявлений для обработки (для теста)
+        limit: Ограничение количества объявлений для обработки (опционально)
     
     Returns:
         list: Список DbDTO объектов с данными объявлений
@@ -1046,28 +1138,45 @@ def parse_listings(listing_urls: list[str], concurrency: int = 10, limit: int = 
 
 # Пример использования
 if __name__ == "__main__":
-    # Код работает с любым регионом Compass, например:
-    # - 'https://www.compass.com/homes-for-sale/arizona/'
-    # - 'https://www.compass.com/homes-for-sale/california/'
-    # - 'https://www.compass.com/homes-for-sale/new-york/'
-    # - Или с URL содержащим mapview: 'https://www.compass.com/homes-for-sale/arizona/mapview=37.0,-109.0,31.0,-114.0/'
-    
-    location_url = 'https://www.compass.com/homes-for-sale/hawaii/'
-    
-    # Шаг 1: Собираем ссылки на объявления
+    # Шаг 0: Получаем location URLs из sitemap
     print("=" * 60)
-    print("ШАГ 1: Сбор ссылок на объявления")
+    print("ШАГ 0: Получение location URLs из sitemap")
     print("=" * 60)
-    links = get_all_listing_links(location_url, concurrency=10)
     
-    print(f"\nВсего собрано ссылок: {len(links)}")
-    
-    # Шаг 2: Парсим объявления (для теста ограничиваем до 10)
+    # Шаг 1 и 2: Обрабатываем каждый location URL постепенно
     print("\n" + "=" * 60)
-    print("ШАГ 2: Парсинг объявлений")
+    print("ШАГ 1-2: Сбор ссылок и парсинг объявлений")
     print("=" * 60)
-    TEST_LIMIT = 10
-    listings_data = parse_listings(links, concurrency=10, limit=TEST_LIMIT)
+    
+    all_listings_data = []
+    total_location_urls = 0
+    
+    # Обрабатываем каждый location URL из sitemap постепенно
+    for location_url in process_sitemaps_generator():
+        total_location_urls += 1
+        print(f"\n{'='*60}")
+        print(f"Обработка location URL {total_location_urls}: {location_url}")
+        print(f"{'='*60}")
+        
+        try:
+            # Собираем ссылки на объявления для данного location
+            print(f"\nСбор ссылок на объявления из {location_url}...")
+            links = get_all_listing_links(location_url, concurrency=10)
+            print(f"Собрано ссылок: {len(links)}")
+            
+            if links:
+                # Парсим объявления
+                print(f"Парсинг объявлений...")
+                listings_data = parse_listings(links, concurrency=10)
+                all_listings_data.extend(listings_data)
+                print(f"Добавлено объявлений: {len(listings_data)}, всего: {len(all_listings_data)}")
+        except Exception as e:
+            print(f"Ошибка при обработке {location_url}: {e}")
+            continue
+    
+    print(f"\n{'='*60}")
+    print(f"Обработано location URLs: {total_location_urls}")
+    print(f"Всего собрано объявлений: {len(all_listings_data)}")
     
     # Шаг 3: Сохраняем в JSON
     print("\n" + "=" * 60)
@@ -1076,14 +1185,8 @@ if __name__ == "__main__":
     output_file = 'listings_data.json'
     with open(output_file, 'w', encoding='utf-8') as f:
         # Преобразуем DbDTO объекты в словари для JSON
-        listings_dict = [dto.model_dump(exclude_none=True) for dto in listings_data]
+        listings_dict = [dto.model_dump(exclude_none=True) for dto in all_listings_data]
         json.dump(listings_dict, f, ensure_ascii=False, indent=2, default=str)
     
     print(f"\n✓ Данные сохранены в файл '{output_file}'")
-    print(f"✓ Обработано объявлений: {len(listings_data)}")
-    
-    # Показываем пример первого объявления
-    if listings_data:
-        print(f"\nПример данных первого объявления:")
-        first_dict = listings_data[0].model_dump(exclude_none=True)
-        print(json.dumps(first_dict, ensure_ascii=False, indent=2, default=str)[:500] + "...")
+    print(f"✓ Обработано объявлений: {len(all_listings_data)}")
